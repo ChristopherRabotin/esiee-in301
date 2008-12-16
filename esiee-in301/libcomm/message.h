@@ -1,29 +1,29 @@
-#ifndef _MESSAGEH_
-#define _MESSAGEH_
+#ifndef MESSAGE_H_
+#define MESSAGE_H_
 
 /**
- * Decoupe du message 
- * Retourne 1 si il n'y a pas eu de probl�me
- * Retourne 0 si il y a eu un probl�me
- * ATTENTION:
- *   Les variables emeteur, destinataire, commande, identifiant
- *   et sms doivent �tre allou�es avant l'appel � decoupe
+ * decoupe: Decoupe du message
+ * @param *emeteur émeteur du message
+ * @param *type type du message
+ * @param *action identificateur de l'action
+ * @param *valeur valeur associée au message 
+ * @return 0 si erreur, 1 sinon
+ * <b>ATTENTION:</b>
+ * Les paramètres étant des pointeurs, les variables associées DOIVENT
+ * être allouées avant l'appel de la fonction
  */
 
-int decoupe(char *message,      /* Source a d�couper */
-	    char *emeteur,      /* Emeteur du message */
-	    char *type,         /* Type du message */
-	    char *action,       /* Idebtificateur de l'action */
-	    char *valeur        /* Valeur associ�e au message */
-	    );
+int decoupe(char *message, char *emeteur, char *type, char *action,
+		char *valeur);
 
 /** 
- * Construction du message
- * Retourne le message construit suivant le protocole
- * a partir des arguments
- * Le message est allou� dans la fonction
+ * message: Construction du message. Le message est alloué dans la fonction.
+ * @param *emeteur émeteur du message
+ * @param *type type du message
+ * @param *action identificateur de l'action
+ * @param *valeur valeur associée au message
+ * @return le message construit suivant le protocole à partir des arguments
  */
-char* message(char *emeteur, char *type, char *action, 
-	      char *valeur);
+char* message(char *emeteur, char *type, char *action, char *valeur);
 
-#endif // _MESSAGEH_
+#endif // MESSAGE_H_
