@@ -10,7 +10,7 @@ int main(int argc, char ** argv) {
 		printf("usage: %s mode ValeurIntrinseque Stock QuantiteDemandee\n",
 				argv[0]);
 		printf("\t ou mode=0 correspond a un prix d'achat\n");
-		printf("\t et mode = 1 a un prix de vente\n");
+		printf("\t et mode=1 a un prix de vente\n");
 		exit(0);
 	}
 	mode = atoi(argv[1]);
