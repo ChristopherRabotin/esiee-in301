@@ -19,4 +19,4 @@ TestRedirection: TestRedirection.c
 	gcc TestRedirection.c -o  ../bin/TestRedirection
 
 clean:	
-	rm -f *.o
+	rm -f ../bin/*.o
