@@ -6,8 +6,8 @@ PrixAchatVente.o:	../libbourse/PrixAchatVente.c ../libbourse/PrixAchatVente.h
 TestAchatVente:	PrixAchatVente.o TestAchatVente.c
 	gcc PrixAchatVente.o TestAchatVente.c -o ../bin/TestAchatVente
 
-message.o: ../libbourse/message.c ../libbourse/message.h
-	gcc -Wall -c ../libbourse/message.c
+message.o: ../libcomm/message.c ../libcomm/message.h
+	gcc -Wall -c ../libcomm/message.c
 
 alea.o: ../libbourse/alea.h ../libbourse/alea.c
 	gcc -Wall -c ../libbourse/alea.c
