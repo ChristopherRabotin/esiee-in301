@@ -1,21 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include "../libbourse/message.h"
+#include "../libcomm/message.h"
 #include "../libbourse/alea.h"
 
 /**
  * Programme de test des fonctions messages
  */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
   char emeteur[255], type[255], action[255], 
     valeur[255];
   int erreur;
 
   aleainit();
-  // Creation d'un ordre demandant l'achat d'un nombre al�atoire
-  // d'actions
+  // Creation d'un ordre demandant l'achat d'un nombre aléatoire d'actions
   
   sprintf(valeur,"%d",alea(1,50));
   printf("L'ordre porte sur %s actions\n",valeur);
@@ -25,7 +23,7 @@ int main(int argc, char **argv)
 
   erreur = decoupe(msg, emeteur, type, action, valeur);
   if (erreur) {
-    printf("Erreur de d�coupage!!\n");
+    printf("Erreur de découpage!!\n");
     exit(0);
   }
 
