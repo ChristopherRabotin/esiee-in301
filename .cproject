@@ -43,7 +43,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="src-test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libcomm"/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -354,7 +354,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="src-test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="libcomm"/>
 </sourceEntries>
 </configuration>
 </storageModule>

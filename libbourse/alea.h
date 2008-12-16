@@ -1,14 +1,17 @@
-#ifndef _ALEAH_
-#define _ALEAH_
+/**
+ * Code fourni dans libbourse: gÃ©nÃ©rateur de nombre alÃ©atoires
+ */
+#ifndef ALEA_H_
+#define ALEA_H_
 
 /**
- * Initialisation du générateur aléatoire
+ * Initialisation du gÃ©nÃ©rateur alÃ©atoire
  */
 void aleainit();
 
 /**
- * Retourne un nombre aléatoire en min et max (bornes comprises)
+ * Retourne un nombre alÃ©atoire en min et max (bornes comprises)
  */
 int alea(int min, int max);
 
-#endif // _ALEAH_
+#endif // ALEA_H_
