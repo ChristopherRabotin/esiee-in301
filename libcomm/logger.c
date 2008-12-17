@@ -22,11 +22,18 @@ void log_call(const char *msg, char *func_name, const char *args, ...) {
 }
 
 void log(const char *msg) {
-
+	FILE *fp = fopen(filename, "a+");
+	if (fp == NULL)
+		return; // ne devrait pas arriver vu la vérif dans init_log
+	fprintf(fp, "%s", private_start_log(call_type));
+	fprintf(fp, "\t%s", msg);
+	fwrite("\n", 1, 1, fp);
+	fflush(fp);
+	fclose(fp);
 }
 
 // début des fonctions/méthodes non détaillées dans l'API
-// enum
+enum LOG_TYPES { call_type, msg_type, unkown_type };
 /**
  * Permet de logguer l'appel à une fonction, avec des paramètres.
  * Il n'est pas conseillé d'appeler cetter fonction directement! Passez plutôt par "log" qui s'occupe de tout.
@@ -39,27 +46,29 @@ void private_log_call(const char *msg, const char *func_name, va_list args) {
 	if (fp == NULL)
 		return; // ne devrait pas arriver vu la vérif dans init_log
 
-	time_t curTime;
-	time(&curTime);
-
-	char timeStamp[32] = {0};
-	strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
-
-	fprintf(fp, "[*] <%s>",timeStamp);
+	fprintf(fp, "%s", private_start_log(call_type));
 	vfprintf(fp, fmt, args); // détermine le type de variable et l'affiche
-	fprintf(fp, "\t%s",msg);
+	fprintf(fp, "\t%s", msg);
 	fwrite("\n", 1, 1, fp);
 	fflush(fp);
 	fclose(fp);
 }
 /**
- * Permet de mettre en forme le début du log
- * Il n'est pas conseillé d'appeler cetter fonction directement! Passez plutôt par "log" qui s'occupe de tout.
- * @param *msg le message à être loggué
- * @param *func_name nom de la fonction
- * @param *args arguments passés à la fonction
+ * Permet de mettre en forme le début du log.
+ * @param log_type type de log, voir l'enum plus haut
+ * @return une chaine de caractères représentant le but
  */
-void private_start_log(){
-	
-	
+char *private_start_log(int log_type) {
+	time_t curTime;
+	time(&curTime);
+
+	char timeStamp[32] = { 0 }, rtn[32] = { 0 }, tmp[3]= { 0 };
+	strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
+	switch(log_type) {
+		case call_type: tmp="[*]"; break;
+		case msg_type: tmp="[M]"; break;
+		default: tmp="[U]";
+	}
+	sprintf(rtn,"%s <%s>",tmp, timeStamp);
+	return rtn;
 }
