@@ -1,6 +1,9 @@
 #ifndef MESSAGE_H_
 #define MESSAGE_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 /**
  * decoupe: Decoupe du message
  * @param *emeteur émeteur du message
