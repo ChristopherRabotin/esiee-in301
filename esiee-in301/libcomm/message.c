@@ -1,6 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "message.h"
 
 int decoupe(char *message, char *emeteur, char *type, char *action,
 		char *valeur) {
