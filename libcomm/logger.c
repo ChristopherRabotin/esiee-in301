@@ -52,10 +52,11 @@ void private_write_log(int log_type, char* msg) {
 	// ouverture du fichier de log en mode "append" (ajout)
 	FILE *fp = fopen(filename, "a+");
 	if (fp == NULL){
+		// ne devrait pas arriver vu la vérif dans init_log, mais au cas où ...
 		// si on ne peut pas logger, alors on affiche erreur puis le message à être loggué dans stderr
-		fprintf(stderr, "Erreur lors de l'ouverture du fichier \""+filename+"\" en mode append!");
+		fprintf(stderr, "Erreur lors de l'ouverture du fichier \"%s\" en mode append!",filename);
 		fprintf(stderr, "[F] %s", msg);
-		return; // ne devrait pas arriver vu la vérif dans init_log
+		return;
 	}
 
 	fprintf(fp, "%s <%s>", tmp, timeStamp);
