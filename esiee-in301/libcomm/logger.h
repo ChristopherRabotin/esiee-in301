@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 /**
@@ -42,6 +43,26 @@ void log_call(const char *msg, char *func_name, const char *args, ...);
  * Permet de logguer un message divers.
  * @param msg le message à être loggué
  */
-void log(const char *msg);
+void log_smth(const char *msg);
 //TODO log_msg pour logger les ordres de transactions
+
+// ce qui concerne le fonctionnement interne du logguer
+// il n'est pas conseillé d'appeler les fonctions ci-dessous directement (d'où le préfixe "private_")
+enum LOG_TYPES {call_type, msg_type, unkown_type};
+/**
+ * Permet de logguer l'appel à une fonction, avec des paramètres.
+ * Il n'est pas conseillé d'appeler cetter fonction directement! Passez plutôt par "log" qui s'occupe de tout.
+ * @param *msg le message à être loggué
+ * @param *func_name nom de la fonction
+ * @param *args arguments passés à la fonction
+ */
+void private_log_call(const char *msg, const char *func_name, va_list args);
+
+/**
+ * Permet d'écrire le log d'un message passé, suivant le type de log
+ * @param log_type type de log, voir l'enum plus haut
+ * @param msg le message à être loggué
+ */
+void private_write_log(int log_type, char* msg);
+
 #endif /*LOGGER_H_*/
