@@ -1,13 +1,14 @@
 #include "logger.h"
 
-char *filename;
+char *filename= NULL;
 
 int init_log(const char *fn) {
 	FILE *fp = fopen(fn, "a+");
 	if (fp== NULL)
 		return 0; // échec
 	fclose(fp);
-	strcpy(filename,fn);
+	filename =( char*)malloc( strlen(fn + 1) );
+	strcpy(filename, fn);
 	return 1; // succès
 }
 
@@ -22,7 +23,7 @@ void log_call(const char *msg, char *func_name, const char *args, ...) {
 }
 
 void log_smth(const char *msg) {
-	private_write_log(call_type,msg);
+	private_write_log(unkown_type, msg);
 }
 
 // début des fonctions/méthodes non détaillées dans l'API
@@ -32,27 +33,27 @@ void private_log_call(const char *msg, const char *func_name, va_list args) {
 	char vspft[32] = { 0 }, new_msg[256] = { 0 };
 	vsprintf(vspft, func_name, args); // détermine le type de variable et l'affiche
 	sprintf(new_msg, "%s %s", vspft, msg);
-	private_write_log(call_type,new_msg);
+	private_write_log(call_type, new_msg);
 }
 
-void private_write_log(int log_type, char* msg) {
+void private_write_log(int log_type, const char* msg) {
 	// TODO: ajouter un sémaphore pour ne pas avoir des logs qui déconnent
 	// on commence par déterminer l'heure à laquelle le log a lieu (en secondes)
 	time_t curTime;
 	time(&curTime);
 
 	char timeStamp[32] = { 0 }, tmp[3]= { 0 };
-	strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
+	int test = strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
+	printf("Le timestamp est de taille %d et vaut \"%s\"\n", test, timeStamp);
 	switch(log_type) {
 		case call_type: strcpy(tmp,"[*]"); break;
-		case msg_type: strcpy(tmp,"[M]"); break;
-		default: strcpy(tmp,"[U]");
+		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
+		default: strcpy(tmp,"[U]"); // 'U' comme Unkown
 	}
-
-	// ouverture du fichier de log en mode "append" (ajout)
-	FILE *fp = fopen(filename, "a+");
-	if (fp == NULL){
-		// ne devrait pas arriver vu la vérif dans init_log, mais au cas où ...
+	FILE *fp = fopen(filename, "a+"); // ouverture du fichier de log en mode "append" (ajout)
+	if (fp == NULL) {
+		// ne devrait pas arriver vu la vérif dans init_log, sauf si les permissions changent pendant le 
+		// déroulement du programme...
 		// si on ne peut pas logger, alors on affiche erreur puis le message à être loggué dans stderr
 		fprintf(stderr, "Erreur lors de l'ouverture du fichier \"%s\" en mode append!",filename);
 		fprintf(stderr, "[F] %s", msg);
@@ -65,4 +66,4 @@ void private_write_log(int log_type, char* msg) {
 	fflush(fp);
 	fclose(fp);
 
-}
+	}
