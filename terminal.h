@@ -6,5 +6,5 @@
 #include <unistd.h>
 
 // prototypes
-int main(int, char **);
+int main(int argc, char ** argv);
 #endif /*TERMINAL_H_*/

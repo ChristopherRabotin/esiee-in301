@@ -1,0 +1,50 @@
+\hypertarget{message_8h}{
+\section{/home/noxon/coding/C/esiee-in301/libcomm/message.h File Reference}
+\label{message_8h}\index{/home/noxon/coding/C/esiee-in301/libcomm/message.h@{/home/noxon/coding/C/esiee-in301/libcomm/message.h}}
+}
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$stdio.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+int \hyperlink{message_8h_a95b8aa1ca64808e2a063faa92369042}{decoupe} (char $\ast$message, char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
+\item 
+char $\ast$ \hyperlink{message_8h_b54ef99ea54b4285bfe417afa2ea9ceb}{message} (char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{message_8h_a95b8aa1ca64808e2a063faa92369042}{
+\index{message.h@{message.h}!decoupe@{decoupe}}
+\index{decoupe@{decoupe}!message.h@{message.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int decoupe (char $\ast$ {\em message}, \/  char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
+\label{message_8h_a95b8aa1ca64808e2a063faa92369042}
+
+
+decoupe: Decoupe du message \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$message}]le texte du message \item[{\em $\ast$emeteur}]émeteur du message \item[{\em $\ast$type}]type du message \item[{\em $\ast$action}]identificateur de l'action \item[{\em $\ast$valeur}]valeur associée au message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]0 si erreur, 1 sinon {\bf ATTENTION:} Les paramètres étant des pointeurs, les variables associées DOIVENT être allouées avant l'appel de la fonction \end{Desc}
+
+
+Definition at line 3 of file message.c.\hypertarget{message_8h_b54ef99ea54b4285bfe417afa2ea9ceb}{
+\index{message.h@{message.h}!message@{message}}
+\index{message@{message}!message.h@{message.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ message (char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
+\label{message_8h_b54ef99ea54b4285bfe417afa2ea9ceb}
+
+
+message: Construction du message. Le message est alloué dans la fonction. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$emeteur}]émeteur du message \item[{\em $\ast$type}]type du message \item[{\em $\ast$action}]identificateur de l'action \item[{\em $\ast$valeur}]valeur associée au message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]le message construit suivant le protocole à partir des arguments \end{Desc}
+
+
+Definition at line 15 of file message.c.

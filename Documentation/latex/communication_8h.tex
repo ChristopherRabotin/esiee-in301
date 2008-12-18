@@ -1,0 +1,31 @@
+\hypertarget{communication_8h}{
+\section{/home/noxon/coding/C/esiee-in301/libcomm/communication.h File Reference}
+\label{communication_8h}\index{/home/noxon/coding/C/esiee-in301/libcomm/communication.h@{/home/noxon/coding/C/esiee-in301/libcomm/communication.h}}
+}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{communication_8h_23aa06e8a796fe66953adc393cc729b8}{envoi} (const char $\ast$message, const void $\ast$id)
+\item 
+char $\ast$ \hyperlink{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{recoit} ()
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{communication_8h_23aa06e8a796fe66953adc393cc729b8}{
+\index{communication.h@{communication.h}!envoi@{envoi}}
+\index{envoi@{envoi}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void envoi (const char $\ast$ {\em message}, \/  const void $\ast$ {\em id})}}
+\label{communication_8h_23aa06e8a796fe66953adc393cc729b8}
+
+
+\begin{Desc}
+\item[Author:]: Christopher Rabotin \hyperlink{communication_8h}{communication.h} gère toutes les communications au sein du programme. Grâce aux defines, ce header exécute les bonnes méthodes. Les communications disponibles sont: + par fichiers: implémentation bouchon + par pipe (ou tube): implémentation demandée + par socket: implémentation supplémentaire \end{Desc}
+\hypertarget{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{
+\index{communication.h@{communication.h}!recoit@{recoit}}
+\index{recoit@{recoit}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ recoit ()}}
+\label{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}
+
+
+Thread s'occupant de lire tous les messages reçus par le moyen de communication utilisé. Le message reçu sera probablement stocké dans un pipe le temps d'être appelé par le reste du programme. TODO idée à revoir, potentiellement Thread lancé dès le premier appel. Si on tente de le rappeller par la suite il envoie un message sur str\_\-err spécifiant qu'il est déjà lancé. 
