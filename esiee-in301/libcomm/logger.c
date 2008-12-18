@@ -42,9 +42,8 @@ void private_write_log(int log_type, const char* msg) {
 	time_t curTime;
 	time(&curTime);
 
-	char timeStamp[32] = { 0 }, tmp[3]= { 0 };
+	char tmp[3]= { 0 }, timeStamp[32] = { 0 };
 	int test = strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
-	printf("Le timestamp est de taille %d et vaut \"%s\"\n", test, timeStamp);
 	switch(log_type) {
 		case call_type: strcpy(tmp,"[*]"); break;
 		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
@@ -59,7 +58,6 @@ void private_write_log(int log_type, const char* msg) {
 		fprintf(stderr, "[F] %s", msg);
 		return;
 	}
-
 	fprintf(fp, "%s <%s>", tmp, timeStamp);
 	fprintf(fp, "\t%s", msg);
 	fwrite("\n", 1, 1, fp);
