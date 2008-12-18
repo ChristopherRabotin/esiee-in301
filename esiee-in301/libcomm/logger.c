@@ -43,7 +43,7 @@ void private_write_log(int log_type, const char* msg) {
 	time(&curTime);
 
 	char tmp[3]= { 0 }, timeStamp[32] = { 0 };
-	int test = strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
+	strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
 	switch(log_type) {
 		case call_type: strcpy(tmp,"[*]"); break;
 		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
