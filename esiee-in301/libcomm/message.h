@@ -6,6 +6,7 @@
 #include <string.h>
 /**
  * decoupe: Decoupe du message
+ * @param *message le texte du message
  * @param *emeteur émeteur du message
  * @param *type type du message
  * @param *action identificateur de l'action

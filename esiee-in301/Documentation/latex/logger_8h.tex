@@ -1,0 +1,163 @@
+\hypertarget{logger_8h}{
+\section{/home/noxon/coding/C/esiee-in301/libcomm/logger.h File Reference}
+\label{logger_8h}\index{/home/noxon/coding/C/esiee-in301/libcomm/logger.h@{/home/noxon/coding/C/esiee-in301/libcomm/logger.h}}
+}
+{\tt \#include $<$stdio.h$>$}\par
+{\tt \#include $<$stdarg.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$string.h$>$}\par
+{\tt \#include $<$time.h$>$}\par
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum \hyperlink{logger_8h_26a2ec2574e71d699a30a6da87a9060a}{LOG\_\-TYPES} \{ \hyperlink{logger_8h_26a2ec2574e71d699a30a6da87a9060aee067308743486de1676fa06a8b42e31}{call\_\-type}, 
+\hyperlink{logger_8h_26a2ec2574e71d699a30a6da87a9060a8f02a988f6843d2c18070bd138c4b565}{msg\_\-type}, 
+\hyperlink{logger_8h_26a2ec2574e71d699a30a6da87a9060aca3babe946c0278ce012de560a45db77}{unkown\_\-type}
+ \}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+int \hyperlink{logger_8h_d2002666dc679ddab3032057c21c1305}{init\_\-log} (const char $\ast$\hyperlink{logger_8c_eac90097f29f7529968697163cea5c18}{filename})
+\item 
+void \hyperlink{logger_8h_5d4e11dc9c0756733a61a76f3e7f57b1}{log\_\-call} (const char $\ast$msg, char $\ast$func\_\-name, const char $\ast$args,...)
+\item 
+void \hyperlink{logger_8h_4efa8315ec79596ad308f38c18558069}{log\_\-smth} (const char $\ast$msg)
+\item 
+void \hyperlink{logger_8h_a7017b21f46168c4c60cfe08a5dba154}{private\_\-log\_\-call} (const char $\ast$msg, const char $\ast$func\_\-name, va\_\-list args)
+\item 
+void \hyperlink{logger_8h_c5780f57248a4e80eb50e695b593a1a0}{private\_\-write\_\-log} (int log\_\-type, const char $\ast$msg)
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{Desc}
+\item[Author:]Christopher Rabotin. Logger permet de logguer l'activité du programme.\par
+ Les méthodes présentes ici permettrons d'éviter d'utiliser printf() afin de savoir précisément d'où l'appel a été effectué et l'heure de cet appel. -- La fonction de trace est basée sur un code C++: \href{http://www.codeproject.com/KB/cpp/cmtrace.aspx}{\tt http://www.codeproject.com/KB/cpp/cmtrace.aspx} . \end{Desc}
+
+
+Definition in file \hyperlink{logger_8h-source}{logger.h}.
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{logger_8h_26a2ec2574e71d699a30a6da87a9060a}{
+\index{logger.h@{logger.h}!LOG\_\-TYPES@{LOG\_\-TYPES}}
+\index{LOG\_\-TYPES@{LOG\_\-TYPES}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf LOG\_\-TYPES}}}
+\label{logger_8h_26a2ec2574e71d699a30a6da87a9060a}
+
+
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{call\_\-type@{call\_\-type}!logger.h@{logger.h}}\index{logger.h@{logger.h}!call\_\-type@{call\_\-type}}\item[{\em 
+\hypertarget{logger_8h_26a2ec2574e71d699a30a6da87a9060aee067308743486de1676fa06a8b42e31}{
+call\_\-type}
+\label{logger_8h_26a2ec2574e71d699a30a6da87a9060aee067308743486de1676fa06a8b42e31}
+}]\index{msg\_\-type@{msg\_\-type}!logger.h@{logger.h}}\index{logger.h@{logger.h}!msg\_\-type@{msg\_\-type}}\item[{\em 
+\hypertarget{logger_8h_26a2ec2574e71d699a30a6da87a9060a8f02a988f6843d2c18070bd138c4b565}{
+msg\_\-type}
+\label{logger_8h_26a2ec2574e71d699a30a6da87a9060a8f02a988f6843d2c18070bd138c4b565}
+}]\index{unkown\_\-type@{unkown\_\-type}!logger.h@{logger.h}}\index{logger.h@{logger.h}!unkown\_\-type@{unkown\_\-type}}\item[{\em 
+\hypertarget{logger_8h_26a2ec2574e71d699a30a6da87a9060aca3babe946c0278ce012de560a45db77}{
+unkown\_\-type}
+\label{logger_8h_26a2ec2574e71d699a30a6da87a9060aca3babe946c0278ce012de560a45db77}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 56 of file logger.h.
+
+\subsection{Function Documentation}
+\hypertarget{logger_8h_d2002666dc679ddab3032057c21c1305}{
+\index{logger.h@{logger.h}!init\_\-log@{init\_\-log}}
+\index{init\_\-log@{init\_\-log}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int init\_\-log (const char $\ast$ {\em filename})}}
+\label{logger_8h_d2002666dc679ddab3032057c21c1305}
+
+
+Permet d'initialiser le fichier de log en vérifiant si le fichier peut-être ouvert en écriture.\par
+ Si DEBUG\_\-TO\_\-STDOUT est défini, alors l'appel à cette fonction n'est pas nécessaire avant de logguer. Au contraire, un message sera affiché dans stderr si la fonction de log est appelée avec l'init. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$filename}]nom du fichier \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Bernouilli: 0 $<$=$>$ échec $|$ 1 $<$=$>$ succès \end{Desc}
+
+
+Definition at line 5 of file logger.c.
+
+References filename.\hypertarget{logger_8h_5d4e11dc9c0756733a61a76f3e7f57b1}{
+\index{logger.h@{logger.h}!log\_\-call@{log\_\-call}}
+\index{log\_\-call@{log\_\-call}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void log\_\-call (const char $\ast$ {\em msg}, \/  char $\ast$ {\em func\_\-name}, \/  const char $\ast$ {\em args}, \/   {\em ...})}}
+\label{logger_8h_5d4e11dc9c0756733a61a76f3e7f57b1}
+
+
+Permet de tracer une fonction, avec les paramètres passés, puis appelle \hyperlink{logger_8c_a7017b21f46168c4c60cfe08a5dba154}{private\_\-log\_\-call()}. Si DEBUG\_\-TO\_\-STDOUT est défini, alors le message de log est affiché dans stdout. Tous les logs concernant les fonctions seront précédés d'un \mbox{[}$\ast$\mbox{]}. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$msg}]le message à être loggué \item[{\em $\ast$func\_\-name}]nom de la fonction \item[{\em $\ast$args}]arguments passés à la fonction \item[{\em ...}]signifie qu'il peut y avoir plusieurs arguments. Pour les extraire, on utilisera stdarg.h\end{description}
+\end{Desc}
+Exemples d'utilisation: \begin{itemize}
+\item {\bf Cas général}: log\_\-call(\char`\"{}si erreur, vérifier paramètres\char`\"{}, fct, format, fct\_\-arg1, fct\_\-arg2, fct\_\-arg3); \item {\bf Exemples de TestLogger.c}: \begin{itemize}
+\item {\tt log\_\-call(\char`\"{}dans testParamInt\char`\"{}, \char`\"{}testParamInt\char`\"{}, \char`\"{}(\%d,\%d)\char`\"{}, arg1, arg2);} \item {\tt log\_\-call(\char`\"{}dans testParamChar\char`\"{}, \char`\"{}testParamChar\char`\"{}, \char`\"{}($\backslash$\char`\"{}s$\backslash$\char`\"{})\char`\"{}, str);} \item {\tt log\_\-smth(\char`\"{}Okeille c'est bon, l'init est passé youpi!\char`\"{});}\end{itemize}
+\end{itemize}
+
+
+Definition at line 15 of file logger.c.
+
+References private\_\-log\_\-call().\hypertarget{logger_8h_4efa8315ec79596ad308f38c18558069}{
+\index{logger.h@{logger.h}!log\_\-smth@{log\_\-smth}}
+\index{log\_\-smth@{log\_\-smth}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void log\_\-smth (const char $\ast$ {\em msg})}}
+\label{logger_8h_4efa8315ec79596ad308f38c18558069}
+
+
+Permet de logguer un message divers. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em msg}]le message à être loggué \end{description}
+\end{Desc}
+
+
+Definition at line 25 of file logger.c.
+
+References private\_\-write\_\-log(), and unkown\_\-type.\hypertarget{logger_8h_a7017b21f46168c4c60cfe08a5dba154}{
+\index{logger.h@{logger.h}!private\_\-log\_\-call@{private\_\-log\_\-call}}
+\index{private\_\-log\_\-call@{private\_\-log\_\-call}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void private\_\-log\_\-call (const char $\ast$ {\em msg}, \/  const char $\ast$ {\em func\_\-name}, \/  va\_\-list {\em args})}}
+\label{logger_8h_a7017b21f46168c4c60cfe08a5dba154}
+
+
+Permet de logguer l'appel à une fonction, avec des paramètres. Il n'est pas conseillé d'appeler cetter fonction directement! Passez plutôt par \char`\"{}log\char`\"{} qui s'occupe de tout. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$msg}]le message à être loggué \item[{\em $\ast$func\_\-name}]nom de la fonction \item[{\em $\ast$args}]arguments passés à la fonction \end{description}
+\end{Desc}
+
+
+Definition at line 32 of file logger.c.
+
+References call\_\-type, and private\_\-write\_\-log().
+
+Referenced by log\_\-call().\hypertarget{logger_8h_c5780f57248a4e80eb50e695b593a1a0}{
+\index{logger.h@{logger.h}!private\_\-write\_\-log@{private\_\-write\_\-log}}
+\index{private\_\-write\_\-log@{private\_\-write\_\-log}!logger.h@{logger.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void private\_\-write\_\-log (int {\em log\_\-type}, \/  const char $\ast$ {\em msg})}}
+\label{logger_8h_c5780f57248a4e80eb50e695b593a1a0}
+
+
+Permet d'écrire le log d'un message passé, suivant le type de log \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em log\_\-type}]type de log, voir l'enum plus haut \item[{\em msg}]le message à être loggué \end{description}
+\end{Desc}
+
+
+Definition at line 39 of file logger.c.
+
+References call\_\-type, filename, and msg\_\-type.
+
+Referenced by log\_\-smth(), and private\_\-log\_\-call().
