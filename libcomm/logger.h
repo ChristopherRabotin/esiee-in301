@@ -34,14 +34,18 @@ int init_log(const char *filename);
  * @param *args arguments passés à la fonction
  * @param ... signifie qu'il peut y avoir plusieurs arguments. Pour les extraire, on utilisera stdarg.h
  * 
- * Exemple d'utilisation:
- * log_call("si erreur, vérifier paramètres", fct, fct_arg1, fct_arg2, fct_arg3);
+ * Exemples d'utilisation:
+ * <u>Cas général</u>: log_call("si erreur, vérifier paramètres", fct, format, fct_arg1, fct_arg2, fct_arg3);
+ * <u>Exemples de TestLogger.c</u>:
+ * <ul><li><tt>log_call("dans testParamInt", "testParamInt", "(%d,%d)", arg1, arg2);</tt></li>
+ * <li><tt>log_call("dans testParamChar", "testParamChar", "(\"%s\")", str);</tt></li>
+ * <li><tt>log_smth("Okeille c'est bon, l'init est passé youpi!");</tt></li></ul>
  */
 void log_call(const char *msg, char *func_name, const char *args, ...);
 
 /**
  * Permet de logguer un message divers.
- * @param msg le message à être loggué
+ * @param msg le message à être loggué 
  */
 void log_smth(const char *msg);
 //TODO log_msg pour logger les ordres de transactions
@@ -63,6 +67,6 @@ void private_log_call(const char *msg, const char *func_name, va_list args);
  * @param log_type type de log, voir l'enum plus haut
  * @param msg le message à être loggué
  */
-void private_write_log(int log_type, char* msg);
+void private_write_log(int log_type, const char* msg);
 
 #endif /*LOGGER_H_*/
