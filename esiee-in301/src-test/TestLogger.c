@@ -18,8 +18,10 @@ int testParamInt(int arg1, int arg2){
 }
 
 int main(int argc, char **argv) {
-	if(!init_log("./TestLogger.log")){
-		fprintf(stderr, "Impossible de toucher à ../TestLogger.log");
+	char *fn = "/root/TestLogger.log";
+	if(!init_log(fn)){
+		fprintf(stderr, "Impossible de modifier le fichier %s\n",fn);
+		exit(0);
 	}
 	log_smth("Okeille c'est bon, l'init est passé youpi!");
 	testParamInt(2,5);
