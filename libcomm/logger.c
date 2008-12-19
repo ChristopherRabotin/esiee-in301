@@ -42,24 +42,24 @@ void private_write_log(int log_type, const char* msg) {
 	time_t curTime;
 	time(&curTime);
 
-	char tmp[3]= { 0 }, timeStamp[32] = { 0 };
+	char tmp[3]= { 0 }, timeStamp[32] = { 0 }, fullMsg[256] = {0};
 	strftime(timeStamp, sizeof(timeStamp), "%Y-%m-%d %H:%M:%S", localtime(&curTime));
 	switch(log_type) {
 		case call_type: strcpy(tmp,"[*]"); break;
 		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
 		default: strcpy(tmp,"[U]"); // 'U' comme Unkown
 	}
+	sprintf(fullMsg, "%s <%s>\t %s", tmp, timeStamp, msg);
 	FILE *fp = fopen(filename, "a+"); // ouverture du fichier de log en mode "append" (ajout)
 	if (fp == NULL) {
 		// ne devrait pas arriver vu la vérif dans init_log, sauf si les permissions changent pendant le 
-		// déroulement du programme...
+		// déroulement du programme... Pensez à arrêter le programme si init_log() retourne 0.
 		// si on ne peut pas logger, alors on affiche erreur puis le message à être loggué dans stderr
-		fprintf(stderr, "Erreur lors de l'ouverture du fichier \"%s\" en mode append!",filename);
-		fprintf(stderr, "[F] %s", msg);
+		fprintf(stderr, "\n[!!!] Le fichier \"%s\" n'est pas modifiable!",filename);
+		fprintf(stderr, "\n[!!!] %s\n", fullMsg);
 		return;
 	}
-	fprintf(fp, "%s <%s>", tmp, timeStamp);
-	fprintf(fp, "\t%s", msg);
+	fprintf(fp, "%s", fullMsg);
 	fwrite("\n", 1, 1, fp);
 	fflush(fp);
 	fclose(fp);
