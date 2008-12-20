@@ -4,6 +4,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+/**
+ * msg correspond aux données qui transitent sur le réseau interboursier. Ces données sont nommés
+ * <i>messages</i> dans le sujet du projet.
+ */
+typedef struct {
+	char emetteur[32]; //  l’identiﬁant de l’émetteur de l’ordre ;
+	char type[11]; // – T...T est le type du message: ’Achat’ ’Vente’ ’AccuseVente’ ’AccuseAchat’
+	char action[20]; // t l’identiﬁcateur de l’action sur laquelle porte l’ordre ou l’accusé de réception
+	char valeur[5];
+} msg;
+
 /**
  * decoupe: Decoupe du message
  * @param *message le texte du message
@@ -30,10 +42,4 @@ int decoupe(char *message, char *emeteur, char *type, char *action,
  */
 char* message(char *emeteur, char *type, char *action, char *valeur);
 
-typedef struct {
-	char emetteur[32]; //  l’identiﬁant de l’émetteur de l’ordre ;
-	char type[11]; // – T...T est le type du message: ’Achat’ ’Vente’ ’AccuseVente’ ’AccuseAchat’
-	char action[20]; // t l’identiﬁcateur de l’action sur laquelle porte l’ordre ou l’accusé de réception
-	char valeur[5]; 
-} message;
 #endif // MESSAGE_H_
