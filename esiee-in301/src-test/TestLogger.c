@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../libcomm/logger.c"
+#include "../libcomm/logger.h"
 
 /**
  * author Christopher Rabotin
