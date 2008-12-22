@@ -3,30 +3,53 @@
 
 /**
  * Terminal prend deux descripteurs de fichiers en paramètre
- * vers lesquels il redirige son entrée et sa sortie standart.
+ * vers lesquels il redirige son entrée et sa sortie standards.
  */
 int main(void){
-	terminal();
+	int fd0 = open("./commercants", O_RDONLY); // Ouverture du fichier en lecture(entrée)
+
+	int fd1 = open("./accuse_de_reception", O_WRONLY); // Ouverture du fichier en écriture(sortie)
+
+	terminal(fd0,fd1);
 	return 0;
 }
 
-int terminal(){
+int terminal(int in, int out){
 
 	char buf;
-	char identifiant[1];
+	char identifiant[10];
 	   int fd; // Notre file descriptor
-	   if (-1 == (fd = open("./commercants", O_RDONLY))) // Lecture du fichier
-	   {
-	      perror("open() ");
-	      exit(EXIT_FAILURE);
-	   }
+	   if (-1 == in)
+		   {
+		      perror("open(entrée) ");
+		      exit(EXIT_FAILURE);
+		   }
 	   else {
 		   int i;
-		   for (i = 0 ; i < 2 ; i++)
+		   for (i = 0 ; i < 10 ; i++)
 		   {
-			read(fd, &buf,sizeof(char));
-			printf("%c\n",buf);
+			read(in, &buf,sizeof(char));
+			printf("%d%c\n",i,buf);
 			identifiant[i]=buf;
+		   }
+			printf("\n%s\n",identifiant);
+			close(fd);
+	   }
+	   if (-1 == out)
+		   {
+		      perror("open(sortie) ");
+		      exit(EXIT_FAILURE);
+		   }
+	   else {
+		   int i;
+		   char accuseString[] = "accusé de réception positif";
+		   printf("%d",sizeof(accuseString)/sizeof(char));
+		   for (i = 0 ; i < sizeof(accuseString)/sizeof(char) ; i++)
+		   {
+			   // TODO: résoudre le pb pour écrire dans le fichier la chaine de caractères
+			   buf = accuseString[i];
+			   printf("%c",accuseString[i]);
+			   write(out, &buf, sizeof(char));
 		   }
 			printf("\n%s\n",identifiant);
 			close(fd);
