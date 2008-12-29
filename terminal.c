@@ -18,7 +18,6 @@ int terminal(int in, int out){
 
 	char buf;
 	char identifiant[10];
-	   int fd; // Notre file descriptor
 	   if (-1 == in)
 		   {
 		      perror("open(entrée) ");
@@ -33,7 +32,7 @@ int terminal(int in, int out){
 			identifiant[i]=buf;
 		   }
 			printf("\n%s\n",identifiant);
-			close(fd);
+			close(in);
 	   }
 	   if (-1 == out)
 		   {
@@ -43,16 +42,15 @@ int terminal(int in, int out){
 	   else {
 		   int i;
 		   char accuseString[] = "accusé de réception positif";
-		   printf("%d",sizeof(accuseString)/sizeof(char));
 		   for (i = 0 ; i < sizeof(accuseString)/sizeof(char) ; i++)
 		   {
-			   // TODO: résoudre le pb pour écrire dans le fichier la chaine de caractères
+			   // TODO : résoudre le pb pour écrire dans le fichier la chaine de caractères
 			   buf = accuseString[i];
-			   printf("%c",accuseString[i]);
+			   printf("%c",buf);
 			   write(out, &buf, sizeof(char));
 		   }
 			printf("\n%s\n",identifiant);
-			close(fd);
+			close(out);
 	   }
 	   return 0;
 }
