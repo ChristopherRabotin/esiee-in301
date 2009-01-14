@@ -25,15 +25,16 @@ int main(void){
 }
 
 void terminal(FILE* commercants, FILE* actions){
-
-
+	//printf("commercants: %d\n actions: %d",commercants,actions);
+	char id_commercant[100];
+	char id_action[100];
 	//lecture de l'id_commercant du commercant
-	if (commercants!=NULL) {
+	if (commercants!=NULL && actions!=NULL) {
 		int nombre_commercants=0;
-		char id_commercant[10] = "";
+		//char id_commercant[11];
 		fseek(commercants,0,SEEK_SET);
 		//récupération du nombre de lignes = nombre de commercants dans le fichier
-		while(fgets(id_commercant,11,commercants)!=0) {
+		while(fgets(id_commercant,12,commercants)!=0) {
 			nombre_commercants++;
 		}
 		//on tire un commercant aléatoirement dans le fichier de commercants
@@ -41,38 +42,40 @@ void terminal(FILE* commercants, FILE* actions){
 		aleainit();
 		int i;
 		int commercant_aleatoire = alea(1,nombre_commercants);
-		if(commercant_aleatoire%2==0){
-			commercant_aleatoire--;
-		}
 		for(i=0;i<commercant_aleatoire;i++){
-			fgets(id_commercant,11,commercants);
+			fgets(id_commercant,12,commercants);
 		}
+		//on remplace le \n qui est a la fin de la chaine
+		id_commercant[10] = ' ';
 
+		printf("id_commercant=%s\n",id_commercant);
 	//lecture de l'id_action de l'action
 		int nombre_actions=0;
-		char id_action[10] = "";
+
 		fseek(actions,0,SEEK_SET);
 		//récupération du nombre de lignes = nombre d'actions dans le fichier
-		while(fgets(id_action,11,actions)!=0) {
+		while(fgets(id_action,12,actions)!=0) {
 			nombre_actions++;
 		}
-		printf(id_commercant);
-		printf(id_commercant);
 		//on tire une action aléatoirement dans le fichier des actions
 		fseek(actions,0,SEEK_SET);
 		aleainit();
 		int action_aleatoire = alea(1,nombre_actions);
-		if(action_aleatoire%2==0){
-			action_aleatoire--;
-		}
 		for(i=0;i<action_aleatoire;i++){
-			fgets(id_action,11,actions);
+			fgets(id_action,12,actions);
 		}
+		printf("id_action=%s\n",id_action);
+		//on remplace le \n qui est a la fin de la chaine
+		id_action[10] = ' ';
+
+
 
 		//TODO: affichage de l'identifiant;
-		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",identifiant,"vente",id_action);
+		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",id_commercant,"vente",id_action);
 		fclose(commercants);
 		fclose(actions);
+
+		log_smth(create_msg(id_commercant,"achat", id_action, id_action));
 	}
 
 //	//écriture de l'accusé de réception
