@@ -10,7 +10,8 @@
 
 #ifndef COMMUNICATION_H_
 #define COMMUNICATION_H_
-
+#include logger.h
+#include message.h
 /*
  * Envoi un message via le descripteur passé, en utilisant le moyen de
  * communication spécifié lors de la compilation
@@ -26,7 +27,7 @@ void envoi(const char* message, const void* id);
  * utilisé. Le message reçu sera probablement stocké dans un pipe le temps d'être
  * appelé par le reste du programme. TODO idée à revoir, potentiellement
  * Thread lancé dès le premier appel. Si on tente de le rappeller par la suite
- * il envoie un message sur str_err spécifiant qu'il est déjà lancé.
+ * il envoie un message sur std_err spécifiant qu'il est déjà lancé.
  * 
  */
 char* recoit();
