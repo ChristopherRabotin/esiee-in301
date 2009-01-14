@@ -7,9 +7,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "libbourse/alea.h"
+#include "libcomm/logger.h"
+#include "libcomm/message.h"
 
 // prototypes
-int terminal();
+void terminal();
+void envoie_ordre();
 #endif /*TERMINAL_H_*/
 
 
