@@ -7,6 +7,7 @@
 {\tt \#include $<$stdlib.h$>$}\par
 {\tt \#include $<$string.h$>$}\par
 {\tt \#include $<$time.h$>$}\par
+{\tt \#include \char`\"{}message.h\char`\"{}}\par
 \subsection*{Enumerations}
 \begin{CompactItemize}
 \item 
@@ -20,13 +21,13 @@ enum \hyperlink{logger_8h_26a2ec2574e71d699a30a6da87a9060a}{LOG\_\-TYPES} \{ \hy
 \item 
 int \hyperlink{logger_8h_d2002666dc679ddab3032057c21c1305}{init\_\-log} (const char $\ast$\hyperlink{logger_8c_eac90097f29f7529968697163cea5c18}{filename})
 \item 
-void \hyperlink{logger_8h_5d4e11dc9c0756733a61a76f3e7f57b1}{log\_\-call} (const char $\ast$msg, char $\ast$func\_\-name, const char $\ast$args,...)
+void \hyperlink{logger_8h_5d4e11dc9c0756733a61a76f3e7f57b1}{log\_\-call} (const char $\ast$\hyperlink{structmsg__struct}{msg}, char $\ast$func\_\-name, const char $\ast$args,...)
 \item 
-void \hyperlink{logger_8h_4efa8315ec79596ad308f38c18558069}{log\_\-smth} (const char $\ast$msg)
+void \hyperlink{logger_8h_4efa8315ec79596ad308f38c18558069}{log\_\-smth} (const char $\ast$\hyperlink{structmsg__struct}{msg})
 \item 
-void \hyperlink{logger_8h_a7017b21f46168c4c60cfe08a5dba154}{private\_\-log\_\-call} (const char $\ast$msg, const char $\ast$func\_\-name, va\_\-list args)
+void \hyperlink{logger_8h_a7017b21f46168c4c60cfe08a5dba154}{private\_\-log\_\-call} (const char $\ast$\hyperlink{structmsg__struct}{msg}, const char $\ast$func\_\-name, va\_\-list args)
 \item 
-void \hyperlink{logger_8h_c5780f57248a4e80eb50e695b593a1a0}{private\_\-write\_\-log} (int log\_\-type, const char $\ast$msg)
+void \hyperlink{logger_8h_c5780f57248a4e80eb50e695b593a1a0}{private\_\-write\_\-log} (int log\_\-type, const char $\ast$\hyperlink{structmsg__struct}{msg})
 \end{CompactItemize}
 
 
@@ -108,7 +109,9 @@ Exemples d'utilisation: \begin{itemize}
 
 Definition at line 15 of file logger.c.
 
-References private\_\-log\_\-call().\hypertarget{logger_8h_4efa8315ec79596ad308f38c18558069}{
+References private\_\-log\_\-call().
+
+Referenced by create\_\-msg().\hypertarget{logger_8h_4efa8315ec79596ad308f38c18558069}{
 \index{logger.h@{logger.h}!log\_\-smth@{log\_\-smth}}
 \index{log\_\-smth@{log\_\-smth}!logger.h@{logger.h}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}void log\_\-smth (const char $\ast$ {\em msg})}}
@@ -122,7 +125,7 @@ Permet de logguer un message divers. \begin{Desc}
 \end{Desc}
 
 
-Definition at line 25 of file logger.c.
+Definition at line 26 of file logger.c.
 
 References private\_\-write\_\-log(), and unkown\_\-type.\hypertarget{logger_8h_a7017b21f46168c4c60cfe08a5dba154}{
 \index{logger.h@{logger.h}!private\_\-log\_\-call@{private\_\-log\_\-call}}
@@ -138,7 +141,7 @@ Permet de logguer l'appel à une fonction, avec des paramètres. Il n'est pas co
 \end{Desc}
 
 
-Definition at line 32 of file logger.c.
+Definition at line 33 of file logger.c.
 
 References call\_\-type, and private\_\-write\_\-log().
 
@@ -156,8 +159,8 @@ Permet d'écrire le log d'un message passé, suivant le type de log \begin{Desc}
 \end{Desc}
 
 
-Definition at line 39 of file logger.c.
+Definition at line 40 of file logger.c.
 
 References call\_\-type, filename, and msg\_\-type.
 
-Referenced by log\_\-smth(), and private\_\-log\_\-call().
+Referenced by log\_\-msg(), log\_\-smth(), and private\_\-log\_\-call().

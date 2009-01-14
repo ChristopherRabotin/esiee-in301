@@ -9,11 +9,35 @@
 int \hyperlink{message_8c_a95b8aa1ca64808e2a063faa92369042}{decoupe} (char $\ast$message, char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
 \item 
 char $\ast$ \hyperlink{message_8c_b54ef99ea54b4285bfe417afa2ea9ceb}{message} (char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
+\item 
+\hyperlink{structmsg__struct}{msg} $\ast$ \hyperlink{message_8c_08dcfe33ebdcb8a3d18d48ade7576753}{create\_\-msg} (char $\ast$emetteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
+\item 
+char $\ast$ \hyperlink{message_8c_be214f5fc66e60c4ec70cb29b75f9553}{msg\_\-to\_\-str} (\hyperlink{structmsg__struct}{msg} $\ast$\hyperlink{structmsg__struct}{msg})
+\item 
+void \hyperlink{message_8c_0282fd92d95a32c573832baba8d18167}{log\_\-msg} (const char $\ast$un\_\-msg, \hyperlink{structmsg__struct}{msg} $\ast$damsg)
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{message_8c_a95b8aa1ca64808e2a063faa92369042}{
+\hypertarget{message_8c_08dcfe33ebdcb8a3d18d48ade7576753}{
+\index{message.c@{message.c}!create\_\-msg@{create\_\-msg}}
+\index{create\_\-msg@{create\_\-msg}!message.c@{message.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf msg}$\ast$ create\_\-msg (char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
+\label{message_8c_08dcfe33ebdcb8a3d18d48ade7576753}
+
+
+create\_\-msg: Construction du message. Le message est alloué dans la fonction. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em $\ast$emeteur}]émeteur du message \item[{\em $\ast$type}]type du message \item[{\em $\ast$action}]identificateur de l'action \item[{\em $\ast$valeur}]valeur associée au message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]le message de type msg \end{Desc}
+
+
+Definition at line 28 of file message.c.
+
+References msg\_\-struct::action, msg\_\-struct::emetteur, log\_\-call(), msg\_\-struct::type, and msg\_\-struct::valeur.\hypertarget{message_8c_a95b8aa1ca64808e2a063faa92369042}{
 \index{message.c@{message.c}!decoupe@{decoupe}}
 \index{decoupe@{decoupe}!message.c@{message.c}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}int decoupe (char $\ast$ {\em message}, \/  char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
@@ -29,7 +53,25 @@ decoupe: Decoupe du message \begin{Desc}
 \item[Returns:]0 si erreur, 1 sinon {\bf ATTENTION:} Les paramètres étant des pointeurs, les variables associées DOIVENT être allouées avant l'appel de la fonction \end{Desc}
 
 
-Definition at line 3 of file message.c.\hypertarget{message_8c_b54ef99ea54b4285bfe417afa2ea9ceb}{
+Definition at line 3 of file message.c.\hypertarget{message_8c_0282fd92d95a32c573832baba8d18167}{
+\index{message.c@{message.c}!log\_\-msg@{log\_\-msg}}
+\index{log\_\-msg@{log\_\-msg}!message.c@{message.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void log\_\-msg (const char $\ast$ {\em un\_\-msg}, \/  {\bf msg} $\ast$ {\em damsg})}}
+\label{message_8c_0282fd92d95a32c573832baba8d18167}
+
+
+Permet de logguer les ordres de transaction. Placé dans \hyperlink{message_8h}{message.h} puisque utilisé uniquement pour les messages. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em un\_\-msg}]message d'explication lié à l'ordre de transaction \item[{\em damsg}]l'ordre à être loggué. \end{description}
+\end{Desc}
+
+
+Definition at line 56 of file message.c.
+
+References msg\_\-struct::action, msg\_\-struct::emetteur, msg\_\-type, private\_\-write\_\-log(), msg\_\-struct::type, and msg\_\-struct::valeur.
+
+Referenced by msg\_\-to\_\-str().\hypertarget{message_8c_b54ef99ea54b4285bfe417afa2ea9ceb}{
 \index{message.c@{message.c}!message@{message}}
 \index{message@{message}!message.c@{message.c}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ message (char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
@@ -46,3 +88,16 @@ message: Construction du message. Le message est alloué dans la fonction. \begi
 
 
 Definition at line 15 of file message.c.
+
+Referenced by msg\_\-to\_\-str().\hypertarget{message_8c_be214f5fc66e60c4ec70cb29b75f9553}{
+\index{message.c@{message.c}!msg\_\-to\_\-str@{msg\_\-to\_\-str}}
+\index{msg\_\-to\_\-str@{msg\_\-to\_\-str}!message.c@{message.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ msg\_\-to\_\-str ({\bf msg} $\ast$ {\em msg})}}
+\label{message_8c_be214f5fc66e60c4ec70cb29b75f9553}
+
+
+msg\_\-to\_\-str: transforme le message msg en une chaine de charactère suivant le protocole utilisé Fait appel à découpe 
+
+Definition at line 49 of file message.c.
+
+References msg\_\-struct::action, msg\_\-struct::emetteur, log\_\-msg(), message(), msg\_\-struct::type, and msg\_\-struct::valeur.

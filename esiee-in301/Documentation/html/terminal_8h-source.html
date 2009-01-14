@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -18,12 +19,18 @@
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">// prototypes</span>
-<a name="l00009"></a>00009 <span class="keywordtype">int</span> <a class="code" href="terminal_8c.html#3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> ** argv);
-<a name="l00010"></a>00010 <span class="preprocessor">#endif </span><span class="comment">/*TERMINAL_H_*/</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sys/stat.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;fcntl.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="comment">// prototypes</span>
+<a name="l00012"></a>00012 <span class="keywordtype">int</span> <a class="code" href="terminal_8c.html#3bbc958ab202e7849ec7ff24e9c5dff0">terminal</a>();
+<a name="l00013"></a>00013 <span class="preprocessor">#endif </span><span class="comment">/*TERMINAL_H_*/</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Dec 18 10:36:01 2008 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

@@ -9,28 +9,30 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
 <h1>/home/noxon/coding/C/esiee-in301/libcomm/communication.h</h1><a href="communication_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
 <a name="l00011"></a>00011 <span class="preprocessor">#ifndef COMMUNICATION_H_</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define COMMUNICATION_H_</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="comment">/*</span>
-<a name="l00015"></a>00015 <span class="comment"> * Envoi un message via le descripteur passé, en utilisant le moyen de</span>
-<a name="l00016"></a>00016 <span class="comment"> * communication spécifié lors de la compilation</span>
-<a name="l00017"></a>00017 <span class="comment"> * @param char* message le message à envoyer</span>
-<a name="l00018"></a>00018 <span class="comment"> * @param void* id le nom du moyen de communication utilisé.</span>
-<a name="l00019"></a>00019 <span class="comment"> *</span>
-<a name="l00020"></a>00020 <span class="comment"> * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' </span>
-<a name="l00021"></a>00021 <span class="comment"> */</span>
-<a name="l00022"></a>00022 <span class="keywordtype">void</span> <a class="code" href="communication_8h.html#23aa06e8a796fe66953adc393cc729b8">envoi</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keywordtype">id</span>);
-<a name="l00023"></a>00023 
-<a name="l00032"></a>00032 <span class="keywordtype">char</span>* <a class="code" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">recoit</a>();
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#endif </span><span class="comment">/*COMMUNICATION_H_*/</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#include logger.h</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#include message.h</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="comment">/*</span>
+<a name="l00016"></a>00016 <span class="comment"> * Envoi un message via le descripteur passé, en utilisant le moyen de</span>
+<a name="l00017"></a>00017 <span class="comment"> * communication spécifié lors de la compilation</span>
+<a name="l00018"></a>00018 <span class="comment"> * @param char* message le message à envoyer</span>
+<a name="l00019"></a>00019 <span class="comment"> * @param void* id le nom du moyen de communication utilisé.</span>
+<a name="l00020"></a>00020 <span class="comment"> *</span>
+<a name="l00021"></a>00021 <span class="comment"> * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' </span>
+<a name="l00022"></a>00022 <span class="comment"> */</span>
+<a name="l00023"></a>00023 <span class="keywordtype">void</span> <a class="code" href="communication_8h.html#23aa06e8a796fe66953adc393cc729b8">envoi</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keywordtype">id</span>);
+<a name="l00024"></a>00024 
+<a name="l00033"></a>00033 <span class="keywordtype">char</span>* <a class="code" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">recoit</a>();
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="preprocessor">#endif </span><span class="comment">/*COMMUNICATION_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Dec 18 10:36:01 2008 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>
