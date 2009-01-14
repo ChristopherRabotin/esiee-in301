@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "./logger.h"
-
 /**
  * msg correspond aux données qui transitent sur le réseau interboursier. Ces données sont nommés
  * <i>messages</i> dans le sujet du projet.
@@ -58,5 +57,13 @@ int decoupe(char *message, char *emeteur, char *type, char *action,
  * @return le message construit suivant le protocole à partir des arguments
  */
 char* message(char *emeteur, char *type, char *action, char *valeur);
+
+/**
+ * Permet de logguer les ordres de transaction. Placé dans message.h puisque
+ * utilisé uniquement pour les messages.
+ * @param un_msg message d'explication lié à l'ordre de transaction 
+ * @param damsg l'ordre à être loggué.
+ */
+void log_msg(const char *un_msg, msg *damsg);
 
 #endif // MESSAGE_H_

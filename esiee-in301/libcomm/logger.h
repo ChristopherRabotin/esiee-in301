@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "message.h"
 
 /**
  * Permet d'initialiser le fichier de log en vérifiant si le fichier peut-être ouvert en écriture.<br/>
@@ -49,7 +50,6 @@ void log_call(const char *msg, char *func_name, const char *args, ...);
  * @param msg le message à être loggué 
  */
 void log_smth(const char *msg);
-//TODO log_msg pour logger les ordres de transactions
 
 // ce qui concerne le fonctionnement interne du logguer
 // il n'est pas conseillé d'appeler les fonctions ci-dessous directement (d'où le préfixe "private_")
