@@ -1,6 +1,5 @@
 #include "terminal.h"
 
-
 /**
  * Terminal prend deux descripteurs de fichiers en paramètre
  * vers lesquels il redirige son entrée et sa sortie standards.
@@ -26,8 +25,10 @@ int main(void){
 
 void terminal(FILE* commercants, FILE* actions){
 	//printf("commercants: %d\n actions: %d",commercants,actions);
-	char id_commercant[100];
-	char id_action[100];
+	char id_commercant[20];
+	char id_action[20];
+	char type_transaction[20]= "Achat";
+	char valeur[255]="12121";
 	//lecture de l'id_commercant du commercant
 	if (commercants!=NULL && actions!=NULL) {
 		int nombre_commercants=0;
@@ -69,14 +70,21 @@ void terminal(FILE* commercants, FILE* actions){
 		id_action[10] = ' ';
 
 
-
-		//TODO: affichage de l'identifiant;
-		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",id_commercant,"vente",id_action);
+		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",id_commercant,type_transaction,id_action);
 		fclose(commercants);
 		fclose(actions);
 
-		log_smth(create_msg(id_commercant,"achat", id_action, id_action));
+
+		msg * ordre = create_msg(id_commercant, type_transaction, id_action, valeur);
+		printf("msg2: %s", msg_to_str(ordre));
+		log_msg("log",ordre);
 	}
+
+	//TODO: récupérer l'accusé de réception (sur un flux ou fichier)
+	//TODO: le traiter
+
+
+
 
 //	//écriture de l'accusé de réception
 //	if (out!=NULL){
