@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -18,14 +19,28 @@
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00020"></a>00020 <span class="keywordtype">int</span> <a class="code" href="message_8c.html#a95b8aa1ca64808e2a063faa92369042">decoupe</a>(<span class="keywordtype">char</span> *<a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keywordtype">char</span> *emeteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action,
-<a name="l00021"></a>00021                 <span class="keywordtype">char</span> *valeur);
-<a name="l00022"></a>00022 
-<a name="l00031"></a>00031 <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>(<span class="keywordtype">char</span> *emeteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action, <span class="keywordtype">char</span> *valeur);
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="preprocessor">#endif // MESSAGE_H_</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include "<a class="code" href="logger_8h.html">./logger.h</a>"</span>
+<a name="l00012"></a><a class="code" href="structmsg__struct.html">00012</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structmsg__struct.html">msg_struct</a> {
+<a name="l00013"></a><a class="code" href="structmsg__struct.html#63bd710310c42f1758e497179ae443be">00013</a>         <span class="keywordtype">char</span> <a class="code" href="structmsg__struct.html#63bd710310c42f1758e497179ae443be">emetteur</a>[32]; <span class="comment">//  l’identiﬁant de l’émetteur de l’ordre ;</span>
+<a name="l00014"></a><a class="code" href="structmsg__struct.html#b1bee85c89cf3c52f0a4343675f76038">00014</a>         <span class="keywordtype">char</span> <a class="code" href="structmsg__struct.html#b1bee85c89cf3c52f0a4343675f76038">type</a>[11]; <span class="comment">// – T...T est le type du message: ’Achat’ ’Vente’ ’AccuseVente’ ’AccuseAchat’</span>
+<a name="l00015"></a><a class="code" href="structmsg__struct.html#6863e9ef8f00f38466c33643798b2652">00015</a>         <span class="keywordtype">char</span> <a class="code" href="structmsg__struct.html#6863e9ef8f00f38466c33643798b2652">action</a>[20]; <span class="comment">// t l’identiﬁcateur de l’action sur laquelle porte l’ordre ou l’accusé de réception</span>
+<a name="l00016"></a><a class="code" href="structmsg__struct.html#388703005dfbdfb61b6c5eb72b25f535">00016</a>         <span class="keywordtype">char</span> <a class="code" href="structmsg__struct.html#388703005dfbdfb61b6c5eb72b25f535">valeur</a>[5];
+<a name="l00017"></a>00017 } <a class="code" href="structmsg__struct.html">msg</a>;
+<a name="l00018"></a>00018 
+<a name="l00027"></a>00027 <a class="code" href="structmsg__struct.html">msg</a>* <a class="code" href="message_8c.html#08dcfe33ebdcb8a3d18d48ade7576753">create_msg</a>(<span class="keywordtype">char</span> *emeteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action, <span class="keywordtype">char</span> *valeur);
+<a name="l00028"></a>00028 
+<a name="l00033"></a>00033 <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#be214f5fc66e60c4ec70cb29b75f9553">msg_to_str</a>(<a class="code" href="structmsg__struct.html">msg</a> *<a class="code" href="structmsg__struct.html">msg</a>);
+<a name="l00034"></a>00034 
+<a name="l00048"></a>00048 <span class="keywordtype">int</span> <a class="code" href="message_8c.html#a95b8aa1ca64808e2a063faa92369042">decoupe</a>(<span class="keywordtype">char</span> *<a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keywordtype">char</span> *emeteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action,
+<a name="l00049"></a>00049                 <span class="keywordtype">char</span> *valeur);
+<a name="l00050"></a>00050 
+<a name="l00059"></a>00059 <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>(<span class="keywordtype">char</span> *emeteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action, <span class="keywordtype">char</span> *valeur);
+<a name="l00060"></a>00060 
+<a name="l00067"></a>00067 <span class="keywordtype">void</span> <a class="code" href="message_8c.html#0282fd92d95a32c573832baba8d18167">log_msg</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *un_msg, <a class="code" href="structmsg__struct.html">msg</a> *damsg);
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="preprocessor">#endif // MESSAGE_H_</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Dec 18 10:36:01 2008 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

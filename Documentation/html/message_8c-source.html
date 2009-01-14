@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -38,8 +39,43 @@
 <a name="l00024"></a>00024 
 <a name="l00025"></a>00025         <span class="keywordflow">return</span> mess;
 <a name="l00026"></a>00026 }
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="message_8h.html#f480a2501dc267fb01d953443081bc71">00028</a> <a class="code" href="structmsg__struct.html">msg</a> *<a class="code" href="message_8c.html#08dcfe33ebdcb8a3d18d48ade7576753">create_msg</a>(<span class="keywordtype">char</span> *emetteur, <span class="keywordtype">char</span> *type, <span class="keywordtype">char</span> *action, <span class="keywordtype">char</span> *valeur) {
+<a name="l00029"></a>00029         <a class="code" href="structmsg__struct.html">msg</a> *rtn =( <a class="code" href="structmsg__struct.html">msg</a>*) malloc (<span class="keyword">sizeof</span> (<a class="code" href="structmsg__struct.html">msg</a>));
+<a name="l00030"></a>00030         <span class="keywordflow">if</span> (strcmp(type, <span class="stringliteral">"Achat"</span>) != 0 &amp;&amp; strcmp(type, <span class="stringliteral">"Vente"</span>) != 0&amp;&amp; strcmp(type,
+<a name="l00031"></a>00031                         <span class="stringliteral">"AccuseVente"</span>) != 0 &amp;&amp; strcmp(type, <span class="stringliteral">"AccuseAchat"</span>) != 0) {
+<a name="l00032"></a>00032                 <a class="code" href="logger_8c.html#5d4e11dc9c0756733a61a76f3e7f57b1">log_call</a>(<span class="stringliteral">"Un message de type invalide a été rencontré!"</span>, <span class="stringliteral">"create_msg"</span>,
+<a name="l00033"></a>00033                 <span class="stringliteral">"(\"emetteur=%s,type=%s,action=%s,valeur=%s\")"</span>, emetteur,
+<a name="l00034"></a>00034                 type, action, valeur);
+<a name="l00035"></a>00035                 <span class="keywordflow">return</span> NULL;
+<a name="l00036"></a>00036         }
+<a name="l00037"></a>00037 <span class="preprocessor">#ifdef DEBUG</span>
+<a name="l00038"></a>00038 <span class="preprocessor"></span>        <a class="code" href="logger_8c.html#5d4e11dc9c0756733a61a76f3e7f57b1">log_call</a>(<span class="stringliteral">"Creation d'un message"</span>, <span class="stringliteral">"create_msg"</span>,
+<a name="l00039"></a>00039         <span class="stringliteral">"(\"emetteur=%s,type=%s,action=%s,valeur=%s\")"</span>, emetteur, type,
+<a name="l00040"></a>00040         action, valeur);
+<a name="l00041"></a>00041 <span class="preprocessor">#endif</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span>        strcpy(rtn-&gt;<a class="code" href="structmsg__struct.html#6863e9ef8f00f38466c33643798b2652">action</a>, action);
+<a name="l00043"></a>00043         strcpy(rtn-&gt;<a class="code" href="structmsg__struct.html#b1bee85c89cf3c52f0a4343675f76038">type</a>, type);
+<a name="l00044"></a>00044         strcpy(rtn-&gt;<a class="code" href="structmsg__struct.html#63bd710310c42f1758e497179ae443be">emetteur</a>, emetteur);
+<a name="l00045"></a>00045         strcpy(rtn-&gt;<a class="code" href="structmsg__struct.html#388703005dfbdfb61b6c5eb72b25f535">valeur</a>, valeur);
+<a name="l00046"></a>00046         <span class="keywordflow">return</span> rtn;
+<a name="l00047"></a>00047 }
+<a name="l00048"></a>00048 
+<a name="l00049"></a><a class="code" href="message_8h.html#be214f5fc66e60c4ec70cb29b75f9553">00049</a> <span class="keywordtype">char</span> *<a class="code" href="message_8c.html#be214f5fc66e60c4ec70cb29b75f9553">msg_to_str</a>(<a class="code" href="structmsg__struct.html">msg</a> *<a class="code" href="structmsg__struct.html">msg</a>) {
+<a name="l00050"></a>00050 <span class="preprocessor">#ifdef DEBUG</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span>        <a class="code" href="message_8c.html#0282fd92d95a32c573832baba8d18167">log_msg</a>(<span class="stringliteral">"traduction en char*"</span>, msg);
+<a name="l00052"></a>00052 <span class="preprocessor">#endif</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span>        <span class="keywordflow">return</span> <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>(msg-&gt;<a class="code" href="structmsg__struct.html#63bd710310c42f1758e497179ae443be">emetteur</a>, msg-&gt;<a class="code" href="structmsg__struct.html#b1bee85c89cf3c52f0a4343675f76038">type</a>, msg-&gt;<a class="code" href="structmsg__struct.html#6863e9ef8f00f38466c33643798b2652">action</a>, msg-&gt;<a class="code" href="structmsg__struct.html#388703005dfbdfb61b6c5eb72b25f535">valeur</a>);
+<a name="l00054"></a>00054 }
+<a name="l00055"></a>00055 
+<a name="l00056"></a><a class="code" href="message_8h.html#0282fd92d95a32c573832baba8d18167">00056</a> <span class="keywordtype">void</span> <a class="code" href="message_8c.html#0282fd92d95a32c573832baba8d18167">log_msg</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *un_msg, <a class="code" href="structmsg__struct.html">msg</a> *damsg) {
+<a name="l00057"></a>00057         <span class="keywordtype">char</span> loggedmsg[1024];
+<a name="l00058"></a>00058         sprintf(loggedmsg,<span class="stringliteral">"%s par %s: action=%s valeur=%s %s"</span>,
+<a name="l00059"></a>00059                         damsg-&gt;<a class="code" href="structmsg__struct.html#b1bee85c89cf3c52f0a4343675f76038">type</a>, damsg-&gt;<a class="code" href="structmsg__struct.html#63bd710310c42f1758e497179ae443be">emetteur</a>, damsg-&gt;<a class="code" href="structmsg__struct.html#6863e9ef8f00f38466c33643798b2652">action</a>, damsg-&gt;<a class="code" href="structmsg__struct.html#388703005dfbdfb61b6c5eb72b25f535">valeur</a>, un_msg);
+<a name="l00060"></a>00060         <a class="code" href="logger_8c.html#c5780f57248a4e80eb50e695b593a1a0">private_write_log</a>(<a class="code" href="logger_8h.html#26a2ec2574e71d699a30a6da87a9060a8f02a988f6843d2c18070bd138c4b565">msg_type</a>, loggedmsg);
+<a name="l00061"></a>00061 }
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Dec 18 10:36:01 2008 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

@@ -6,18 +6,33 @@
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-int \hyperlink{terminal_8c_3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+int \hyperlink{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\item 
+int \hyperlink{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}{terminal} (int in, int out)
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{terminal_8c_3c04138a5bfe5d72780bb7e82a18e627}{
+\hypertarget{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}{
 \index{terminal.c@{terminal.c}!main@{main}}
 \index{main@{main}!terminal.c@{terminal.c}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
-\label{terminal_8c_3c04138a5bfe5d72780bb7e82a18e627}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int main (void)}}
+\label{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}
+
+
+Terminal prend deux descripteurs de fichiers en paramètre vers lesquels il redirige son entrée et sa sortie standards. 
+
+Definition at line 8 of file terminal.c.
+
+References terminal().\hypertarget{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}{
+\index{terminal.c@{terminal.c}!terminal@{terminal}}
+\index{terminal@{terminal}!terminal.c@{terminal.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int terminal (int {\em in}, \/  int {\em out})}}
+\label{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}
 
 
 
 
-Definition at line 3 of file terminal.c.
+Definition at line 17 of file terminal.c.
+
+Referenced by main().

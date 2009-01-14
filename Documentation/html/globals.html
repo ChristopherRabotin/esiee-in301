@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -23,6 +24,7 @@
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
+      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
       <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
       <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
     </ul>
@@ -39,6 +41,7 @@
       <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
     </ul>
   </div>
@@ -59,6 +62,9 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 <h3><a class="anchor" name="index_c">- c -</a></h3><ul>
 <li>call_type
 : <a class="el" href="logger_8h.html#26a2ec2574e71d699a30a6da87a9060aee067308743486de1676fa06a8b42e31">logger.h</a>
+<li>create_msg()
+: <a class="el" href="message_8h.html#f480a2501dc267fb01d953443081bc71">message.h</a>
+, <a class="el" href="message_8c.html#08dcfe33ebdcb8a3d18d48ade7576753">message.c</a>
 </ul>
 <h3><a class="anchor" name="index_d">- d -</a></h3><ul>
 <li>decoupe()
@@ -82,6 +88,9 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 <li>log_call()
 : <a class="el" href="logger_8c.html#5d4e11dc9c0756733a61a76f3e7f57b1">logger.c</a>
 , <a class="el" href="logger_8h.html#5d4e11dc9c0756733a61a76f3e7f57b1">logger.h</a>
+<li>log_msg()
+: <a class="el" href="message_8h.html#0282fd92d95a32c573832baba8d18167">message.h</a>
+, <a class="el" href="message_8c.html#0282fd92d95a32c573832baba8d18167">message.c</a>
 <li>log_smth()
 : <a class="el" href="logger_8h.html#4efa8315ec79596ad308f38c18558069">logger.h</a>
 , <a class="el" href="logger_8c.html#4efa8315ec79596ad308f38c18558069">logger.c</a>
@@ -90,11 +99,15 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 </ul>
 <h3><a class="anchor" name="index_m">- m -</a></h3><ul>
 <li>main()
-: <a class="el" href="terminal_8c.html#3c04138a5bfe5d72780bb7e82a18e627">terminal.c</a>
-, <a class="el" href="terminal_8h.html#3c04138a5bfe5d72780bb7e82a18e627">terminal.h</a>
+: <a class="el" href="terminal_8c.html#840291bc02cba5474a4cb46a9b9566fe">terminal.c</a>
 <li>message()
-: <a class="el" href="message_8h.html#b54ef99ea54b4285bfe417afa2ea9ceb">message.h</a>
-, <a class="el" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message.c</a>
+: <a class="el" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message.c</a>
+, <a class="el" href="message_8h.html#b54ef99ea54b4285bfe417afa2ea9ceb">message.h</a>
+<li>msg
+: <a class="el" href="message_8h.html#71a0aa584f0134e9cbea8098ad82c665">message.h</a>
+<li>msg_to_str()
+: <a class="el" href="message_8c.html#be214f5fc66e60c4ec70cb29b75f9553">message.c</a>
+, <a class="el" href="message_8h.html#be214f5fc66e60c4ec70cb29b75f9553">message.h</a>
 <li>msg_type
 : <a class="el" href="logger_8h.html#26a2ec2574e71d699a30a6da87a9060a8f02a988f6843d2c18070bd138c4b565">logger.h</a>
 </ul>
@@ -118,12 +131,17 @@ Here is a list of all functions, variables, defines, enums, and typedefs with li
 <li>recoit()
 : <a class="el" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">communication.h</a>
 </ul>
+<h3><a class="anchor" name="index_t">- t -</a></h3><ul>
+<li>terminal()
+: <a class="el" href="terminal_8c.html#3bbc958ab202e7849ec7ff24e9c5dff0">terminal.c</a>
+, <a class="el" href="terminal_8h.html#f7e98df71ae4465e9f15b377a208a424">terminal.h</a>
+</ul>
 <h3><a class="anchor" name="index_u">- u -</a></h3><ul>
 <li>unkown_type
 : <a class="el" href="logger_8h.html#26a2ec2574e71d699a30a6da87a9060aca3babe946c0278ce012de560a45db77">logger.h</a>
 </ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Dec 18 10:36:01 2008 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>
