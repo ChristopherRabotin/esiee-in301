@@ -18,7 +18,7 @@ int testParamInt(int arg1, int arg2){
 }
 
 int main(int argc, char **argv) {
-	char *fn = "/root/TestLogger.log";
+	char *fn = "./TestLogger.log";
 	if(!init_log(fn)){
 		fprintf(stderr, "Impossible de modifier le fichier %s\n",fn);
 		exit(0);
