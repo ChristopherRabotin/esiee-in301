@@ -52,7 +52,7 @@ void log_smth(const char *msg, ...);
 
 // ce qui concerne le fonctionnement interne du logguer
 // il n'est pas conseillé d'appeler les fonctions ci-dessous directement (d'où le préfixe "private_")
-enum LOG_TYPES {call_type, msg_type, unkown_type};
+enum LOG_TYPES {call_type, msg_type, comm_type, unkown_type};
 /**
  * Permet de logguer l'appel à une fonction, avec des paramètres.
  * Il n'est pas conseillé d'appeler cetter fonction directement! Passez plutôt par "log" qui s'occupe de tout.

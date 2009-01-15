@@ -30,8 +30,8 @@ msg* create_msg(const char *emetteur, const char *type, const char *action,
 	msg *rtn =( msg*) malloc (sizeof (msg));
 	if (strcmp(type, "Achat") != 0 && strcmp(type, "Vente") != 0&& strcmp(type,
 			"AccuseVente") != 0 && strcmp(type, "AccuseAchat") != 0) {
-		log_call("Un message de type invalide a été rencontré!", "create_msg",
-		"(\"emetteur=%s,type=%s,action=%s,valeur=%s\")", emetteur,
+		log_call("Un message de type invalide (%s) a été rencontré!", "create_msg",
+		"(\"emetteur=%s,type=%s,action=%s,valeur=%s\")", type, emetteur,
 		type, action, valeur);
 		return NULL;
 	}
@@ -53,23 +53,6 @@ char *msg_to_str(msg *msg) {
 #endif
 	return message(msg->emetteur, msg->type, msg->action, msg->valeur);
 }
-
-/*msg* str_to_msg(char *str) {
-	int i;
-	char *emeteur = calloc(32, sizeof(char)), *type = calloc(11, sizeof(char)),
-			*action = calloc(20, sizeof(char)), *valeur = calloc(5,
-					sizeof(char));
-	char *rslt[] = { emeteur, type, action, valeur };
-	char delims[] = "|";
-	char *result= NULL;
-	result = strtok(str, delims );
-	while (result != NULL) {
-		sprintf(rslt[i++], result);
-		printf("%s\n", result);
-		result = strtok( NULL, delims);
-	}
-	return create_msg(emeteur,type,action,valeur);
-}*/
 
 void log_msg(const char *un_msg, msg *damsg) {
 	char loggedmsg[1024];
