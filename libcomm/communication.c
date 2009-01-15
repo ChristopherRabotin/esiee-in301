@@ -41,10 +41,8 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 					continue;
 				}
 				char tmp[128];
-				//sprintf("connexion entrante depuis %s",inet_ntoa(servers[iteration].remote_addr.sin_addr));
-				//log_srv(servers[iteration],"blah");
-				log_smth("%s (#%d) connexion de %s", servers[iteration].name, servers[iteration].id,
-								inet_ntoa(servers[iteration].remote_addr.sin_addr));
+				sprintf(tmp, "connexion entrante depuis %s:%d",inet_ntoa(servers[iteration].remote_addr.sin_addr),servers[iteration].remote_addr.sin_port);
+				log_srv(servers[iteration],tmp);
 				if (!fork()) { /* fils seconde génération - permet d'être multiclient */
 					char answer[MAXRECVDATA];
 					sprintf(answer,"Serveur %s (#%d). En attente d'un msg (voir libcomm/message.h).\n", servers[iteration].name, servers[iteration].id);
@@ -59,8 +57,8 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 					}
 
 					//bzero(tmp,1);
-					sprintf(tmp,"reçu par %s (#%d) %s",servers[iteration].name, servers[iteration].id,
-					inet_ntoa(servers[iteration].remote_addr.sin_addr));
+					sprintf(tmp,"reçu par %s (#%d) %s:%d",servers[iteration].name, servers[iteration].id,
+					inet_ntoa(servers[iteration].remote_addr.sin_addr),servers[iteration].remote_addr.sin_port);
 					log_msg(tmp,servers[iteration].recvdata);
 					printf("%s",msg_to_str(servers[iteration].recvdata));
 					// la connexion avec le client reste ouverte
