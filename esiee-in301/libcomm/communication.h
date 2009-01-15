@@ -58,6 +58,8 @@ typedef struct client_struct {
 	struct sockaddr_in remote_addr; /* adresse distante*/
 } client;
 
+enum SRVS {ack,exec,term};
+enum CLTS {toAck,toExec,toTerm};
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
  * Retourne un tableau des serveur initialisés (de taille NB_SERV puisqu'il y a NB_SERV serveurs)
@@ -73,20 +75,33 @@ void init_servers(server* servers, const int nb_serv, int port_start, const int 
  */
 void init_clients(client* clients, const int nb_serv, int port_start);
 
-/*
- * Envoi un message via le descripteur passé, en utilisant le moyen de
- * communication spécifié lors de la compilation
- * @param char* message le message à envoyer
- * @param void* id le nom du moyen de communication utilisé.
- *
- * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' 
+/**
+ * Envoi d'un message par socket vers le bon serveur. Il suffit de passer en paramètre
+ * le bon client (toAck,toExec,toTerm) et le message (msg) à envoyer.
+ * @param client_sending le client qui envoit le message
  */
-void send_msg(client* clients, const int id, msg* damsg);
+void send_msg(client* client_sending, msg* damsg);
 
 /*
  * Ferme la connexion d'un client. Attention, la connexion ne pourra être réouverte par l'API,
  * puisque la connexion est établie dans init_clients().
+ * @param client_to_kill le client dont on doit fermer la connexion
  */
-void kill_client(client* clients, const int id);
+void kill_client(client* client_to_kill);
 
+/**
+ * Permet de logguer les communications des serveurs. Placé dans communication.h puisque
+ * utilisé uniquement pour la communication par socket.
+ * @param srv le serveur d'où le log émane
+ * @param un_msg message d'explication lié à l'ordre de transaction 
+ */
+void log_srv(const server *srv, char* un_msg);
+
+/**
+ * Permet de logguer les communications des clients. Placé dans communication.h puisque
+ * utilisé uniquement pour la communication par socket.
+ * @param clt le client d'où le log émane 
+ * @param un_msg message d'explication lié 
+ */
+void log_clt(const client *clt, char* un_msg);
 #endif /*COMMUNICATION_H_*/

@@ -53,6 +53,7 @@ void private_write_log(int log_type, const char* msg) {
 	switch(log_type) {
 		case call_type: strcpy(tmp,"[*]"); break;
 		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
+		case comm_type: strcpy(tmp,"[C]"); break; // 'C' comme Communication
 			default: strcpy(tmp,"[U]"); // 'U' comme Unkown
 		}
 		sprintf(fullMsg, "%s <%s>\t %s", tmp, timeStamp, msg);
