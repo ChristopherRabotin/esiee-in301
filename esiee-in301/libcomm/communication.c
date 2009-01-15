@@ -8,12 +8,13 @@ void init_servers(server* servers, const int nb_serv, int port_start, const int 
 	int iteration;
 	for(iteration=0; iteration < nb_serv; iteration++){
 		servers[iteration].id = iteration;
+		strcpy(servers[iteration].name,(iteration==0?"Acquisition":(iteration==1?"Execution":"Terminal")));
 		if ((servers[iteration].sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 			perror("socket");
 			exit(1);
 		}
 #ifdef DEBUG
-		log_smth("création du serveur #%d",iteration);
+		log_smth("création du serveur %s (#%d)",servers[iteration].name, servers[iteration].id);
 #endif
 		servers[iteration].local_addr.sin_family = AF_INET; /* host byte order */
 		servers[iteration].local_addr.sin_port = htons(port_start++); /* short, network byte order */
@@ -43,8 +44,7 @@ void init_servers(server* servers, const int nb_serv, int port_start, const int 
 						inet_ntoa(servers[iteration].remote_addr.sin_addr));
 				if (!fork()) { /* fils seconde génération - permet d'être multiclient */
 					char answer[128];
-					// TODO non important: servers[iteration].id vaut (null) (iteration a disparu)
-					sprintf(answer,"Hi! This is server %d answering.\n", servers[iteration].id);
+					sprintf(answer,"Bienvenue sur le serveur %s (#%d).\n", servers[iteration].name, servers[iteration].id);
 					if (send(new_fd, answer, strlen(answer), 0) == -1)
 						perror("send");
 					close(new_fd);

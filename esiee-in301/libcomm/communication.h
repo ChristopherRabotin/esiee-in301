@@ -29,6 +29,7 @@
  */
 typedef struct server_struct {
 	int id; /* identifiant du serveur */
+	char name[128]; /* nom du serveur (Acquisition, Execution, Terminal) */
 	int sockfd; /* descripteur du socket */
 	int my_port; /* port du serveur*/
 	int max_conn; /* nombre maximal de connexions */
@@ -41,7 +42,6 @@ typedef struct server_struct {
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
  * Retourne un tableau des serveur initialisés (de taille NB_SERV puisqu'il y a NB_SERV serveurs)
- * TODO définir l'ordre des serveur (ex. 0-> terminal, 1->exécution, 2->acquisition)
  * @param servers tableau de serveurs dans lequel les données concernant ces serveurs sont stockées
  * @param nb_serv nombre de serveurs (correspond au nombre de cases dans le tableau servers)
  * @param port_start port du premier serveur. Les autres sont port_start+1.
