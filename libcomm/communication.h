@@ -42,7 +42,7 @@ typedef struct server_struct {
  * @param port_start port du premier serveur. Les autres sont port_start+1 (si disponible, sinon on incrémente encore)
  * @param max_connexions nombre maximal de connexions simultannées par serveur
  */
-server[] init_servers(int port_start, const int max_connexions);
+server* init_servers(int port_start, const int max_connexions);
 int init_clients();
 
 /*
