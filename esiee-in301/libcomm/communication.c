@@ -91,7 +91,7 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 		}
 
 		clients[iteration].remote_addr.sin_family = AF_INET; /* host byte order */
-		clients[iteration].remote_addr.sin_port = htons(port_start); /* short, network byte order */
+		clients[iteration].remote_addr.sin_port = htons(port_start++); /* short, network byte order */
 		clients[iteration].remote_addr.sin_addr = *((struct in_addr *)(clients[iteration].he)->h_addr);
 		bzero(&(clients[iteration].remote_addr.sin_zero), 8); /* zero pour le reste de struct */
 
@@ -106,8 +106,10 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 }
 
 void send_msg(const client clt, msg* damsg) {
-	if (damsg == NULL)
-		log_smth("");
+	if (damsg == NULL) {
+		log_clt(clt,"tentative d'envoi d'un message NULL");
+		return;
+	}
 	if (send(clt.sockfd, damsg, sizeof(msg), 0) == -1)
 		perror("send");
 }
