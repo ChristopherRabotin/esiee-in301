@@ -1,7 +1,7 @@
 #ifndef EXECUTION_
 #define EXECUTION_
 
-#include <stdio.h>
+#include "casual_includes.h"
 /**
  * Cette méthode permet de recevoir 
  * 

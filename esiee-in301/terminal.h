@@ -1,8 +1,7 @@
 #ifndef TERMINAL_H_
 #define TERMINAL_H_
 // includes
-#include <stdio.h>
-#include <stdlib.h>
+#include "casual_includes.h"
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
