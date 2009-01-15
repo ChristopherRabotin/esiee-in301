@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 	printf("msg1: %s",msg1);
 	msg * msg2 = create_msg("0033125218", "Achat", "0001000012", valeur);
 	printf("msg2: %s", msg_to_str(msg2));
-	log_msg("Je loggue le msg1",msg2);
+	//printf("msg3: %s", msg_to_str(str_to_msg(msg_to_str(msg2))));
 	return 0;
 }
 

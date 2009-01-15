@@ -1,0 +1,142 @@
+\hypertarget{structserver__struct}{
+\section{server\_\-struct Struct Reference}
+\label{structserver__struct}\index{server\_\-struct@{server\_\-struct}}
+}
+{\tt \#include $<$communication.h$>$}
+
+\subsection*{Data Fields}
+\begin{CompactItemize}
+\item 
+int \hyperlink{structserver__struct_36f42199a23f5b79ebd56be10f6a898b}{id}
+\item 
+char \hyperlink{structserver__struct_a50388c012354da44c2f85cf0492b932}{name} \mbox{[}128\mbox{]}
+\item 
+int \hyperlink{structserver__struct_17659ebbdd1f18203ed0ead7ca1b5ed1}{sockfd}
+\item 
+int \hyperlink{structserver__struct_cfe32222ef17a379eb0d1979811e2ddb}{my\_\-port}
+\item 
+int \hyperlink{structserver__struct_8aa422f50ae575556a51e282277c79e7}{max\_\-conn}
+\item 
+int \hyperlink{structserver__struct_b56d302ce3497c35c81694b8f4d1e5d7}{numbytes}
+\item 
+socklen\_\-t \hyperlink{structserver__struct_a4ae791fe60087000b9badae65f6a813}{sin\_\-size}
+\item 
+struct sockaddr\_\-in \hyperlink{structserver__struct_7ab2ae9f72357160310633ae3e1ae14c}{local\_\-addr}
+\item 
+struct sockaddr\_\-in \hyperlink{structserver__struct_98c3d085937cf6ad2a5b600155088e79}{remote\_\-addr}
+\item 
+char \hyperlink{structserver__struct_a157cab1fdf76eee8fbe32dc7dd425d1}{recvdata} \mbox{[}MAXRECVDATA\mbox{]}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+server comprend toutes les données nécessaires au bon fonctionnement d'un serveur. 
+
+Definition at line 30 of file communication.h.
+
+\subsection{Field Documentation}
+\hypertarget{structserver__struct_36f42199a23f5b79ebd56be10f6a898b}{
+\index{server\_\-struct@{server\_\-struct}!id@{id}}
+\index{id@{id}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf server\_\-struct::id}}}
+\label{structserver__struct_36f42199a23f5b79ebd56be10f6a898b}
+
+
+
+
+Definition at line 31 of file communication.h.
+
+Referenced by init\_\-servers().\hypertarget{structserver__struct_a50388c012354da44c2f85cf0492b932}{
+\index{server\_\-struct@{server\_\-struct}!name@{name}}
+\index{name@{name}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char {\bf server\_\-struct::name}\mbox{[}128\mbox{]}}}
+\label{structserver__struct_a50388c012354da44c2f85cf0492b932}
+
+
+
+
+Definition at line 32 of file communication.h.\hypertarget{structserver__struct_17659ebbdd1f18203ed0ead7ca1b5ed1}{
+\index{server\_\-struct@{server\_\-struct}!sockfd@{sockfd}}
+\index{sockfd@{sockfd}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf server\_\-struct::sockfd}}}
+\label{structserver__struct_17659ebbdd1f18203ed0ead7ca1b5ed1}
+
+
+
+
+Definition at line 33 of file communication.h.\hypertarget{structserver__struct_cfe32222ef17a379eb0d1979811e2ddb}{
+\index{server\_\-struct@{server\_\-struct}!my\_\-port@{my\_\-port}}
+\index{my\_\-port@{my\_\-port}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf server\_\-struct::my\_\-port}}}
+\label{structserver__struct_cfe32222ef17a379eb0d1979811e2ddb}
+
+
+
+
+Definition at line 34 of file communication.h.\hypertarget{structserver__struct_8aa422f50ae575556a51e282277c79e7}{
+\index{server\_\-struct@{server\_\-struct}!max\_\-conn@{max\_\-conn}}
+\index{max\_\-conn@{max\_\-conn}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf server\_\-struct::max\_\-conn}}}
+\label{structserver__struct_8aa422f50ae575556a51e282277c79e7}
+
+
+
+
+Definition at line 35 of file communication.h.\hypertarget{structserver__struct_b56d302ce3497c35c81694b8f4d1e5d7}{
+\index{server\_\-struct@{server\_\-struct}!numbytes@{numbytes}}
+\index{numbytes@{numbytes}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int {\bf server\_\-struct::numbytes}}}
+\label{structserver__struct_b56d302ce3497c35c81694b8f4d1e5d7}
+
+
+
+
+Definition at line 36 of file communication.h.
+
+Referenced by init\_\-servers().\hypertarget{structserver__struct_a4ae791fe60087000b9badae65f6a813}{
+\index{server\_\-struct@{server\_\-struct}!sin\_\-size@{sin\_\-size}}
+\index{sin\_\-size@{sin\_\-size}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}socklen\_\-t {\bf server\_\-struct::sin\_\-size}}}
+\label{structserver__struct_a4ae791fe60087000b9badae65f6a813}
+
+
+
+
+Definition at line 37 of file communication.h.
+
+Referenced by init\_\-servers().\hypertarget{structserver__struct_7ab2ae9f72357160310633ae3e1ae14c}{
+\index{server\_\-struct@{server\_\-struct}!local\_\-addr@{local\_\-addr}}
+\index{local\_\-addr@{local\_\-addr}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}struct sockaddr\_\-in {\bf server\_\-struct::local\_\-addr}\hspace{0.3cm}{\tt  \mbox{[}read\mbox{]}}}}
+\label{structserver__struct_7ab2ae9f72357160310633ae3e1ae14c}
+
+
+
+
+Definition at line 38 of file communication.h.
+
+Referenced by init\_\-servers().\hypertarget{structserver__struct_98c3d085937cf6ad2a5b600155088e79}{
+\index{server\_\-struct@{server\_\-struct}!remote\_\-addr@{remote\_\-addr}}
+\index{remote\_\-addr@{remote\_\-addr}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}struct sockaddr\_\-in {\bf server\_\-struct::remote\_\-addr}\hspace{0.3cm}{\tt  \mbox{[}read\mbox{]}}}}
+\label{structserver__struct_98c3d085937cf6ad2a5b600155088e79}
+
+
+
+
+Definition at line 39 of file communication.h.\hypertarget{structserver__struct_a157cab1fdf76eee8fbe32dc7dd425d1}{
+\index{server\_\-struct@{server\_\-struct}!recvdata@{recvdata}}
+\index{recvdata@{recvdata}!server_struct@{server\_\-struct}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char {\bf server\_\-struct::recvdata}\mbox{[}MAXRECVDATA\mbox{]}}}
+\label{structserver__struct_a157cab1fdf76eee8fbe32dc7dd425d1}
+
+
+
+
+Definition at line 40 of file communication.h.
+
+Referenced by init\_\-servers().
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+/home/noxon/coding/C/esiee-in301/libcomm/\hyperlink{communication_8h}{communication.h}\end{CompactItemize}

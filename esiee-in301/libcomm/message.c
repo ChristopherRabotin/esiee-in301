@@ -12,7 +12,7 @@ int decoupe(char *message, char *emeteur, char *type, char *action,
 	 return 1;*/
 }
 
-char* message(char *emeteur, char *type, char *action, char * valeur) {
+char* message(char *emeteur, char *type, char *action, char *valeur) {
 	int longueur = strlen(emeteur) + strlen(type) + strlen(action)
 			+ strlen(valeur) + 1+ 5+ 1;
 	char *mess = calloc(longueur, sizeof(char));
@@ -25,7 +25,8 @@ char* message(char *emeteur, char *type, char *action, char * valeur) {
 	return mess;
 }
 
-msg *create_msg(char *emetteur, char *type, char *action, char *valeur) {
+msg* create_msg(const char *emetteur, const char *type, const char *action,
+		const char *valeur) {
 	msg *rtn =( msg*) malloc (sizeof (msg));
 	if (strcmp(type, "Achat") != 0 && strcmp(type, "Vente") != 0&& strcmp(type,
 			"AccuseVente") != 0 && strcmp(type, "AccuseAchat") != 0) {
@@ -53,9 +54,26 @@ char *msg_to_str(msg *msg) {
 	return message(msg->emetteur, msg->type, msg->action, msg->valeur);
 }
 
+/*msg* str_to_msg(char *str) {
+	int i;
+	char *emeteur = calloc(32, sizeof(char)), *type = calloc(11, sizeof(char)),
+			*action = calloc(20, sizeof(char)), *valeur = calloc(5,
+					sizeof(char));
+	char *rslt[] = { emeteur, type, action, valeur };
+	char delims[] = "|";
+	char *result= NULL;
+	result = strtok(str, delims );
+	while (result != NULL) {
+		sprintf(rslt[i++], result);
+		printf("%s\n", result);
+		result = strtok( NULL, delims);
+	}
+	return create_msg(emeteur,type,action,valeur);
+}*/
+
 void log_msg(const char *un_msg, msg *damsg) {
 	char loggedmsg[1024];
-	sprintf(loggedmsg,"%s par %s: action=%s valeur=%s %s",
-			damsg->type, damsg->emetteur, damsg->action, damsg->valeur, un_msg);
+	sprintf(loggedmsg, "%s par %s: action=%s valeur=%s %s", damsg->type,
+			damsg->emetteur, damsg->action, damsg->valeur, un_msg);
 	private_write_log(msg_type, loggedmsg);
 }

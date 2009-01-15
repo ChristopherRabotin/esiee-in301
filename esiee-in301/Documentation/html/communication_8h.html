@@ -15,16 +15,75 @@
   </div>
 </div>
 <div class="contents">
-<h1>/home/noxon/coding/C/esiee-in301/libcomm/communication.h File Reference</h1>
+<h1>/home/noxon/coding/C/esiee-in301/libcomm/communication.h File Reference</h1><code>#include &quot;<a class="el" href="casual__includes_8h-source.html">../casual_includes.h</a>&quot;</code><br>
+<code>#include &lt;unistd.h&gt;</code><br>
+<code>#include &lt;sys/types.h&gt;</code><br>
+<code>#include &lt;netinet/in.h&gt;</code><br>
+<code>#include &lt;arpa/inet.h&gt;</code><br>
+<code>#include &lt;sys/socket.h&gt;</code><br>
+<code>#include &lt;sys/wait.h&gt;</code><br>
+<code>#include &quot;<a class="el" href="logger_8h-source.html">logger.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="message_8h-source.html">message.h</a>&quot;</code><br>
+
 <p>
 <a href="communication_8h-source.html">Go to the source code of this file.</a><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Data Structures</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structserver__struct.html">server_struct</a></td></tr>
+
+<tr><td colspan="2"><br><h2>Defines</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#722965678f7ebad779fcd63c60ef79ab">MAXRECVDATA</a>&nbsp;&nbsp;&nbsp;1024</td></tr>
+
+<tr><td colspan="2"><br><h2>Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">typedef struct <a class="el" href="structserver__struct.html">server_struct</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#28331476d3a09aff9ad6d65418b6d896">server</a></td></tr>
+
 <tr><td colspan="2"><br><h2>Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#d54c5f9e66ded0425b322a4c5317c772">init_servers</a> (<a class="el" href="structserver__struct.html">server</a> *servers, const int nb_serv, int port_start, const int max_connexions)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#6a2c39342c0d9e3717a6e9f87073067c">init_clients</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#23aa06e8a796fe66953adc393cc729b8">envoi</a> (const char *message, const void *id)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">recoit</a> ()</td></tr>
 
 </table>
+<hr><h2>Define Documentation</h2>
+<a class="anchor" name="722965678f7ebad779fcd63c60ef79ab"></a><!-- doxytag: member="communication.h::MAXRECVDATA" ref="722965678f7ebad779fcd63c60ef79ab" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAXRECVDATA&nbsp;&nbsp;&nbsp;1024          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+<dl class="author" compact><dt><b>Author:</b></dt><dd>: Christopher Rabotin <a class="el" href="communication_8h.html">communication.h</a> gère toutes les communications au sein du programme. Grâce aux defines, ce header exécute les bonnes méthodes. Les communications disponibles sont: + par fichiers: implémentation bouchon + par pipe (ou tube): implémentation demandée + par socket: implémentation supplémentaire </dd></dl>
+
+<p>Definition at line <a class="el" href="communication_8h-source.html#l00025">25</a> of file <a class="el" href="communication_8h-source.html">communication.h</a>.</p>
+
+<p>Referenced by <a class="el" href="communication_8c-source.html#l00003">init_servers()</a>.</p>
+
+</div>
+</div><p>
+<hr><h2>Typedef Documentation</h2>
+<a class="anchor" name="28331476d3a09aff9ad6d65418b6d896"></a><!-- doxytag: member="communication.h::server" ref="28331476d3a09aff9ad6d65418b6d896" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structserver__struct.html">server_struct</a>  <a class="el" href="structserver__struct.html">server</a>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
 <hr><h2>Function Documentation</h2>
 <a class="anchor" name="23aa06e8a796fe66953adc393cc729b8"></a><!-- doxytag: member="communication.h::envoi" ref="23aa06e8a796fe66953adc393cc729b8" args="(const char *message, const void *id)" -->
 <div class="memitem">
@@ -52,7 +111,78 @@
 <div class="memdoc">
 
 <p>
-<dl class="author" compact><dt><b>Author:</b></dt><dd>: Christopher Rabotin <a class="el" href="communication_8h.html">communication.h</a> gère toutes les communications au sein du programme. Grâce aux defines, ce header exécute les bonnes méthodes. Les communications disponibles sont: + par fichiers: implémentation bouchon + par pipe (ou tube): implémentation demandée + par socket: implémentation supplémentaire </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="6a2c39342c0d9e3717a6e9f87073067c"></a><!-- doxytag: member="communication.h::init_clients" ref="6a2c39342c0d9e3717a6e9f87073067c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_clients           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="d54c5f9e66ded0425b322a4c5317c772"></a><!-- doxytag: member="communication.h::init_servers" ref="d54c5f9e66ded0425b322a4c5317c772" args="(server *servers, const int nb_serv, int port_start, const int max_connexions)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_servers           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structserver__struct.html">server</a> *&nbsp;</td>
+          <td class="paramname"> <em>servers</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>nb_serv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>port_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>max_connexions</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Permet d'initialiser les serveurs des différents modules du programme. Retourne un tableau des serveur initialisés (de taille NB_SERV puisqu'il y a NB_SERV serveurs) <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>servers</em>&nbsp;</td><td>tableau de serveurs dans lequel les données concernant ces serveurs sont stockées </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>nb_serv</em>&nbsp;</td><td>nombre de serveurs (correspond au nombre de cases dans le tableau servers) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>port_start</em>&nbsp;</td><td>port du premier serveur. Les autres sont port_start+1. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>max_connexions</em>&nbsp;</td><td>nombre maximal de connexions simultannées par serveur </td></tr>
+  </table>
+</dl>
+
+<p>Definition at line <a class="el" href="communication_8c-source.html#l00003">3</a> of file <a class="el" href="communication_8c-source.html">communication.c</a>.</p>
+
+<p>References <a class="el" href="communication_8h-source.html#l00031">server_struct::id</a>, <a class="el" href="logger_8c-source.html#l00005">init_log()</a>, <a class="el" href="communication_8h-source.html#l00038">server_struct::local_addr</a>, <a class="el" href="logger_8c-source.html#l00026">log_smth()</a>, <a class="el" href="communication_8h-source.html#l00025">MAXRECVDATA</a>, <a class="el" href="communication_8h-source.html#l00036">server_struct::numbytes</a>, <a class="el" href="communication_8h-source.html#l00040">server_struct::recvdata</a>, and <a class="el" href="communication_8h-source.html#l00037">server_struct::sin_size</a>.</p>
 
 </div>
 </div><p>
@@ -76,7 +206,7 @@ Thread s'occupant de lire tous les messages reçus par le moyen de communication
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Thu Jan 15 15:40:20 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

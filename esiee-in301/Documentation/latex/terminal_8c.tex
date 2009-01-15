@@ -8,12 +8,25 @@
 \item 
 int \hyperlink{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}{main} (void)
 \item 
-int \hyperlink{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}{terminal} (int in, int out)
+void \hyperlink{terminal_8c_2fb2f6593208a4f794e63e42e86d3220}{terminal} (FILE $\ast$commercants, FILE $\ast$actions)
+\item 
+void \hyperlink{terminal_8c_c6f820a64ada2454e58ff012b85f7156}{envoie\_\-ordre} (FILE $\ast$out)
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}{
+\hypertarget{terminal_8c_c6f820a64ada2454e58ff012b85f7156}{
+\index{terminal.c@{terminal.c}!envoie\_\-ordre@{envoie\_\-ordre}}
+\index{envoie\_\-ordre@{envoie\_\-ordre}!terminal.c@{terminal.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void envoie\_\-ordre (FILE $\ast$ {\em out})}}
+\label{terminal_8c_c6f820a64ada2454e58ff012b85f7156}
+
+
+
+
+Definition at line 100 of file terminal.c.
+
+Referenced by main(), and terminal().\hypertarget{terminal_8c_840291bc02cba5474a4cb46a9b9566fe}{
 \index{terminal.c@{terminal.c}!main@{main}}
 \index{main@{main}!terminal.c@{terminal.c}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}int main (void)}}
@@ -24,15 +37,17 @@ Terminal prend deux descripteurs de fichiers en paramètre vers lesquels il redi
 
 Definition at line 8 of file terminal.c.
 
-References terminal().\hypertarget{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}{
+References envoie\_\-ordre(), and terminal().\hypertarget{terminal_8c_2fb2f6593208a4f794e63e42e86d3220}{
 \index{terminal.c@{terminal.c}!terminal@{terminal}}
 \index{terminal@{terminal}!terminal.c@{terminal.c}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int terminal (int {\em in}, \/  int {\em out})}}
-\label{terminal_8c_3bbc958ab202e7849ec7ff24e9c5dff0}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void terminal (FILE $\ast$ {\em commercants}, \/  FILE $\ast$ {\em actions})}}
+\label{terminal_8c_2fb2f6593208a4f794e63e42e86d3220}
 
 
 
 
-Definition at line 17 of file terminal.c.
+Definition at line 26 of file terminal.c.
+
+References alea(), aleainit(), create\_\-msg(), envoie\_\-ordre(), log\_\-msg(), and msg\_\-to\_\-str().
 
 Referenced by main().
