@@ -46,8 +46,9 @@ void log_call(const char *msg, char *func_name, const char *args, ...);
 /**
  * Permet de logguer un message divers.
  * @param msg le message à être loggué 
+ * @param ... permet de s'en servir exactement comme un printf
  */
-void log_smth(const char *msg);
+void log_smth(const char *msg, ...);
 
 // ce qui concerne le fonctionnement interne du logguer
 // il n'est pas conseillé d'appeler les fonctions ci-dessous directement (d'où le préfixe "private_")

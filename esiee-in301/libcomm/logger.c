@@ -17,14 +17,19 @@ void log_call(const char *msg, char *func_name, const char *args, ...) {
 	sprintf(fctNargs, "%s%s", func_name, args); // concaténation
 	va_list arglist; // nouveau struct qui va contenir les arguments
 	va_start(arglist, args);
-	// extraction des arguments et/ou de leurs type
+	// extraction des arguments et/ou de leur type
 	private_log_call(msg, fctNargs, arglist);
 	va_end(arglist);
 }
 
 
-void log_smth(const char *msg) {
-	private_write_log(unkown_type, msg);
+void log_smth(const char *msg, ...) {
+	char vspft[1024] = { 0 }, new_msg[1024] = { 0 };
+	va_list arglist; // nouveau struct qui va contenir les arguments
+	va_start(arglist, msg);
+	vsprintf(vspft, msg, arglist);
+	sprintf(new_msg, vspft, msg);
+	private_write_log(unkown_type, new_msg);
 }
 
 // début des fonctions/méthodes non détaillées dans l'API
