@@ -38,7 +38,7 @@ typedef struct server_struct {
 	socklen_t sin_size; /* taille du socket */
 	struct sockaddr_in local_addr; /* adresse locale */
 	struct sockaddr_in remote_addr; /* adresse distante*/
-	msg *recvdata/*[MAXRECVDATA]*/; /* données reçues */
+	msg *recvdata; /* données reçues */
 } server;
 
 /**
@@ -53,7 +53,7 @@ typedef struct client_struct {
 	int my_port; /* port de connexion au serveur*/
 	int numbytes; /* nombre d'octets reçus par une connexion */
 	socklen_t sin_size; /* taille du socket */
-	struct hostent *he;  /* informations de l'hôte */
+	struct hostent *he; /* informations de l'hôte */
 	struct sockaddr_in local_addr; /* adresse locale */
 	struct sockaddr_in remote_addr; /* adresse distante*/
 } client;
@@ -68,7 +68,8 @@ enum CLTS {toAck,toExec,toTerm};
  * @param port_start port du premier serveur. Les autres sont port_start+1.
  * @param max_connexions nombre maximal de connexions simultannées par serveur
  */
-void init_servers(server* servers, const int nb_serv, int port_start, const int max_connexions);
+void init_servers(server* servers, const int nb_serv, int port_start,
+		const int max_connexions);
 
 /**
  * TODO doc
