@@ -15,10 +15,8 @@
   </div>
 </div>
 <div class="contents">
-<h1>/home/noxon/coding/C/esiee-in301/libcomm/logger.h File Reference</h1><code>#include &lt;stdio.h&gt;</code><br>
+<h1>/home/noxon/coding/C/esiee-in301/libcomm/logger.h File Reference</h1><code>#include &quot;<a class="el" href="casual__includes_8h-source.html">../casual_includes.h</a>&quot;</code><br>
 <code>#include &lt;stdarg.h&gt;</code><br>
-<code>#include &lt;stdlib.h&gt;</code><br>
-<code>#include &lt;string.h&gt;</code><br>
 <code>#include &lt;time.h&gt;</code><br>
 <code>#include &quot;<a class="el" href="message_8h-source.html">message.h</a>&quot;</code><br>
 
@@ -36,7 +34,7 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#5d4e11dc9c0756733a61a76f3e7f57b1">log_call</a> (const char *<a class="el" href="structmsg__struct.html">msg</a>, char *func_name, const char *args,...)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#4efa8315ec79596ad308f38c18558069">log_smth</a> (const char *<a class="el" href="structmsg__struct.html">msg</a>)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#6cc4eb379baec30531bd4852517f31ad">log_smth</a> (const char *<a class="el" href="structmsg__struct.html">msg</a>,...)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a7017b21f46168c4c60cfe08a5dba154">private_log_call</a> (const char *<a class="el" href="structmsg__struct.html">msg</a>, const char *func_name, va_list args)</td></tr>
 
@@ -72,7 +70,7 @@
 </table>
 </dl>
 
-<p>Definition at line <a class="el" href="logger_8h-source.html#l00056">56</a> of file <a class="el" href="logger_8h-source.html">logger.h</a>.</p>
+<p>Definition at line <a class="el" href="logger_8h-source.html#l00055">55</a> of file <a class="el" href="logger_8h-source.html">logger.h</a>.</p>
 
 </div>
 </div><p>
@@ -105,6 +103,8 @@ Permet d'initialiser le fichier de log en vérifiant si le fichier peut-être ou
 <p>Definition at line <a class="el" href="logger_8c-source.html#l00005">5</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
 
 <p>References <a class="el" href="logger_8c-source.html#l00003">filename</a>.</p>
+
+<p>Referenced by <a class="el" href="communication_8c-source.html#l00003">init_servers()</a>.</p>
 
 </div>
 </div><p>
@@ -171,13 +171,13 @@ Exemples d'utilisation: <ul>
 
 <p>Definition at line <a class="el" href="logger_8c-source.html#l00015">15</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
 
-<p>References <a class="el" href="logger_8c-source.html#l00033">private_log_call()</a>.</p>
+<p>References <a class="el" href="logger_8c-source.html#l00038">private_log_call()</a>.</p>
 
 <p>Referenced by <a class="el" href="message_8c-source.html#l00028">create_msg()</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="4efa8315ec79596ad308f38c18558069"></a><!-- doxytag: member="logger.h::log_smth" ref="4efa8315ec79596ad308f38c18558069" args="(const char *msg)" -->
+<a class="anchor" name="6cc4eb379baec30531bd4852517f31ad"></a><!-- doxytag: member="logger.h::log_smth" ref="6cc4eb379baec30531bd4852517f31ad" args="(const char *msg,...)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -185,9 +185,18 @@ Exemples d'utilisation: <ul>
           <td class="memname">void log_smth           </td>
           <td>(</td>
           <td class="paramtype">const char *&nbsp;</td>
-          <td class="paramname"> <em>msg</em>          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td width="100%"></td>
+          <td class="paramname"> <em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>...</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"></td>
         </tr>
       </table>
 </div>
@@ -197,12 +206,15 @@ Exemples d'utilisation: <ul>
 Permet de logguer un message divers. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>msg</em>&nbsp;</td><td>le message à être loggué </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>...</em>&nbsp;</td><td>permet de s'en servir exactement comme un printf </td></tr>
   </table>
 </dl>
 
 <p>Definition at line <a class="el" href="logger_8c-source.html#l00026">26</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
 
-<p>References <a class="el" href="logger_8c-source.html#l00040">private_write_log()</a>, and <a class="el" href="logger_8h-source.html#l00056">unkown_type</a>.</p>
+<p>References <a class="el" href="logger_8c-source.html#l00045">private_write_log()</a>, and <a class="el" href="logger_8h-source.html#l00055">unkown_type</a>.</p>
+
+<p>Referenced by <a class="el" href="communication_8c-source.html#l00003">init_servers()</a>.</p>
 
 </div>
 </div><p>
@@ -246,9 +258,9 @@ Permet de logguer l'appel à une fonction, avec des paramètres. Il n'est pas co
   </table>
 </dl>
 
-<p>Definition at line <a class="el" href="logger_8c-source.html#l00033">33</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
+<p>Definition at line <a class="el" href="logger_8c-source.html#l00038">38</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
 
-<p>References <a class="el" href="logger_8h-source.html#l00056">call_type</a>, and <a class="el" href="logger_8c-source.html#l00040">private_write_log()</a>.</p>
+<p>References <a class="el" href="logger_8h-source.html#l00055">call_type</a>, and <a class="el" href="logger_8c-source.html#l00045">private_write_log()</a>.</p>
 
 <p>Referenced by <a class="el" href="logger_8c-source.html#l00015">log_call()</a>.</p>
 
@@ -287,16 +299,16 @@ Permet d'écrire le log d'un message passé, suivant le type de log <dl compact>
   </table>
 </dl>
 
-<p>Definition at line <a class="el" href="logger_8c-source.html#l00040">40</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
+<p>Definition at line <a class="el" href="logger_8c-source.html#l00045">45</a> of file <a class="el" href="logger_8c-source.html">logger.c</a>.</p>
 
-<p>References <a class="el" href="logger_8h-source.html#l00056">call_type</a>, <a class="el" href="logger_8c-source.html#l00003">filename</a>, and <a class="el" href="logger_8h-source.html#l00056">msg_type</a>.</p>
+<p>References <a class="el" href="logger_8h-source.html#l00055">call_type</a>, <a class="el" href="logger_8c-source.html#l00003">filename</a>, and <a class="el" href="logger_8h-source.html#l00055">msg_type</a>.</p>
 
-<p>Referenced by <a class="el" href="message_8c-source.html#l00056">log_msg()</a>, <a class="el" href="logger_8c-source.html#l00026">log_smth()</a>, and <a class="el" href="logger_8c-source.html#l00033">private_log_call()</a>.</p>
+<p>Referenced by <a class="el" href="message_8c-source.html#l00074">log_msg()</a>, <a class="el" href="logger_8c-source.html#l00026">log_smth()</a>, and <a class="el" href="logger_8c-source.html#l00038">private_log_call()</a>.</p>
 
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Thu Jan 15 15:40:20 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

@@ -2,13 +2,67 @@
 \section{/home/noxon/coding/C/esiee-in301/libcomm/communication.h File Reference}
 \label{communication_8h}\index{/home/noxon/coding/C/esiee-in301/libcomm/communication.h@{/home/noxon/coding/C/esiee-in301/libcomm/communication.h}}
 }
+{\tt \#include \char`\"{}../casual\_\-includes.h\char`\"{}}\par
+{\tt \#include $<$unistd.h$>$}\par
+{\tt \#include $<$sys/types.h$>$}\par
+{\tt \#include $<$netinet/in.h$>$}\par
+{\tt \#include $<$arpa/inet.h$>$}\par
+{\tt \#include $<$sys/socket.h$>$}\par
+{\tt \#include $<$sys/wait.h$>$}\par
+{\tt \#include \char`\"{}logger.h\char`\"{}}\par
+{\tt \#include \char`\"{}message.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct \hyperlink{structserver__struct}{server\_\-struct}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define \hyperlink{communication_8h_722965678f7ebad779fcd63c60ef79ab}{MAXRECVDATA}~1024
+\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef struct \hyperlink{structserver__struct}{server\_\-struct} \hyperlink{communication_8h_28331476d3a09aff9ad6d65418b6d896}{server}
+\end{CompactItemize}
 \subsection*{Functions}
 \begin{CompactItemize}
+\item 
+void \hyperlink{communication_8h_d54c5f9e66ded0425b322a4c5317c772}{init\_\-servers} (\hyperlink{structserver__struct}{server} $\ast$servers, const int nb\_\-serv, int port\_\-start, const int max\_\-connexions)
+\item 
+int \hyperlink{communication_8h_6a2c39342c0d9e3717a6e9f87073067c}{init\_\-clients} ()
 \item 
 void \hyperlink{communication_8h_23aa06e8a796fe66953adc393cc729b8}{envoi} (const char $\ast$message, const void $\ast$id)
 \item 
 char $\ast$ \hyperlink{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{recoit} ()
 \end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{communication_8h_722965678f7ebad779fcd63c60ef79ab}{
+\index{communication.h@{communication.h}!MAXRECVDATA@{MAXRECVDATA}}
+\index{MAXRECVDATA@{MAXRECVDATA}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MAXRECVDATA~1024}}
+\label{communication_8h_722965678f7ebad779fcd63c60ef79ab}
+
+
+\begin{Desc}
+\item[Author:]: Christopher Rabotin \hyperlink{communication_8h}{communication.h} gère toutes les communications au sein du programme. Grâce aux defines, ce header exécute les bonnes méthodes. Les communications disponibles sont: + par fichiers: implémentation bouchon + par pipe (ou tube): implémentation demandée + par socket: implémentation supplémentaire \end{Desc}
+
+
+Definition at line 25 of file communication.h.
+
+Referenced by init\_\-servers().
+
+\subsection{Typedef Documentation}
+\hypertarget{communication_8h_28331476d3a09aff9ad6d65418b6d896}{
+\index{communication.h@{communication.h}!server@{server}}
+\index{server@{server}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf server\_\-struct}  {\bf server}}}
+\label{communication_8h_28331476d3a09aff9ad6d65418b6d896}
+
+
 
 
 \subsection{Function Documentation}
@@ -19,9 +73,30 @@ char $\ast$ \hyperlink{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{recoit
 \label{communication_8h_23aa06e8a796fe66953adc393cc729b8}
 
 
-\begin{Desc}
-\item[Author:]: Christopher Rabotin \hyperlink{communication_8h}{communication.h} gère toutes les communications au sein du programme. Grâce aux defines, ce header exécute les bonnes méthodes. Les communications disponibles sont: + par fichiers: implémentation bouchon + par pipe (ou tube): implémentation demandée + par socket: implémentation supplémentaire \end{Desc}
-\hypertarget{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{
+\hypertarget{communication_8h_6a2c39342c0d9e3717a6e9f87073067c}{
+\index{communication.h@{communication.h}!init\_\-clients@{init\_\-clients}}
+\index{init\_\-clients@{init\_\-clients}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int init\_\-clients ()}}
+\label{communication_8h_6a2c39342c0d9e3717a6e9f87073067c}
+
+
+\hypertarget{communication_8h_d54c5f9e66ded0425b322a4c5317c772}{
+\index{communication.h@{communication.h}!init\_\-servers@{init\_\-servers}}
+\index{init\_\-servers@{init\_\-servers}!communication.h@{communication.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void init\_\-servers ({\bf server} $\ast$ {\em servers}, \/  const int {\em nb\_\-serv}, \/  int {\em port\_\-start}, \/  const int {\em max\_\-connexions})}}
+\label{communication_8h_d54c5f9e66ded0425b322a4c5317c772}
+
+
+Permet d'initialiser les serveurs des différents modules du programme. Retourne un tableau des serveur initialisés (de taille NB\_\-SERV puisqu'il y a NB\_\-SERV serveurs) \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em servers}]tableau de serveurs dans lequel les données concernant ces serveurs sont stockées \item[{\em nb\_\-serv}]nombre de serveurs (correspond au nombre de cases dans le tableau servers) \item[{\em port\_\-start}]port du premier serveur. Les autres sont port\_\-start+1. \item[{\em max\_\-connexions}]nombre maximal de connexions simultannées par serveur \end{description}
+\end{Desc}
+
+
+Definition at line 3 of file communication.c.
+
+References server\_\-struct::id, init\_\-log(), server\_\-struct::local\_\-addr, log\_\-smth(), MAXRECVDATA, server\_\-struct::numbytes, server\_\-struct::recvdata, and server\_\-struct::sin\_\-size.\hypertarget{communication_8h_67cba26c8d29a97fd2ef782f6b64fead}{
 \index{communication.h@{communication.h}!recoit@{recoit}}
 \index{recoit@{recoit}!communication.h@{communication.h}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ recoit ()}}

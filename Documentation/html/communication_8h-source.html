@@ -16,23 +16,51 @@
 <h1>/home/noxon/coding/C/esiee-in301/libcomm/communication.h</h1><a href="communication_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
 <a name="l00011"></a>00011 <span class="preprocessor">#ifndef COMMUNICATION_H_</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define COMMUNICATION_H_</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">#include logger.h</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#include message.h</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="comment">/*</span>
-<a name="l00016"></a>00016 <span class="comment"> * Envoi un message via le descripteur passé, en utilisant le moyen de</span>
-<a name="l00017"></a>00017 <span class="comment"> * communication spécifié lors de la compilation</span>
-<a name="l00018"></a>00018 <span class="comment"> * @param char* message le message à envoyer</span>
-<a name="l00019"></a>00019 <span class="comment"> * @param void* id le nom du moyen de communication utilisé.</span>
-<a name="l00020"></a>00020 <span class="comment"> *</span>
-<a name="l00021"></a>00021 <span class="comment"> * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' </span>
-<a name="l00022"></a>00022 <span class="comment"> */</span>
-<a name="l00023"></a>00023 <span class="keywordtype">void</span> <a class="code" href="communication_8h.html#23aa06e8a796fe66953adc393cc729b8">envoi</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keywordtype">id</span>);
+<a name="l00013"></a>00013 <span class="preprocessor"></span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include "../casual_includes.h"</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;unistd.h&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;sys/types.h&gt;</span> 
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;netinet/in.h&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;arpa/inet.h&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;sys/socket.h&gt;</span> 
+<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;sys/wait.h&gt;</span> 
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 <span class="preprocessor">#include "<a class="code" href="logger_8h.html">logger.h</a>"</span>
+<a name="l00023"></a>00023 <span class="preprocessor">#include "<a class="code" href="message_8h.html">message.h</a>"</span>
 <a name="l00024"></a>00024 
-<a name="l00033"></a>00033 <span class="keywordtype">char</span>* <a class="code" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">recoit</a>();
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="preprocessor">#endif </span><span class="comment">/*COMMUNICATION_H_*/</span>
+<a name="l00025"></a><a class="code" href="communication_8h.html#722965678f7ebad779fcd63c60ef79ab">00025</a> <span class="preprocessor">#define MAXRECVDATA 1024 </span><span class="comment">/* nombre de serveurs à être initialisés */</span>
+<a name="l00026"></a>00026 
+<a name="l00030"></a><a class="code" href="structserver__struct.html">00030</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structserver__struct.html">server_struct</a> {
+<a name="l00031"></a><a class="code" href="structserver__struct.html#36f42199a23f5b79ebd56be10f6a898b">00031</a>         <span class="keywordtype">int</span> <a class="code" href="structserver__struct.html#36f42199a23f5b79ebd56be10f6a898b">id</a>; <span class="comment">/* identifiant du serveur */</span>
+<a name="l00032"></a><a class="code" href="structserver__struct.html#a50388c012354da44c2f85cf0492b932">00032</a>         <span class="keywordtype">char</span> <a class="code" href="structserver__struct.html#a50388c012354da44c2f85cf0492b932">name</a>[128]; <span class="comment">/* nom du serveur (Acquisition, Execution, Terminal) */</span>
+<a name="l00033"></a><a class="code" href="structserver__struct.html#17659ebbdd1f18203ed0ead7ca1b5ed1">00033</a>         <span class="keywordtype">int</span> <a class="code" href="structserver__struct.html#17659ebbdd1f18203ed0ead7ca1b5ed1">sockfd</a>; <span class="comment">/* descripteur du socket */</span>
+<a name="l00034"></a><a class="code" href="structserver__struct.html#cfe32222ef17a379eb0d1979811e2ddb">00034</a>         <span class="keywordtype">int</span> <a class="code" href="structserver__struct.html#cfe32222ef17a379eb0d1979811e2ddb">my_port</a>; <span class="comment">/* port du serveur*/</span>
+<a name="l00035"></a><a class="code" href="structserver__struct.html#8aa422f50ae575556a51e282277c79e7">00035</a>         <span class="keywordtype">int</span> <a class="code" href="structserver__struct.html#8aa422f50ae575556a51e282277c79e7">max_conn</a>; <span class="comment">/* nombre maximal de connexions */</span>
+<a name="l00036"></a><a class="code" href="structserver__struct.html#b56d302ce3497c35c81694b8f4d1e5d7">00036</a>         <span class="keywordtype">int</span> <a class="code" href="structserver__struct.html#b56d302ce3497c35c81694b8f4d1e5d7">numbytes</a>; <span class="comment">/* nombre d'octets reçus par une connexion */</span>
+<a name="l00037"></a><a class="code" href="structserver__struct.html#a4ae791fe60087000b9badae65f6a813">00037</a>         socklen_t <a class="code" href="structserver__struct.html#a4ae791fe60087000b9badae65f6a813">sin_size</a>; <span class="comment">/* taille du socket */</span>
+<a name="l00038"></a><a class="code" href="structserver__struct.html#7ab2ae9f72357160310633ae3e1ae14c">00038</a>         <span class="keyword">struct </span>sockaddr_in <a class="code" href="structserver__struct.html#7ab2ae9f72357160310633ae3e1ae14c">local_addr</a>; <span class="comment">/* adresse locale */</span>
+<a name="l00039"></a><a class="code" href="structserver__struct.html#98c3d085937cf6ad2a5b600155088e79">00039</a>         <span class="keyword">struct </span>sockaddr_in <a class="code" href="structserver__struct.html#98c3d085937cf6ad2a5b600155088e79">remote_addr</a>; <span class="comment">/* adresse distante*/</span>
+<a name="l00040"></a><a class="code" href="structserver__struct.html#a157cab1fdf76eee8fbe32dc7dd425d1">00040</a>         <span class="keywordtype">char</span> <a class="code" href="structserver__struct.html#a157cab1fdf76eee8fbe32dc7dd425d1">recvdata</a>[<a class="code" href="communication_8h.html#722965678f7ebad779fcd63c60ef79ab">MAXRECVDATA</a>]; <span class="comment">/* données reçues */</span>
+<a name="l00041"></a>00041 } <a class="code" href="structserver__struct.html">server</a>;
+<a name="l00042"></a>00042 
+<a name="l00051"></a>00051 <span class="keywordtype">void</span> <a class="code" href="communication_8c.html#d54c5f9e66ded0425b322a4c5317c772">init_servers</a>(<a class="code" href="structserver__struct.html">server</a>* servers, <span class="keyword">const</span> <span class="keywordtype">int</span> nb_serv, <span class="keywordtype">int</span> port_start, <span class="keyword">const</span> <span class="keywordtype">int</span> max_connexions);
+<a name="l00052"></a>00052 <span class="keywordtype">int</span> <a class="code" href="communication_8h.html#6a2c39342c0d9e3717a6e9f87073067c">init_clients</a>();
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="comment">/*</span>
+<a name="l00055"></a>00055 <span class="comment"> * Envoi un message via le descripteur passé, en utilisant le moyen de</span>
+<a name="l00056"></a>00056 <span class="comment"> * communication spécifié lors de la compilation</span>
+<a name="l00057"></a>00057 <span class="comment"> * @param char* message le message à envoyer</span>
+<a name="l00058"></a>00058 <span class="comment"> * @param void* id le nom du moyen de communication utilisé.</span>
+<a name="l00059"></a>00059 <span class="comment"> *</span>
+<a name="l00060"></a>00060 <span class="comment"> * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' </span>
+<a name="l00061"></a>00061 <span class="comment"> */</span>
+<a name="l00062"></a>00062 <span class="keywordtype">void</span> <a class="code" href="communication_8h.html#23aa06e8a796fe66953adc393cc729b8">envoi</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message</a>, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keywordtype">id</span>);
+<a name="l00063"></a>00063 
+<a name="l00072"></a>00072 <span class="keywordtype">char</span>* <a class="code" href="communication_8h.html#67cba26c8d29a97fd2ef782f6b64fead">recoit</a>();
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 <span class="preprocessor">#endif </span><span class="comment">/*COMMUNICATION_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Thu Jan 15 15:40:19 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

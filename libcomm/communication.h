@@ -22,7 +22,7 @@
 #include "logger.h"
 #include "message.h"
 
-#define NB_SERV 3 /* nombre de serveurs à être initialisés */
+#define MAXRECVDATA 1024 /* nombre de serveurs à être initialisés */
 
 /**
  * server comprend toutes les données nécessaires au bon fonctionnement d'un serveur.
@@ -33,10 +33,11 @@ typedef struct server_struct {
 	int sockfd; /* descripteur du socket */
 	int my_port; /* port du serveur*/
 	int max_conn; /* nombre maximal de connexions */
+	int numbytes; /* nombre d'octets reçus par une connexion */
 	socklen_t sin_size; /* taille du socket */
 	struct sockaddr_in local_addr; /* adresse locale */
 	struct sockaddr_in remote_addr; /* adresse distante*/
-
+	char recvdata[MAXRECVDATA]; /* données reçues */
 } server;
 
 /**

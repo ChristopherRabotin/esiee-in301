@@ -1,0 +1,30 @@
+\hypertarget{communication_8c}{
+\section{/home/noxon/coding/C/esiee-in301/libcomm/communication.c File Reference}
+\label{communication_8c}\index{/home/noxon/coding/C/esiee-in301/libcomm/communication.c@{/home/noxon/coding/C/esiee-in301/libcomm/communication.c}}
+}
+{\tt \#include \char`\"{}communication.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{communication_8c_d54c5f9e66ded0425b322a4c5317c772}{init\_\-servers} (\hyperlink{structserver__struct}{server} $\ast$servers, const int nb\_\-serv, int port\_\-start, const int max\_\-connexions)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{communication_8c_d54c5f9e66ded0425b322a4c5317c772}{
+\index{communication.c@{communication.c}!init\_\-servers@{init\_\-servers}}
+\index{init\_\-servers@{init\_\-servers}!communication.c@{communication.c}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void init\_\-servers ({\bf server} $\ast$ {\em servers}, \/  const int {\em nb\_\-serv}, \/  int {\em port\_\-start}, \/  const int {\em max\_\-connexions})}}
+\label{communication_8c_d54c5f9e66ded0425b322a4c5317c772}
+
+
+Permet d'initialiser les serveurs des différents modules du programme. Retourne un tableau des serveur initialisés (de taille NB\_\-SERV puisqu'il y a NB\_\-SERV serveurs) \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em servers}]tableau de serveurs dans lequel les données concernant ces serveurs sont stockées \item[{\em nb\_\-serv}]nombre de serveurs (correspond au nombre de cases dans le tableau servers) \item[{\em port\_\-start}]port du premier serveur. Les autres sont port\_\-start+1. \item[{\em max\_\-connexions}]nombre maximal de connexions simultannées par serveur \end{description}
+\end{Desc}
+
+
+Definition at line 3 of file communication.c.
+
+References server\_\-struct::id, init\_\-log(), server\_\-struct::local\_\-addr, log\_\-smth(), MAXRECVDATA, server\_\-struct::numbytes, server\_\-struct::recvdata, and server\_\-struct::sin\_\-size.

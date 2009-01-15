@@ -23,10 +23,36 @@
 <tr><td colspan="2"><br><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#3bbc958ab202e7849ec7ff24e9c5dff0">terminal</a> (int in, int out)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#2fb2f6593208a4f794e63e42e86d3220">terminal</a> (FILE *commercants, FILE *actions)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8c.html#c6f820a64ada2454e58ff012b85f7156">envoie_ordre</a> (FILE *out)</td></tr>
 
 </table>
 <hr><h2>Function Documentation</h2>
+<a class="anchor" name="c6f820a64ada2454e58ff012b85f7156"></a><!-- doxytag: member="terminal.c::envoie_ordre" ref="c6f820a64ada2454e58ff012b85f7156" args="(FILE *out)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void envoie_ordre           </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&nbsp;</td>
+          <td class="paramname"> <em>out</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+
+<p>Definition at line <a class="el" href="terminal_8c-source.html#l00100">100</a> of file <a class="el" href="terminal_8c-source.html">terminal.c</a>.</p>
+
+<p>Referenced by <a class="el" href="terminal_8c-source.html#l00008">main()</a>, and <a class="el" href="terminal_8c-source.html#l00026">terminal()</a>.</p>
+
+</div>
+</div><p>
 <a class="anchor" name="840291bc02cba5474a4cb46a9b9566fe"></a><!-- doxytag: member="terminal.c::main" ref="840291bc02cba5474a4cb46a9b9566fe" args="(void)" -->
 <div class="memitem">
 <div class="memproto">
@@ -47,25 +73,25 @@
 Terminal prend deux descripteurs de fichiers en paramètre vers lesquels il redirige son entrée et sa sortie standards. 
 <p>Definition at line <a class="el" href="terminal_8c-source.html#l00008">8</a> of file <a class="el" href="terminal_8c-source.html">terminal.c</a>.</p>
 
-<p>References <a class="el" href="terminal_8c-source.html#l00017">terminal()</a>.</p>
+<p>References <a class="el" href="terminal_8c-source.html#l00100">envoie_ordre()</a>, and <a class="el" href="terminal_8c-source.html#l00026">terminal()</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="3bbc958ab202e7849ec7ff24e9c5dff0"></a><!-- doxytag: member="terminal.c::terminal" ref="3bbc958ab202e7849ec7ff24e9c5dff0" args="(int in, int out)" -->
+<a class="anchor" name="2fb2f6593208a4f794e63e42e86d3220"></a><!-- doxytag: member="terminal.c::terminal" ref="2fb2f6593208a4f794e63e42e86d3220" args="(FILE *commercants, FILE *actions)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int terminal           </td>
+          <td class="memname">void terminal           </td>
           <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>in</em>, </td>
+          <td class="paramtype">FILE *&nbsp;</td>
+          <td class="paramname"> <em>commercants</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>out</em></td><td>&nbsp;</td>
+          <td class="paramtype">FILE *&nbsp;</td>
+          <td class="paramname"> <em>actions</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -78,14 +104,16 @@ Terminal prend deux descripteurs de fichiers en paramètre vers lesquels il redi
 
 <p>
 
-<p>Definition at line <a class="el" href="terminal_8c-source.html#l00017">17</a> of file <a class="el" href="terminal_8c-source.html">terminal.c</a>.</p>
+<p>Definition at line <a class="el" href="terminal_8c-source.html#l00026">26</a> of file <a class="el" href="terminal_8c-source.html">terminal.c</a>.</p>
+
+<p>References <a class="el" href="alea_8c-source.html#l00011">alea()</a>, <a class="el" href="alea_8c-source.html#l00007">aleainit()</a>, <a class="el" href="message_8c-source.html#l00028">create_msg()</a>, <a class="el" href="terminal_8c-source.html#l00100">envoie_ordre()</a>, <a class="el" href="message_8c-source.html#l00074">log_msg()</a>, and <a class="el" href="message_8c-source.html#l00050">msg_to_str()</a>.</p>
 
 <p>Referenced by <a class="el" href="terminal_8c-source.html#l00008">main()</a>.</p>
 
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Thu Jan 15 15:40:20 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

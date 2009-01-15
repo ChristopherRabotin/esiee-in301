@@ -22,11 +22,11 @@ typedef struct msg_struct {
  * @param *valeur valeur associée au message
  * @return le message de type msg
  */
-msg* create_msg(char *emeteur, char *type, char *action, char *valeur);
+msg* create_msg(const char *emetteur, const char *type, const char *action, const char *valeur);
 
 /**
- * msg_to_str: transforme le message msg en une chaine de charactère suivant le protocole utilisé
- * Fait appel à découpe
+ * msg_to_str: transforme le message msg en une chaine de caractères suivant le protocole utilisé
+ * Fait appel à message()
  */
 char* msg_to_str(msg *msg);
 

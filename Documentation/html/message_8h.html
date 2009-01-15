@@ -15,9 +15,7 @@
   </div>
 </div>
 <div class="contents">
-<h1>/home/noxon/coding/C/esiee-in301/libcomm/message.h File Reference</h1><code>#include &lt;stdlib.h&gt;</code><br>
-<code>#include &lt;stdio.h&gt;</code><br>
-<code>#include &lt;string.h&gt;</code><br>
+<h1>/home/noxon/coding/C/esiee-in301/libcomm/message.h File Reference</h1><code>#include &quot;<a class="el" href="casual__includes_8h-source.html">../casual_includes.h</a>&quot;</code><br>
 <code>#include &quot;<a class="el" href="logger_8h-source.html">./logger.h</a>&quot;</code><br>
 
 <p>
@@ -30,9 +28,11 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">typedef struct <a class="el" href="structmsg__struct.html">msg_struct</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#71a0aa584f0134e9cbea8098ad82c665">msg</a></td></tr>
 
 <tr><td colspan="2"><br><h2>Functions</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="structmsg__struct.html">msg</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#f480a2501dc267fb01d953443081bc71">create_msg</a> (char *emeteur, char *type, char *action, char *valeur)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="structmsg__struct.html">msg</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#23f5410bcb26e7a7d38c030dc6529806">create_msg</a> (const char *emetteur, const char *type, const char *action, const char *valeur)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#be214f5fc66e60c4ec70cb29b75f9553">msg_to_str</a> (<a class="el" href="structmsg__struct.html">msg</a> *<a class="el" href="structmsg__struct.html">msg</a>)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="structmsg__struct.html">msg</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#c2801f89755c9bbbf7d0af3d8524ccce">str_to_msg</a> (char *str)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="message_8h.html#a95b8aa1ca64808e2a063faa92369042">decoupe</a> (char *message, char *emeteur, char *type, char *action, char *valeur)</td></tr>
 
@@ -58,32 +58,32 @@
 </div>
 </div><p>
 <hr><h2>Function Documentation</h2>
-<a class="anchor" name="f480a2501dc267fb01d953443081bc71"></a><!-- doxytag: member="message.h::create_msg" ref="f480a2501dc267fb01d953443081bc71" args="(char *emeteur, char *type, char *action, char *valeur)" -->
+<a class="anchor" name="23f5410bcb26e7a7d38c030dc6529806"></a><!-- doxytag: member="message.h::create_msg" ref="23f5410bcb26e7a7d38c030dc6529806" args="(const char *emetteur, const char *type, const char *action, const char *valeur)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structmsg__struct.html">msg</a>* create_msg           </td>
           <td>(</td>
-          <td class="paramtype">char *&nbsp;</td>
-          <td class="paramname"> <em>emeteur</em>, </td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>emetteur</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramtype">const char *&nbsp;</td>
           <td class="paramname"> <em>type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramtype">const char *&nbsp;</td>
           <td class="paramname"> <em>action</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramtype">const char *&nbsp;</td>
           <td class="paramname"> <em>valeur</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -108,7 +108,9 @@ create_msg: Construction du message. Le message est alloué dans la fonction. <d
 
 <p>Definition at line <a class="el" href="message_8c-source.html#l00028">28</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
 
-<p>References <a class="el" href="message_8h-source.html#l00015">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00013">msg_struct::emetteur</a>, <a class="el" href="logger_8c-source.html#l00015">log_call()</a>, <a class="el" href="message_8h-source.html#l00014">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00016">msg_struct::valeur</a>.</p>
+<p>References <a class="el" href="message_8h-source.html#l00013">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00011">msg_struct::emetteur</a>, <a class="el" href="logger_8c-source.html#l00015">log_call()</a>, <a class="el" href="message_8h-source.html#l00012">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00014">msg_struct::valeur</a>.</p>
+
+<p>Referenced by <a class="el" href="message_8c-source.html#l00057">str_to_msg()</a>, and <a class="el" href="terminal_8c-source.html#l00026">terminal()</a>.</p>
 
 </div>
 </div><p>
@@ -204,11 +206,11 @@ Permet de logguer les ordres de transaction. Placé dans <a class="el" href="mes
   </table>
 </dl>
 
-<p>Definition at line <a class="el" href="message_8c-source.html#l00056">56</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
+<p>Definition at line <a class="el" href="message_8c-source.html#l00074">74</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
 
-<p>References <a class="el" href="message_8h-source.html#l00015">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00013">msg_struct::emetteur</a>, <a class="el" href="logger_8h-source.html#l00056">msg_type</a>, <a class="el" href="logger_8c-source.html#l00040">private_write_log()</a>, <a class="el" href="message_8h-source.html#l00014">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00016">msg_struct::valeur</a>.</p>
+<p>References <a class="el" href="message_8h-source.html#l00013">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00011">msg_struct::emetteur</a>, <a class="el" href="logger_8h-source.html#l00055">msg_type</a>, <a class="el" href="logger_8c-source.html#l00045">private_write_log()</a>, <a class="el" href="message_8h-source.html#l00012">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00014">msg_struct::valeur</a>.</p>
 
-<p>Referenced by <a class="el" href="message_8c-source.html#l00049">msg_to_str()</a>.</p>
+<p>Referenced by <a class="el" href="message_8c-source.html#l00050">msg_to_str()</a>, and <a class="el" href="terminal_8c-source.html#l00026">terminal()</a>.</p>
 
 </div>
 </div><p>
@@ -262,7 +264,7 @@ message: Construction du message. Le message est alloué dans la fonction. <dl c
 
 <p>Definition at line <a class="el" href="message_8c-source.html#l00015">15</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
 
-<p>Referenced by <a class="el" href="message_8c-source.html#l00049">msg_to_str()</a>.</p>
+<p>Referenced by <a class="el" href="message_8c-source.html#l00050">msg_to_str()</a>.</p>
 
 </div>
 </div><p>
@@ -283,15 +285,41 @@ message: Construction du message. Le message est alloué dans la fonction. <dl c
 <div class="memdoc">
 
 <p>
-msg_to_str: transforme le message msg en une chaine de charactère suivant le protocole utilisé Fait appel à découpe 
-<p>Definition at line <a class="el" href="message_8c-source.html#l00049">49</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
+msg_to_str: transforme le message msg en une chaine de caractères suivant le protocole utilisé Fait appel à <a class="el" href="message_8c.html#b54ef99ea54b4285bfe417afa2ea9ceb">message()</a> 
+<p>Definition at line <a class="el" href="message_8c-source.html#l00050">50</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
 
-<p>References <a class="el" href="message_8h-source.html#l00015">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00013">msg_struct::emetteur</a>, <a class="el" href="message_8c-source.html#l00056">log_msg()</a>, <a class="el" href="message_8c-source.html#l00015">message()</a>, <a class="el" href="message_8h-source.html#l00014">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00016">msg_struct::valeur</a>.</p>
+<p>References <a class="el" href="message_8h-source.html#l00013">msg_struct::action</a>, <a class="el" href="message_8h-source.html#l00011">msg_struct::emetteur</a>, <a class="el" href="message_8c-source.html#l00074">log_msg()</a>, <a class="el" href="message_8c-source.html#l00015">message()</a>, <a class="el" href="message_8h-source.html#l00012">msg_struct::type</a>, and <a class="el" href="message_8h-source.html#l00014">msg_struct::valeur</a>.</p>
+
+<p>Referenced by <a class="el" href="terminal_8c-source.html#l00026">terminal()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="c2801f89755c9bbbf7d0af3d8524ccce"></a><!-- doxytag: member="message.h::str_to_msg" ref="c2801f89755c9bbbf7d0af3d8524ccce" args="(char *str)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmsg__struct.html">msg</a>* str_to_msg           </td>
+          <td>(</td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>str</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+str_to_msg: transforme une chaine de caractères en msg suivant le protocole utilisé Fait appel à <a class="el" href="message_8c.html#23f5410bcb26e7a7d38c030dc6529806">create_msg()</a> 
+<p>Definition at line <a class="el" href="message_8c-source.html#l00057">57</a> of file <a class="el" href="message_8c-source.html">message.c</a>.</p>
+
+<p>References <a class="el" href="message_8c-source.html#l00028">create_msg()</a>.</p>
 
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Wed Jan 14 10:16:01 2009 by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Thu Jan 15 15:40:20 2009 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>

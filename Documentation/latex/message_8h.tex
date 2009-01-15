@@ -2,9 +2,7 @@
 \section{/home/noxon/coding/C/esiee-in301/libcomm/message.h File Reference}
 \label{message_8h}\index{/home/noxon/coding/C/esiee-in301/libcomm/message.h@{/home/noxon/coding/C/esiee-in301/libcomm/message.h}}
 }
-{\tt \#include $<$stdlib.h$>$}\par
-{\tt \#include $<$stdio.h$>$}\par
-{\tt \#include $<$string.h$>$}\par
+{\tt \#include \char`\"{}../casual\_\-includes.h\char`\"{}}\par
 {\tt \#include \char`\"{}./logger.h\char`\"{}}\par
 \subsection*{Data Structures}
 \begin{CompactItemize}
@@ -19,9 +17,11 @@ typedef struct \hyperlink{structmsg__struct}{msg\_\-struct} \hyperlink{message_8
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-\hyperlink{structmsg__struct}{msg} $\ast$ \hyperlink{message_8h_f480a2501dc267fb01d953443081bc71}{create\_\-msg} (char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
+\hyperlink{structmsg__struct}{msg} $\ast$ \hyperlink{message_8h_23f5410bcb26e7a7d38c030dc6529806}{create\_\-msg} (const char $\ast$emetteur, const char $\ast$type, const char $\ast$action, const char $\ast$valeur)
 \item 
 char $\ast$ \hyperlink{message_8h_be214f5fc66e60c4ec70cb29b75f9553}{msg\_\-to\_\-str} (\hyperlink{structmsg__struct}{msg} $\ast$\hyperlink{structmsg__struct}{msg})
+\item 
+\hyperlink{structmsg__struct}{msg} $\ast$ \hyperlink{message_8h_c2801f89755c9bbbf7d0af3d8524ccce}{str\_\-to\_\-msg} (char $\ast$str)
 \item 
 int \hyperlink{message_8h_a95b8aa1ca64808e2a063faa92369042}{decoupe} (char $\ast$message, char $\ast$emeteur, char $\ast$type, char $\ast$action, char $\ast$valeur)
 \item 
@@ -42,11 +42,11 @@ void \hyperlink{message_8h_0282fd92d95a32c573832baba8d18167}{log\_\-msg} (const 
 
 
 \subsection{Function Documentation}
-\hypertarget{message_8h_f480a2501dc267fb01d953443081bc71}{
+\hypertarget{message_8h_23f5410bcb26e7a7d38c030dc6529806}{
 \index{message.h@{message.h}!create\_\-msg@{create\_\-msg}}
 \index{create\_\-msg@{create\_\-msg}!message.h@{message.h}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf msg}$\ast$ create\_\-msg (char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
-\label{message_8h_f480a2501dc267fb01d953443081bc71}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf msg}$\ast$ create\_\-msg (const char $\ast$ {\em emetteur}, \/  const char $\ast$ {\em type}, \/  const char $\ast$ {\em action}, \/  const char $\ast$ {\em valeur})}}
+\label{message_8h_23f5410bcb26e7a7d38c030dc6529806}
 
 
 create\_\-msg: Construction du message. Le message est alloué dans la fonction. \begin{Desc}
@@ -60,7 +60,9 @@ create\_\-msg: Construction du message. Le message est alloué dans la fonction.
 
 Definition at line 28 of file message.c.
 
-References msg\_\-struct::action, msg\_\-struct::emetteur, log\_\-call(), msg\_\-struct::type, and msg\_\-struct::valeur.\hypertarget{message_8h_a95b8aa1ca64808e2a063faa92369042}{
+References msg\_\-struct::action, msg\_\-struct::emetteur, log\_\-call(), msg\_\-struct::type, and msg\_\-struct::valeur.
+
+Referenced by str\_\-to\_\-msg(), and terminal().\hypertarget{message_8h_a95b8aa1ca64808e2a063faa92369042}{
 \index{message.h@{message.h}!decoupe@{decoupe}}
 \index{decoupe@{decoupe}!message.h@{message.h}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}int decoupe (char $\ast$ {\em message}, \/  char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
@@ -90,11 +92,11 @@ Permet de logguer les ordres de transaction. Placé dans \hyperlink{message_8h}{
 \end{Desc}
 
 
-Definition at line 56 of file message.c.
+Definition at line 74 of file message.c.
 
 References msg\_\-struct::action, msg\_\-struct::emetteur, msg\_\-type, private\_\-write\_\-log(), msg\_\-struct::type, and msg\_\-struct::valeur.
 
-Referenced by msg\_\-to\_\-str().\hypertarget{message_8h_b54ef99ea54b4285bfe417afa2ea9ceb}{
+Referenced by msg\_\-to\_\-str(), and terminal().\hypertarget{message_8h_b54ef99ea54b4285bfe417afa2ea9ceb}{
 \index{message.h@{message.h}!message@{message}}
 \index{message@{message}!message.h@{message.h}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ message (char $\ast$ {\em emeteur}, \/  char $\ast$ {\em type}, \/  char $\ast$ {\em action}, \/  char $\ast$ {\em valeur})}}
@@ -119,8 +121,21 @@ Referenced by msg\_\-to\_\-str().\hypertarget{message_8h_be214f5fc66e60c4ec70cb2
 \label{message_8h_be214f5fc66e60c4ec70cb29b75f9553}
 
 
-msg\_\-to\_\-str: transforme le message msg en une chaine de charactère suivant le protocole utilisé Fait appel à découpe 
+msg\_\-to\_\-str: transforme le message msg en une chaine de caractères suivant le protocole utilisé Fait appel à \hyperlink{message_8c_b54ef99ea54b4285bfe417afa2ea9ceb}{message()} 
 
-Definition at line 49 of file message.c.
+Definition at line 50 of file message.c.
 
 References msg\_\-struct::action, msg\_\-struct::emetteur, log\_\-msg(), message(), msg\_\-struct::type, and msg\_\-struct::valeur.
+
+Referenced by terminal().\hypertarget{message_8h_c2801f89755c9bbbf7d0af3d8524ccce}{
+\index{message.h@{message.h}!str\_\-to\_\-msg@{str\_\-to\_\-msg}}
+\index{str\_\-to\_\-msg@{str\_\-to\_\-msg}!message.h@{message.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf msg}$\ast$ str\_\-to\_\-msg (char $\ast$ {\em str})}}
+\label{message_8h_c2801f89755c9bbbf7d0af3d8524ccce}
+
+
+str\_\-to\_\-msg: transforme une chaine de caractères en msg suivant le protocole utilisé Fait appel à \hyperlink{message_8c_23f5410bcb26e7a7d38c030dc6529806}{create\_\-msg()} 
+
+Definition at line 57 of file message.c.
+
+References create\_\-msg().
