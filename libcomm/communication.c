@@ -15,10 +15,6 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 			perror("socket");
 			exit(1);
 		}
-#ifdef DEBUG
-		log_smth("création du serveur %s (#%d)", servers[iteration].name,
-				servers[iteration].id);
-#endif
 		servers[iteration].local_addr.sin_family = AF_INET; /* host byte order */
 		servers[iteration].local_addr.sin_port = htons(port_start++); /* short, network byte order */
 		servers[iteration].local_addr.sin_addr.s_addr = INADDR_ANY; /* auto-remplissage avec mon IP */
@@ -34,6 +30,7 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 			perror("listen");
 			exit(1);
 		}
+		log_srv(servers[iteration],"créé.");
 		if(!fork()) { /* fils première génération - permet de revenir de la méthode par contre créé des zombies */
 			while(1) { // boucle d' accept() pour recevoir les connexions
 				servers[iteration].sin_size = sizeof(struct sockaddr_in);
@@ -76,8 +73,8 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 	int iteration;
 	for (iteration=0; iteration < nb_serv; iteration++) {
 		clients[iteration].id = iteration;
-		strcpy(clients[iteration].name, strcat("Vers",(iteration==0 ? "Acquisition"
-				: (iteration==1 ? "Execution" : "Terminal"))));
+		strcpy(clients[iteration].name, (iteration==0 ? "Acquisition"
+				: (iteration==1 ? "Execution" : "Terminal")));
 
 		if ((clients[iteration].he=gethostbyname("localhost")) == NULL) {
 			herror("gethostbyname");
@@ -99,31 +96,32 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 			perror("connect");
 			exit(1);
 		}
+		log_clt(clients[iteration],"créé.");
 		//close(sockfd); on garde la connexion ouverte
 	}
 }
 
-void send_msg(client* clients, const int id, msg* damsg) {
+void send_msg(const client clt, msg* damsg) {
 	if (damsg == NULL)
 		log_smth("");
-	if (send(clients[id].sockfd, damsg, sizeof(msg), 0) == -1)
+	if (send(clt.sockfd, damsg, sizeof(msg), 0) == -1)
 		perror("send");
 }
 
-void kill_client(client* clients, const int id) {
-	log_smth("Fermeture de la connexion du client %d", id);
-	close(clients[id].sockfd);
+void kill_client(const client clt) {
+	log_clt(clt,"Fermeture de la connexion");
+	close(clt.sockfd);
 }
 
-void log_srv(const server *srv, char* un_msg) {
+void log_srv(const server srv, char* un_msg) {
 	char logged[1024];
-	sprintf(logged, "Serveur %s (#%d) %s", srv->name, srv->id, un_msg);
+	sprintf(logged, "Serveur %s (#%d) %s", srv.name, srv.id, un_msg);
 	private_write_log(comm_type, logged);
 }
 
-void log_clt(const client *clt, char* un_msg) {
+void log_clt(const client clt, char* un_msg) {
 	char logged[1024];
-	sprintf(logged, "Client %s (#%d) %s", clt->name, clt->id, un_msg);
+	sprintf(logged, "Client %s (#%d) %s", clt.name, clt.id, un_msg);
 	private_write_log(comm_type, logged);
 }
 
