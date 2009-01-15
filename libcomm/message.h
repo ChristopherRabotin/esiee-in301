@@ -1,9 +1,7 @@
 #ifndef MESSAGE_H_
 #define MESSAGE_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "../casual_includes.h"
 #include "./logger.h"
 /**
  * msg correspond aux données qui transitent sur le réseau interboursier. Ces données sont nommés
