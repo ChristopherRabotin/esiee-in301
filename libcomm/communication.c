@@ -49,14 +49,13 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 					bzero(servers[iteration].recvdata,sizeof (msg));
 					if ((servers[iteration].numbytes=recv(new_fd, servers[iteration].recvdata, MAXRECVDATA, 0)) == -1) {
 						perror("recv");
+						log_srv(servers[iteration],"erreur lors du recv!");
 						exit(1);
 					}
 
-					//bzero(tmp,1);
 					sprintf(tmp,"reçu par %s (#%d) %s:%d",servers[iteration].name, servers[iteration].id,
 					inet_ntoa(servers[iteration].remote_addr.sin_addr),servers[iteration].remote_addr.sin_port);
 					log_msg(tmp,servers[iteration].recvdata);
-					// printf("%s",msg_to_str(servers[iteration].recvdata));
 					// la connexion avec le client reste ouverte
 				}
 				close(new_fd); // le parent n'a pas besoin de new_fd
