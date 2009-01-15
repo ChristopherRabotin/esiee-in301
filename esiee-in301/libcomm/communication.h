@@ -80,14 +80,14 @@ void init_clients(client* clients, const int nb_serv, int port_start);
  * le bon client (toAck,toExec,toTerm) et le message (msg) à envoyer.
  * @param client_sending le client qui envoit le message
  */
-void send_msg(client* client_sending, msg* damsg);
+void send_msg(const client clt, msg* damsg);
 
 /*
  * Ferme la connexion d'un client. Attention, la connexion ne pourra être réouverte par l'API,
  * puisque la connexion est établie dans init_clients().
  * @param client_to_kill le client dont on doit fermer la connexion
  */
-void kill_client(client* client_to_kill);
+void kill_client(const client clt);
 
 /**
  * Permet de logguer les communications des serveurs. Placé dans communication.h puisque
@@ -95,7 +95,7 @@ void kill_client(client* client_to_kill);
  * @param srv le serveur d'où le log émane
  * @param un_msg message d'explication lié à l'ordre de transaction 
  */
-void log_srv(const server *srv, char* un_msg);
+void log_srv(const server srv, char* un_msg);
 
 /**
  * Permet de logguer les communications des clients. Placé dans communication.h puisque
@@ -103,5 +103,5 @@ void log_srv(const server *srv, char* un_msg);
  * @param clt le client d'où le log émane 
  * @param un_msg message d'explication lié 
  */
-void log_clt(const client *clt, char* un_msg);
+void log_clt(const client clt, char* un_msg);
 #endif /*COMMUNICATION_H_*/
