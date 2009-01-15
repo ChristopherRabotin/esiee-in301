@@ -1,13 +1,12 @@
 #include "communication.h"
 
-server* init_servers(int port_start, const int max_connexions) {
+void init_servers(server* servers, const int nb_serv, int port_start, const int max_connexions) {
 #ifdef DEBUG
 	init_log("libcomm.log");
 #endif
-	server servers[NB_SERV];
 
 	int iteration;
-	for(iteration=0; iteration < NB_SERV; iteration++){
+	for(iteration=0; iteration < nb_serv; iteration++){
 		servers[iteration].id = iteration;
 		if ((servers[iteration].sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 			perror("socket");
@@ -43,7 +42,7 @@ server* init_servers(int port_start, const int max_connexions) {
 				printf("serveur: Reçu connection de %s\n",
 						inet_ntoa(servers[iteration].remote_addr.sin_addr));
 				if (!fork()) { /* fils seconde génération - permet d'être multiclient */
-					char* answer[128];
+					char answer[128];
 					// TODO non important: servers[iteration].id vaut (null) (iteration a disparu)
 					sprintf(answer,"Hi! This is server %d answering.\n", servers[iteration].id);
 					if (send(new_fd, answer, strlen(answer), 0) == -1)
@@ -57,5 +56,4 @@ server* init_servers(int port_start, const int max_connexions) {
 			}
 		}
 	}
-	return servers;
 }
