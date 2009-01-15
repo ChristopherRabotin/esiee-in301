@@ -17,23 +17,32 @@
 #include <sys/socket.h> 
 #include <sys/wait.h> 
 
-#include logger.h
-#include message.h
-//TODO faire un struct pour stocker toutes les données des serveurs.
+#include "logger.h"
+#include "message.h"
+
+#define NB_SERV 3 /* nombre de serveurs à être initialisés */
+
 /**
- * server correspond 
+ * server comprend toutes les données nécessaires au bon fonctionnement d'un serveur.
  */
 typedef struct server_struct {
-	int sockfd,sin_size, my_port, max_conn;
-	struct sockaddr_in local_addr;
-	struct sockaddr_in dest_addr;
+	int sockfd; /* descripteur du socket */
+	int sin_size; /* taille du socket */
+	int my_port; /* port du serveur*/
+	int max_conn; /* nombre maximal de connexions */
+	struct sockaddr_in local_addr; /* adresse locale */
+	struct sockaddr_in remote_addr; /* adresse distante*/
 
-}server;
+} server;
 
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
+ * Retourne un tableau des serveur initialisés (de taille NB_SERV puisqu'il y a NB_SERV serveurs)
+ * TODO définir l'ordre des serveur (ex. 0-> terminal, 1->exécution, 2->acquisition)
+ * @param port_start port du premier serveur. Les autres sont port_start+1 (si disponible, sinon on incrémente encore)
+ * @param max_connexions nombre maximal de connexions simultannées par serveur
  */
-int init_servers(int nb_serveurs, server tr);
+server[] init_servers(int port_start, const int max_connexions);
 int init_clients();
 
 /*
