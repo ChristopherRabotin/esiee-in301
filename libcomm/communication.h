@@ -17,9 +17,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/socket.h> 
-#include <sys/wait.h> 
+#include <sys/wait.h>
+#include <netdb.h> 
 
-#include "logger.h"
+//#include "logger.h" déjà inclus dans message.h
 #include "message.h"
 
 #define MAXRECVDATA 1024 /* nombre de serveurs à être initialisés */
@@ -37,8 +38,25 @@ typedef struct server_struct {
 	socklen_t sin_size; /* taille du socket */
 	struct sockaddr_in local_addr; /* adresse locale */
 	struct sockaddr_in remote_addr; /* adresse distante*/
-	char recvdata[MAXRECVDATA]; /* données reçues */
+	msg *recvdata/*[MAXRECVDATA]*/; /* données reçues */
 } server;
+
+/**
+ * client comprend toutes les données nécessaires au bon fonctionnement d'un client.
+ * Par la suite, lors de l'appel de la fonction d'envoie de message, nous passerons donc le tableau
+ * de clients et l'identifiant du client et enfin le message (msg) à envoyer.
+ */
+typedef struct client_struct {
+	int id; /* identifiant du client */
+	char name[128]; /* nom du client (Acquisition, Execution, Terminal) */
+	int sockfd; /* descripteur du socket */
+	int my_port; /* port de connexion au serveur*/
+	int numbytes; /* nombre d'octets reçus par une connexion */
+	socklen_t sin_size; /* taille du socket */
+	struct hostent *he;  /* informations de l'hôte */
+	struct sockaddr_in local_addr; /* adresse locale */
+	struct sockaddr_in remote_addr; /* adresse distante*/
+} client;
 
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
@@ -49,7 +67,11 @@ typedef struct server_struct {
  * @param max_connexions nombre maximal de connexions simultannées par serveur
  */
 void init_servers(server* servers, const int nb_serv, int port_start, const int max_connexions);
-int init_clients();
+
+/**
+ * TODO doc
+ */
+void init_clients(client* clients, const int nb_serv, int port_start);
 
 /*
  * Envoi un message via le descripteur passé, en utilisant le moyen de
@@ -59,16 +81,12 @@ int init_clients();
  *
  * Exemple: envoi(msg,"example"); // utilisera le descripteur nommé 'example' 
  */
-void envoi(const char* message, const void* id);
+void send_msg(client* clients, const int id, msg* damsg);
 
-/**
- * Thread s'occupant de lire tous les messages reçus par le moyen de communication
- * utilisé. Le message reçu sera probablement stocké dans un pipe le temps d'être
- * appelé par le reste du programme. TODO idée à revoir, potentiellement
- * Thread lancé dès le premier appel. Si on tente de le rappeller par la suite
- * il envoie un message sur std_err spécifiant qu'il est déjà lancé.
- * 
+/*
+ * Ferme la connexion d'un client. Attention, la connexion ne pourra être réouverte par l'API,
+ * puisque la connexion est établie dans init_clients().
  */
-char* recoit();
+void kill_client(client* clients, const int id);
 
 #endif /*COMMUNICATION_H_*/
