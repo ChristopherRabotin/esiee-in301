@@ -6,9 +6,12 @@ int init_log(const char *fn) {
 	FILE *fp = fopen(fn, "a+");
 	if (fp== NULL)
 		return 0; // échec
+	fprintf(fp,"\n---\n");
+	fflush(fp);
 	fclose(fp);
 	filename =( char*)malloc( strlen(fn + 1) );
 	strcpy(filename, fn);
+	log_smth("Début du log.");
 	return 1; // succès
 }
 
@@ -21,7 +24,6 @@ void log_call(const char *msg, char *func_name, const char *args, ...) {
 	private_log_call(msg, fctNargs, arglist);
 	va_end(arglist);
 }
-
 
 void log_smth(const char *msg, ...) {
 	char vspft[1024] = { 0 }, new_msg[1024] = { 0 };
@@ -54,21 +56,16 @@ void private_write_log(int log_type, const char* msg) {
 		case call_type: strcpy(tmp,"[*]"); break;
 		case msg_type: strcpy(tmp,"[M]"); break; // 'M' comme Message
 		case comm_type: strcpy(tmp,"[C]"); break; // 'C' comme Communication
-			default: strcpy(tmp,"[U]"); // 'U' comme Unkown
-		}
-		sprintf(fullMsg, "%s <%s>\t %s", tmp, timeStamp, msg);
-		FILE *fp = fopen(filename, "a+"); // ouverture du fichier de log en mode "append" (ajout)
-		if (fp == NULL) {
-			// ne devrait pas arriver vu la vérif dans init_log, sauf si les permissions changent pendant le 
-			// déroulement du programme... Pensez à arrêter le programme si init_log() retourne 0.
-			// si on ne peut pas logger, alors on affiche erreur puis le message à être loggué dans stderr
-			fprintf(stderr, "\n[!!!] Le fichier \"%s\" n'est pas modifiable!",filename);
-			fprintf(stderr, "\n[!!!] %s\n", fullMsg);
-			return;
-		}
-		fprintf(fp, "%s", fullMsg);
-		fwrite("\n", 1, 1, fp);
-		fflush(fp);
-		fclose(fp);
-
+		default: strcpy(tmp,"[U]"); // 'U' comme Unkown
 	}
+	sprintf(fullMsg, "%s <%s>\t %s", tmp, timeStamp, msg);
+	FILE *fp = fopen(filename, "a+"); // ouverture du fichier de log en mode "append" (ajout)
+	if (fp == NULL) {
+		fprintf(stderr, "\n[!!!] %s\n", fullMsg);
+		return;
+	}
+	fprintf(fp, "%s", fullMsg);
+	fwrite("\n", 1, 1, fp);
+	fflush(fp);
+	fclose(fp);
+}
