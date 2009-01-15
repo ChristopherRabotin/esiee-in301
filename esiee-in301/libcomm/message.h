@@ -16,7 +16,7 @@ typedef struct msg_struct {
 
 /** 
  * create_msg: Construction du message. Le message est alloué dans la fonction.
- * @param *emeteur émeteur du message
+ * @param *emetteur émeteur du message
  * @param *type type du message
  * @param *action identificateur de l'action
  * @param *valeur valeur associée au message

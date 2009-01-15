@@ -15,7 +15,7 @@
 #include <stdarg.h>
 #include <time.h>
 #include "message.h"
-
+// log_msg() est dans message.h
 /**
  * Permet d'initialiser le fichier de log en vérifiant si le fichier peut-être ouvert en écriture.<br/>
  * Si DEBUG_TO_STDOUT est défini, alors l'appel à cette fonction n'est pas nécessaire avant de logguer.
