@@ -4,6 +4,7 @@
  * Programme de test des serveurs
  */
 int main(int argc, char **argv) {
-	init_servers(1200, 2);
-	printf("fin.");
+	server servers[3];
+	init_servers(servers, 3, 1200, 2);
+	printf("fin.\n");
 }

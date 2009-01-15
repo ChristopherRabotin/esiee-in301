@@ -12,8 +12,8 @@ TestRedirection: TestRedirection.c
 TestLogger: logger.o TestLogger.c # TestLogger 
 	gcc TestLogger.c logger.o -o ../Debug/TestLogger -D DEBUG
 
-TestServers: communication.o TestServers.c # TestServers
-	gcc TestServers.c communication.o -o ../Debug/TestServers -D DEBUG
+TestServers: communication.o logger.o TestServers.c # TestServers
+	gcc TestServers.c communication.o logger.o -o ../Debug/TestServers -D DEBUG
 
 # ici vont tous les sous-builds (par ordre alphabetique!)
 alea.o: ../libbourse/alea.h ../libbourse/alea.c

@@ -12,8 +12,10 @@
 #define COMMUNICATION_H_
 
 #include "../casual_includes.h"
+#include <unistd.h>
 #include <sys/types.h> 
-#include <netinet/in.h> 
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <sys/socket.h> 
 #include <sys/wait.h> 
 
@@ -28,9 +30,9 @@
 typedef struct server_struct {
 	int id; /* identifiant du serveur */
 	int sockfd; /* descripteur du socket */
-	int sin_size; /* taille du socket */
 	int my_port; /* port du serveur*/
 	int max_conn; /* nombre maximal de connexions */
+	socklen_t sin_size; /* taille du socket */
 	struct sockaddr_in local_addr; /* adresse locale */
 	struct sockaddr_in remote_addr; /* adresse distante*/
 
@@ -40,10 +42,12 @@ typedef struct server_struct {
  * Permet d'initialiser les serveurs des différents modules du programme.
  * Retourne un tableau des serveur initialisés (de taille NB_SERV puisqu'il y a NB_SERV serveurs)
  * TODO définir l'ordre des serveur (ex. 0-> terminal, 1->exécution, 2->acquisition)
+ * @param servers tableau de serveurs dans lequel les données concernant ces serveurs sont stockées
+ * @param nb_serv nombre de serveurs (correspond au nombre de cases dans le tableau servers)
  * @param port_start port du premier serveur. Les autres sont port_start+1.
  * @param max_connexions nombre maximal de connexions simultannées par serveur
  */
-server* init_servers(int port_start, const int max_connexions);
+void init_servers(server* servers, const int nb_serv, int port_start, const int max_connexions);
 int init_clients();
 
 /*
