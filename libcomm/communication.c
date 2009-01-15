@@ -2,10 +2,6 @@
 
 void init_servers(server* servers, const int nb_serv, int port_start,
 		const int max_connexions) {
-#ifdef DEBUG
-	init_log("libcomm.log");
-#endif
-
 	int iteration;
 	for (iteration=0; iteration < nb_serv; iteration++) {
 		servers[iteration].id = iteration;
@@ -60,7 +56,7 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 					sprintf(tmp,"reçu par %s (#%d) %s:%d",servers[iteration].name, servers[iteration].id,
 					inet_ntoa(servers[iteration].remote_addr.sin_addr),servers[iteration].remote_addr.sin_port);
 					log_msg(tmp,servers[iteration].recvdata);
-					printf("%s",msg_to_str(servers[iteration].recvdata));
+					// printf("%s",msg_to_str(servers[iteration].recvdata));
 					// la connexion avec le client reste ouverte
 				}
 				close(new_fd); // le parent n'a pas besoin de new_fd
@@ -80,12 +76,12 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 
 		if ((clients[iteration].he=gethostbyname("localhost")) == NULL) {
 			herror("gethostbyname");
-			exit(1);
+			log_clt(clients[iteration],"erreur hôte introuvable");
 		}
 
 		if ((clients[iteration].sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 			perror("socket");
-			exit(1);
+			log_clt(clients[iteration],"erreur lors de l'init du socket");
 		}
 
 		clients[iteration].remote_addr.sin_family = AF_INET; /* host byte order */
@@ -93,23 +89,27 @@ void init_clients(client* clients, const int nb_serv, int port_start) {
 		clients[iteration].remote_addr.sin_addr = *((struct in_addr *)(clients[iteration].he)->h_addr);
 		bzero(&(clients[iteration].remote_addr.sin_zero), 8); /* zero pour le reste de struct */
 
-		if (connect(clients[iteration].sockfd, (struct sockaddr *)&(clients[iteration].remote_addr),
+		log_clt(clients[iteration],"créé.");
+		
+		if (connect(clients[iteration].sockfd,( struct sockaddr *)&(clients[iteration].remote_addr),
 		sizeof(struct sockaddr)) == -1) {
 			perror("connect");
-			exit(1);
+			log_clt(clients[iteration],"déjà connecté ou impossible de se connecter");
 		}
-		log_clt(clients[iteration],"créé.");
-		//close(sockfd); on garde la connexion ouverte
+		// on garde la connexion ouverte
 	}
 }
 
-void send_msg(const client clt, msg* damsg) {
+void send_msg(client clt, msg* damsg) {
 	if (damsg == NULL) {
 		log_clt(clt,"tentative d'envoi d'un message NULL");
 		return;
 	}
-	if (send(clt.sockfd, damsg, sizeof(msg), 0) == -1)
+
+	if (send(clt.sockfd, damsg, sizeof(msg), 0) == -1){
 		perror("send");
+		log_clt(clt,"erreur lors de l'envoi du message");
+	}
 }
 
 void kill_client(const client clt) {
