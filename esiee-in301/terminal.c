@@ -14,21 +14,22 @@ int main(void){
 	commercants = fopen("./commercants", "r");// Ouverture du fichier en lecture(entrée)
 	actions = fopen("./actions", "r");// Ouverture du fichier en lecture(entrée)
 
-	accuse = fopen("./accuse_de_reception", "w");// Ouverture du fichier en écriture(sortie)
-	ordre = fopen("./ordre", "w");// Ouverture du fichier en écriture(sortie)
-	terminal(commercants,actions);
+	accuse = fopen("./accuse_de_reception", "r");// Ouverture du fichier en écriture(sortie)
 
-	envoie_ordre(ordre);
+	ordre = fopen("./ordre", "w");// Ouverture du fichier en écriture(sortie)
+
+	terminal(commercants,actions,accuse);
+
 	return 0;
 
 }
 
-void terminal(FILE* commercants, FILE* actions){
+void terminal(FILE* commercants, FILE* actions, FILE* accuse){
 	//printf("commercants: %d\n actions: %d",commercants,actions);
 	char id_commercant[20];
 	char id_action[20];
-	char type_transaction[20]= "Achat";
-	char valeur[255]="12121";
+	char type_transaction[20];
+	char valeur[20]="12121";
 	//lecture de l'id_commercant du commercant
 	if (commercants!=NULL && actions!=NULL) {
 		int nombre_commercants=0;
@@ -49,7 +50,8 @@ void terminal(FILE* commercants, FILE* actions){
 		//on remplace le \n qui est a la fin de la chaine
 		id_commercant[10] = ' ';
 
-		printf("id_commercant=%s\n",id_commercant);
+		fclose(commercants);
+
 	//lecture de l'id_action de l'action
 		int nombre_actions=0;
 
@@ -65,14 +67,23 @@ void terminal(FILE* commercants, FILE* actions){
 		for(i=0;i<action_aleatoire;i++){
 			fgets(id_action,12,actions);
 		}
-		printf("id_action=%s\n",id_action);
 		//on remplace le \n qui est a la fin de la chaine
 		id_action[10] = ' ';
 
+		fclose(actions);
+
+	//type_transaction défini aléatoirement
+		aleainit();
+		int type_aleatoire = alea(1,2);
+		for(i=0;i<type_aleatoire;i++){
+			switch(i){
+			case(0):strcpy(type_transaction,"Achat");break;
+			case(1):strcpy(type_transaction,"Vente");break;
+			}
+		}
+
 
 		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",id_commercant,type_transaction,id_action);
-		fclose(commercants);
-		fclose(actions);
 
 
 		msg * ordre = create_msg(id_commercant, type_transaction, id_action, valeur);
@@ -80,39 +91,22 @@ void terminal(FILE* commercants, FILE* actions){
 		log_msg("log",ordre);
 	}
 
-	//TODO: récupérer l'accusé de réception (sur un flux ou fichier)
-	//TODO: le traiter
 
+	//lecture de l'accusé de réception
+	if (accuse!=NULL) {
+		char accuse_de_reception[20];
+		fseek(accuse,0,SEEK_SET);
+		fgets(accuse_de_reception,12,accuse);
 
+		//on remplace le \n qui est a la fin de la chaine
+		accuse_de_reception[10] = ' ';
+		printf("Lecture de l'accusé: %s",accuse_de_reception);
 
-
-//	//écriture de l'accusé de réception
-//	if (out!=NULL){
-//	char accuseString[] = "accuse de reception positif";
-//	fprintf(out,accuseString);
-//	fclose(out);
-//	}
-
-	envoie_ordre();
+		//TODO: ATTENTION le fclose() génère une erreur de segmentation!!!
+		fclose(accuse);
+	}
 
 }
-
-void envoie_ordre(FILE* out){
-//	//log_msg();
-//	aleainit();
-//	char id_commercant[10]="";
-//	int i =0;
-//	for (i=0; i<10;i++)
-//		id_commercant[i] = alea(0,9);
-//	printf("%s",id_commercant);
-//
-//	//écriture de l'accusé de réception
-//	if (out!=NULL){
-//	fprintf(out,accuseString);
-//	fclose(out);
-//	}
-}
-
 
 
 
