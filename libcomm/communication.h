@@ -24,11 +24,11 @@
 #include "message.h"
 
 #define MAXRECVDATA 1024 /* nombre de serveurs à être initialisés */
-
 /**
  * server comprend toutes les données nécessaires au bon fonctionnement d'un serveur.
  */
 typedef struct server_struct {
+	int isAlive; /* permet de savoir si le serveur tourne ou non */
 	int id; /* identifiant du serveur */
 	char name[128]; /* nom du serveur (Acquisition, Execution, Terminal) */
 	int sockfd; /* descripteur du socket */
@@ -90,12 +90,17 @@ void send_msg(const client clt, msg* damsg);
 
 /*
  * Ferme la connexion d'un client.
- * <b>Attention</b> lors de l'utilisation de kill_client! La connexion ne pourra être réouverte par l'API,
- * puisque la connexion est établie dans init_clients().
+ * <b>Attention</b> ceci est permanent!
  * @param clt le client dont on doit fermer la connexion
  */
 void kill_client(const client clt);
 
+/**
+ * Permet de tuer un serveur.
+ * <b>Attention</b> ceci est permanent!
+ * @param srv le serveur à tuer.
+ */
+void kill_server(server *srv);
 /**
  * Permet de logguer les communications des serveurs. Placé dans communication.h puisque
  * utilisé uniquement pour la communication par socket.
