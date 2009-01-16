@@ -6,7 +6,7 @@ int init_log(const char *fn) {
 	FILE *fp = fopen(fn, "a+");
 	if (fp== NULL)
 		return 0; // échec
-	fprintf(fp,"\n---\n");
+	fprintf(fp,"---\n");
 	fflush(fp);
 	fclose(fp);
 	filename =( char*)malloc( strlen(fn + 1) );
