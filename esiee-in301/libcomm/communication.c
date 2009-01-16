@@ -5,6 +5,7 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 	int iteration;
 	for (iteration=0; iteration < nb_serv; iteration++) {
 		servers[iteration].id = iteration;
+		servers[iteration].isAlive = 1; 
 		strcpy(servers[iteration].name, (iteration==0 ? "Acquisition"
 				: (iteration==1 ? "Execution" : "Terminal")));
 		if ((servers[iteration].sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
@@ -36,10 +37,18 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 					perror("accept");
 					continue;
 				}
+				if(!servers[iteration].isAlive) {
+					close(new_fd); //si une connexion arrive alors que le programme est terminé, on sort
+					break; return;
+				}
 				char tmp[128];
 				sprintf(tmp, "connexion entrante depuis %s:%d",inet_ntoa(servers[iteration].remote_addr.sin_addr),servers[iteration].remote_addr.sin_port);
 				log_srv(servers[iteration],tmp);
 				if (!fork()) { /* fils seconde génération - permet d'être multiclient */
+					if(!servers[iteration].isAlive) {
+						close(new_fd); //si une connexion arrive alors que le programme est terminé, on sort
+						return;
+					}
 					char answer[MAXRECVDATA];
 					sprintf(answer,"Serveur %s (#%d). En attente d'un msg (voir libcomm/message.h).\n", servers[iteration].name, servers[iteration].id);
 					if (send(new_fd, answer, strlen(answer), 0) == -1)
@@ -114,6 +123,11 @@ void send_msg(client clt, msg* damsg) {
 void kill_client(const client clt) {
 	log_clt(clt,"Fermeture de la connexion");
 	close(clt.sockfd);
+}
+
+void kill_server(server *srv){
+	srv->isAlive=0;
+	log_srv(*srv,"Fin du démon");
 }
 
 void log_srv(const server srv, char* un_msg) {

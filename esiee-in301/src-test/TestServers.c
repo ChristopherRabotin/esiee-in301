@@ -14,9 +14,10 @@ int main(int argc, char **argv) {
 	init_clients(clients, 3, 1200);
 	send_msg(clients[ack],msg1);
 	msg * msg2 = create_msg("2", "Vente", "0001000012", valeur);
-	//send_msg(clients[ack],msg2);
-	//send_msg(clients[ack],msg2);
-	//send_msg(clients[term],msg2);
+	send_msg(clients[ack],msg2);
+	send_msg(clients[exec],msg2);
+	send_msg(clients[term],msg2);
+	kill_server(&servers[ack]); kill_server(&servers[exec]); kill_server(&servers[term]);
 	//kill_client(clients[ack]); kill_client(clients[exec]); kill_client(clients[term]);
 	printf("fin.\n");
 }
