@@ -56,7 +56,7 @@ char *msg_to_str(msg *msg) {
 
 void log_msg(const char *un_msg, msg *damsg) {
 	char loggedmsg[1024];
-	sprintf(loggedmsg, "%s par %s: action=%s valeur=%s %s", damsg->type,
-			damsg->emetteur, damsg->action, damsg->valeur, un_msg);
+	sprintf(loggedmsg, "%s: %s par %s: action=%s valeur=%s", un_msg, damsg->type,
+			damsg->emetteur, damsg->action, damsg->valeur);
 	private_write_log(msg_type, loggedmsg);
 }

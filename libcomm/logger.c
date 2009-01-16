@@ -40,7 +40,7 @@ void log_smth(const char *msg, ...) {
 void private_log_call(const char *msg, const char *func_name, va_list args) {
 	char vspft[1024] = { 0 }, new_msg[1024] = { 0 };
 	vsprintf(vspft, func_name, args); // détermine le type de variable et l'affiche
-	sprintf(new_msg, "%s %s", vspft, msg);
+	sprintf(new_msg, "%s %s", msg, vspft);
 	private_write_log(call_type, new_msg);
 }
 

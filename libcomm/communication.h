@@ -29,7 +29,6 @@
  */
 typedef struct server_struct {
 	int isAlive; /* permet de savoir si le serveur tourne ou non */
-	int id; /* identifiant du serveur */
 	char name[128]; /* nom du serveur (Acquisition, Execution, Terminal) */
 	int sockfd; /* descripteur du socket */
 	int my_port; /* port du serveur*/
@@ -47,7 +46,6 @@ typedef struct server_struct {
  * de clients et l'identifiant du client et enfin le message (msg) à envoyer.
  */
 typedef struct client_struct {
-	int id; /* identifiant du client */
 	char name[128]; /* nom du client (Acquisition, Execution, Terminal) */
 	int sockfd; /* descripteur du socket */
 	int my_port; /* port de connexion au serveur*/
@@ -58,7 +56,7 @@ typedef struct client_struct {
 	struct sockaddr_in remote_addr; /* adresse distante*/
 } client;
 
-enum ORDRE {ack,exec,term};
+enum TYPE {ack,exec,term};
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
  * Retourne un tableau des serveurs initialisés.
@@ -69,7 +67,10 @@ enum ORDRE {ack,exec,term};
  */
 void init_servers(server* servers, const int nb_serv, int port_start,
 		const int max_connexions);
-
+/**
+ * Permet d'initialiser un seul serveur.
+ */
+void init_one_server(server* srv, const int port_start, const int max_connexions, const char* name);
 /**
  * Permet d'initialiser les clients des différents modules du programme.
  * Retourne un tableau des clients initialisés. Il faut conserver ce tableau pour envoyer
@@ -81,6 +82,10 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 void init_clients(client* clients, const int nb_serv, int port_start);
 
 /**
+ * Permet d'initialiser un seul client.
+ */
+void init_one_client(client* clt, const int port_start, const char* name);
+/**
  * Envoi d'un message par socket vers le bon serveur. Il suffit de passer en paramètre
  * le bon client (toAck,toExec,toTerm) et le message (msg) à envoyer.
  * @param clt le client qui envoit le message
@@ -88,19 +93,6 @@ void init_clients(client* clients, const int nb_serv, int port_start);
  */
 void send_msg(const client clt, msg* damsg);
 
-/*
- * Ferme la connexion d'un client.
- * <b>Attention</b> ceci est permanent!
- * @param clt le client dont on doit fermer la connexion
- */
-void kill_client(const client clt);
-
-/**
- * Permet de tuer un serveur.
- * <b>Attention</b> ceci est permanent!
- * @param srv le serveur à tuer.
- */
-void kill_server(server *srv);
 /**
  * Permet de logguer les communications des serveurs. Placé dans communication.h puisque
  * utilisé uniquement pour la communication par socket.
