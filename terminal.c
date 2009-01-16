@@ -6,47 +6,60 @@
  */
 
 int main(void){
-	FILE* commercants = NULL;
-	FILE* actions = NULL;
+
 	FILE* accuse = NULL;
 	FILE* ordre = NULL;
 
-	commercants = fopen("./commercants", "r");// Ouverture du fichier en lecture(entrée)
-	actions = fopen("./actions", "r");// Ouverture du fichier en lecture(entrée)
-
 	accuse = fopen("./accuse_de_reception", "r");// Ouverture du fichier en écriture(sortie)
-
 	ordre = fopen("./ordre", "w");// Ouverture du fichier en écriture(sortie)
 
-	terminal(commercants,actions,accuse);
+	terminal(accuse);
 
 	return 0;
 
 }
 
-void terminal(FILE* commercants, FILE* actions, FILE* accuse){
-	//printf("commercants: %d\n actions: %d",commercants,actions);
-	char id_commercant[20];
-	char id_action[20];
-	char type_transaction[20];
-	char valeur[20]="12121";
+void terminal(FILE* accuse){
+	//on ouvre les fichiers commercants et actions contenant les listes de commercants
+	//et d'actions dispos
+	FILE* commercants = NULL;
+	FILE* actions = NULL;
+	commercants = fopen("./commercants", "r");// Ouverture du fichier en lecture(entrée)
+	actions = fopen("./actions", "r");// Ouverture du fichier en lecture(entrée)
+
+
+	char id_commercant[100];
+	char id_action[100];
+	char type_transaction[100];
+	char valeur[100];
 	//lecture de l'id_commercant du commercant
 	if (commercants!=NULL && actions!=NULL) {
 		int nombre_commercants=0;
 		//char id_commercant[11];
 		fseek(commercants,0,SEEK_SET);
 		//récupération du nombre de lignes = nombre de commercants dans le fichier
-		while(fgets(id_commercant,12,commercants)!=0) {
+		while(fgets(id_commercant,25,commercants)!=0) {
+			printf("%s",id_commercant);
 			nombre_commercants++;
 		}
+
 		//on tire un commercant aléatoirement dans le fichier de commercants
 		fseek(commercants,0,SEEK_SET);
 		aleainit();
 		int i;
 		int commercant_aleatoire = alea(1,nombre_commercants);
 		for(i=0;i<commercant_aleatoire;i++){
-			fgets(id_commercant,12,commercants);
+			fgets(id_commercant,25,commercants);
 		}
+		//on récupère uniquement l'identifiant du commercant
+		  char* pch;
+		  pch = strtok (id_commercant," ");
+		  while (pch != NULL)
+		  {
+		    pch = strtok (NULL, " ");
+		    if(pch!=NULL)
+				  strcpy(id_commercant,pch);
+		  }
 		//on remplace le \n qui est a la fin de la chaine
 		id_commercant[10] = ' ';
 
@@ -77,18 +90,23 @@ void terminal(FILE* commercants, FILE* actions, FILE* accuse){
 		int type_aleatoire = alea(1,2);
 		for(i=0;i<type_aleatoire;i++){
 			switch(i){
-			case(0):strcpy(type_transaction,"Achat");break;
-			case(1):strcpy(type_transaction,"Vente");break;
+				case(0):strcpy(type_transaction,"Achat");break;
+				case(1):strcpy(type_transaction,"Vente");break;
 			}
 		}
 
+
+		//valeur de la transaction définie aléatoirement
+			aleainit();
+			sprintf(valeur,"%d",alea(1,50));
 
 		printf("commercant tiré aléatoirement: %s ordre: %s action: %s\n",id_commercant,type_transaction,id_action);
 
 
 		msg * ordre = create_msg(id_commercant, type_transaction, id_action, valeur);
-		printf("msg2: %s", msg_to_str(ordre));
-		log_msg("log",ordre);
+		//printf("msg2: %s", msg_to_str(ordre));
+		//send_msg();
+		log_msg("test d'ordre",ordre);
 	}
 
 
@@ -102,7 +120,6 @@ void terminal(FILE* commercants, FILE* actions, FILE* accuse){
 		accuse_de_reception[10] = ' ';
 		printf("Lecture de l'accusé: %s",accuse_de_reception);
 
-		//TODO: ATTENTION le fclose() génère une erreur de segmentation!!!
 		fclose(accuse);
 	}
 
