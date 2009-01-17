@@ -2,10 +2,20 @@
 #define EXECUTION_
 
 #include "casual_includes.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include "libbourse/alea.h"
+#include "libcomm/logger.h"
+#include "libcomm/message.h"
+
 /**
- * Cette méthode permet de recevoir 
- * 
+ * Cette méthode permet de recevoir
+ *
  */
 void received_order(FILE*);
+
+void execution();
 
 #endif /*EXECUTION_*/

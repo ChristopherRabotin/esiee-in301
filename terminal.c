@@ -1,12 +1,13 @@
 #include "terminal.h"
 
 /**
- * Terminal prend deux descripteurs de fichiers en paramètre
+ * Terminal prend deux descripteurs de fichiers en paramètres
  * vers lesquels il redirige son entrée et sa sortie standards.
  */
 
 int main(void){
 
+	//on charge les entrées/sorties
 	FILE* accuse = NULL;
 	FILE* ordre = NULL;
 

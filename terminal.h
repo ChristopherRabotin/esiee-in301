@@ -14,6 +14,3 @@
 void terminal();
 void envoie_ordre();
 #endif /*TERMINAL_H_*/
-
-
-
