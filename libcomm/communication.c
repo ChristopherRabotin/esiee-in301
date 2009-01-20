@@ -31,7 +31,7 @@ void init_one_server(server* srv, const int port_start,
 	bzero(&(srv->local_addr.sin_zero), 8); /* zero pour le reste de struct */
 
 	if (bind(srv->sockfd,( struct sockaddr *)&(srv->local_addr),sizeof(struct sockaddr))
-	== -1) {
+			== -1) {
 		perror("bind");
 		exit(1);
 	}
@@ -47,7 +47,7 @@ void init_one_server(server* srv, const int port_start,
 			srv->sin_size = sizeof(struct sockaddr_in);
 			int new_fd; // descripteur lié au socket de la connexion courante
 			if ((new_fd = accept(srv->sockfd, (struct sockaddr *)&(srv->remote_addr),
-			&(srv->sin_size))) == -1) {
+					&(srv->sin_size))) == -1) {
 				perror("accept");
 				continue;
 			}
@@ -59,34 +59,32 @@ void init_one_server(server* srv, const int port_start,
 			sprintf(tmp, "connexion entrante depuis %s:%d",inet_ntoa(srv->remote_addr.sin_addr),srv->remote_addr.sin_port);
 			log_srv(*srv,tmp);
 			if (!(pid=fork())) { /* fils seconde génération - permet d'être multiclient */
-				if(!srv->isAlive) {
-					close(new_fd); //si une connexion arrive alors que le programme est terminé, on sort
-					return;
-				}
-				char answer[MAXRECVDATA];
-				sprintf(answer,"Serveur %s. En attente d'un msg (voir libcomm/message.h).\n", srv->name);
-				if (send(new_fd, answer, strlen(answer), 0) == -1)
-				perror("send");
+				while(srv->isAlive) {
+					char answer[MAXRECVDATA];
+					sprintf(answer,"Serveur %s. En attente d'un msg (voir libcomm/message.h).\n", srv->name);
+					if (send(new_fd, answer, strlen(answer), 0) == -1)
+						perror("send");
 
-				srv->recvdata = (msg*) malloc (sizeof (msg));
-				bzero(srv->recvdata,sizeof (msg));
-				if ((srv->numbytes=recv(new_fd, srv->recvdata, MAXRECVDATA, 0)) == -1) {
-					perror("recv");
-					log_srv(*srv,"erreur lors du recv!");
-					exit(1);
-				}
+					srv->recvdata = (msg*) malloc (sizeof (msg));
+					bzero(srv->recvdata,sizeof (msg));
+					if (srv->isAlive && (srv->numbytes=recv(new_fd, srv->recvdata, MAXRECVDATA, 0)) == -1) {
+						perror("recv");
+						log_srv(*srv,"erreur lors du recv!");
+						exit(1);
+					}
 
-				sprintf(tmp,"Reception par %s %s:%d",srv->name, inet_ntoa(srv->remote_addr.sin_addr),srv->remote_addr.sin_port);
-				log_msg(tmp,srv->recvdata);
-				//TODO ajouter l'exec() pour appeler le bon processus de gestion
-				//TODO pourquoi est-ce qu'un message renvoyé vers le même serveur n'est jamais reçu?
+					sprintf(tmp,"Reception par %s %s:%d",srv->name, inet_ntoa(srv->remote_addr.sin_addr),srv->remote_addr.sin_port);
+					log_msg(tmp,srv->recvdata);
+					//TODO ajouter l'exec() pour appeler le bon processus de gestion
+				} // fin du while pour le recv()
 				close(new_fd);
 				exit(0);
 			}
-			kill(pid,SIGKILL);
 			close(new_fd); // le parent n'a pas besoin de new_fd
 
 			while(waitpid(-1,NULL,WNOHANG) > 0); // nettoyage des processus fils
+			srv->isAlive=0;
+			kill(pid,SIGKILL);
 			exit(0);
 		} // fin while du "accept"
 	} // fin fils première génération
@@ -122,7 +120,7 @@ void init_one_client(client* clt, const int port_start, const char* name) {
 
 	log_clt(*clt,"créé.");
 	if (connect(clt->sockfd,( struct sockaddr *)&(clt->remote_addr),
-	sizeof(struct sockaddr)) == -1) {
+			sizeof(struct sockaddr)) == -1) {
 		perror("connect");
 		log_clt(*clt,"déjà connecté ou impossible de se connecter");
 	}
