@@ -6,7 +6,7 @@
  */
 
 int main(void){
-	execution("0002000002");
+	execution("0002000002","25");
 
 
 	return 0;
@@ -14,7 +14,7 @@ int main(void){
 }
 
 
-void execution(char* id_action_ordre){
+void execution(char* id_action_ordre,char* quantite_ordre){
 	int i;
 	//On va récupérer les informations dont l'action est concernée par l'ordre reçu
 
@@ -37,37 +37,33 @@ void execution(char* id_action_ordre){
 		while(fgets(id_action,25,actions)!=0 && strncmp(id_action_ordre,id_action,10)!=0) {
 		}
 
-		printf("id_action: %s\n",id_action);
 		//on sépare l'id, la valeur et le stock de l'action
 
 		//on ajoute un espace devant la chaine id_action(qui contient la ligne complète)
 		//afin de pouvoir tronquer la chaine en 3
-		char* temp;
+		char temp[100];
 
-
-
-//Provoque un putain de sexfault!
-		strcpy(temp," ");
-		strcat(temp,id_action);
-		strcpy(id_action,temp);
-		temp = strtok (id_action," ");
-		strcpy(id_action,temp);
-
-
-
-
-
+		strcpy(temp,id_action);
+		strcpy(id_action,"");
+		strcpy(valeur_action,"");
+		strcpy(nombre_action,"");
 		i=0;
-		while (temp != NULL)
+		int curseur=0;
+		while (temp[curseur]!='\0')
 		{
-		    temp = strtok (NULL, " ");
-		    if(temp!=NULL) {
-				  switch(i){
-					  case(0):strcpy(valeur_action,temp);break;
-					  case(1):strcpy(nombre_action,temp);break;
-				  }
-				  i++;
-		    }
+			if(temp[curseur]==' '){
+				i++;
+			}
+			else{
+
+				if(i==0)
+					strncat(id_action,temp+curseur,1);
+				if(i==1)
+					strncat(valeur_action,temp+curseur,1);
+				if(i==2)
+					strncat(nombre_action,temp+curseur,1);
+			}
+			curseur++;
 		}
 		fclose(actions);
 		printf("id=%s\nval=%s\nstock=%s\n",id_action,valeur_action,nombre_action);
@@ -85,7 +81,8 @@ void execution(char* id_action_ordre){
 		//Si le stock est supérieur: calcul du prix d'achat, envoi de l'accusé positif, maj du stock
 		if(stock_restant>=nombre_actions){
 			//calcul du prix d'achat
-
+			sprintf(valeur_total_transaction,"%e",PrixAchat(strtod(valeur_action,NULL),atoi(nombre_action),atoi(quantite_ordre)));
+//////////////////////////////////////////////////////////////////////////////////////////merde
 			//envoi de l'accusé positif
 			msg * accuse_positif = create_msg("emetteur", "Achat", id_action, valeur_total_transaction);
 			//printf("msg2: %s", msg_to_str(ordre));
