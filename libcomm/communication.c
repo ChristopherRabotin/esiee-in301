@@ -2,23 +2,24 @@
 
 void init_servers(server* servers, const int nb_serv, int port_start,
 		const int max_connexions) {
-	int iteration, bourse=1;
+	int iteration, bourse=1, type;
 	for (iteration=0; iteration < nb_serv; iteration++) {
 		char name[128];
-		if (iteration==0)
-			sprintf(name, "Réseau inter-boursier");
-		else {
-			if (iteration%2==0)
-				sprintf(name, "Acquisition #000%d", bourse++);
-			else
-				sprintf(name, "Exécution #000%d", bourse);
+		if (iteration==0){
+			sprintf(name, "Réseau inter-boursier"); type=interb;
+		}else {
+			if (iteration%2==0){
+				sprintf(name, "Acquisition #000%d", bourse++); type=ack;
+			}else{
+				sprintf(name, "Exécution #000%d", bourse); type=exec;
+			}
 		}
-		init_one_server(&servers[iteration], port_start++, max_connexions, name);
+		init_one_server(&servers[iteration], port_start++, max_connexions, name,type);
 	} // fin du for
 } // fin init_servers
 
 void init_one_server(server* srv, const int port_start,
-		const int max_connexions, const char* name) {
+		const int max_connexions, const char* name, const int type) {
 	srv->isAlive = 1;
 	strcpy(srv->name, name);
 	if ((srv->sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
@@ -75,6 +76,11 @@ void init_one_server(server* srv, const int port_start,
 
 					sprintf(tmp,"Reception par %s %s:%d",srv->name, inet_ntoa(srv->remote_addr.sin_addr),srv->remote_addr.sin_port);
 					log_msg(tmp,srv->recvdata);
+					switch(type){
+					case ack: break;
+					case exec: /*execution_msg(srv->recvdata);*/ break;
+					default: log_smth("Tentative de démarrage d'un serveur non typé!");
+					}
 					//TODO ajouter l'exec() pour appeler le bon processus de gestion
 				} // fin du while pour le recv()
 				close(new_fd);

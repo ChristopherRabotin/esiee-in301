@@ -56,7 +56,7 @@ typedef struct client_struct {
 	struct sockaddr_in remote_addr; /* adresse distante*/
 } client;
 
-enum TYPE {ack,exec,term};
+enum TYPE {ack,exec,term,interb};
 /**
  * Permet d'initialiser les serveurs des différents modules du programme.
  * Retourne un tableau des serveurs initialisés.
@@ -69,8 +69,10 @@ void init_servers(server* servers, const int nb_serv, int port_start,
 		const int max_connexions);
 /**
  * Permet d'initialiser un seul serveur.
+ * @param type type de serveur, voir l'enum TYPE.
  */
-void init_one_server(server* srv, const int port_start, const int max_connexions, const char* name);
+void init_one_server(server* srv, const int port_start,
+		const int max_connexions, const char* name, const int type);
 /**
  * Permet d'initialiser les clients des différents modules du programme.
  * Retourne un tableau des clients initialisés. Il faut conserver ce tableau pour envoyer
