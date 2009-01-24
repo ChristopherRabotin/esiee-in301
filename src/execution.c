@@ -4,9 +4,18 @@
  * Execution recoit les ordres, traite les transactions
  * et envoie les accusés de réception.
  */
+//prend en argument deux desripteurs de fichiers (0 et 1 pour tester dans le terminal)
+int main(int argc, char *argv[]){
+	char em[100],ty[100],ac[100],qu[100];
+	while(1){
+	if(argc!=1){
+	printf("Veuillez entrer un ordre:\n");
 
-int main(void){
-	execution_msg(create_msg("0000000004", "Achat", "0001000001", "10"));
+	scanf("%s%s%s%s",em,ty,ac,qu);
+	execution(em,ty,ac,qu);
+	}
+	//execution_msg(create_msg("0000000004", "Vente", "0001000001", "10"));
+	}
 	return 0;
 
 }
@@ -16,7 +25,7 @@ void execution_msg(msg *mess){
 }
 
 void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char* quantite_ordre){
-	printf("%s\n%s\n%s\n%s\n\n",emetteur,type_transaction,id_action_ordre,quantite_ordre);
+	//printf("%s\n%s\n%s\n%s\n\n",emetteur,type_transaction,id_action_ordre,quantite_ordre);
 	int i;
 	//On va récupérer les informations dont l'action est concernée par l'ordre reçu
 
@@ -44,9 +53,6 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 		}
 
 		//on sépare l'id, la valeur et le stock de l'action
-
-		//on ajoute un espace devant la chaine id_action(qui contient la ligne complète)
-		//afin de pouvoir tronquer la chaine en 3
 		char temp[100];
 
 		strcpy(temp,id_action);
@@ -72,7 +78,7 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 			curseur++;
 		}
 		fclose(actions);
-		printf("id=%s\nval=%s\nquantité initiale=%s\nstock restant=%d\n",id_action,valeur_action,stock_action,stock_restant);
+		//printf("id=%s\nval=%s\nquantité initiale=%s\nstock restant=%d\n",id_action,valeur_action,stock_action,stock_restant);
 
 
 
@@ -82,12 +88,12 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 
 			//On compare le nombres d'actions demandées et le stock
 
-			//Si le stock est supérieur et prix d'achat a pu etre calculé:  envoi de l'accusé positif, maj du stock
+			//Si le prix d'achat a pu etre calculé:  envoi de l'accusé positif, maj du stock
 
 			//Calcul du prix d'achat
 			sprintf(valeur_totale_transaction,"%.3lf",PrixAchat(strtod(valeur_action,NULL),atoi(stock_action),atoi(quantite_ordre)));
 
-			if(stock_restant>=atoi(quantite_ordre) && atoi(valeur_totale_transaction)!=-1){
+			if(atoi(valeur_totale_transaction)!=-1){
 
 				//envoi de l'accusé positif
 				msg * accuse_positif = create_msg(emetteur, type_transaction, id_action, valeur_totale_transaction);
@@ -103,7 +109,7 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 
 
 			}
-			//Si le stock est inférieur ou prix d'achat retourne erreur: envoi de l'accusé négatif
+			//Si le prix d'achat retourne erreur: envoi de l'accusé négatif
 			else {
 				strcpy(valeur_totale_transaction,"0");
 			}
@@ -129,7 +135,7 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 			//maj du stock
 			stock_restant -= atoi(quantite_ordre);
 
-			sprintf(stock_action,"%d",atoi(stock_action) - atoi(quantite_ordre));
+			sprintf(stock_action,"%d",atoi(stock_action) + atoi(quantite_ordre));
 
 
 
@@ -142,8 +148,8 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 
 		}
 
-		printf("\nnouveau stock dispo en bourse:%d",stock_restant);
-		printf("\nnouvelle quantité de cette action:%s",stock_action);
+		//printf("\nnouvel espace dispo en bourse:%d",stock_restant);
+		//printf("\nnouvelle quantité de cette action:%s",stock_action);
 
 		printf("\n");
 }
