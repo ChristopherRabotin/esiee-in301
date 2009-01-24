@@ -19,8 +19,11 @@ TestServers: communication.o message.o logger.o alea.o TestServers.c # TestServe
 alea.o: ../libbourse/alea.h ../libbourse/alea.c
 	gcc -Wall -c ../libbourse/alea.c -D DEBUG
 
-communication.o: logger.o message.o ../libcomm/communication.h ../libcomm/communication.c
+communication.o: logger.o message.o execution.o ../libcomm/communication.h ../libcomm/communication.c
 	gcc -c -Wall ../libcomm/communication.c -D DEBUG
+
+execution.o: logger.o message.o alea.o ../execution.h ../execution.c
+	gcc -c -Wall o ../execution.c -D DEBUG
 
 logger.o: ../libcomm/logger.h ../libcomm/logger.c
 	gcc -c -Wall ../libcomm/logger.c -D DEBUG
