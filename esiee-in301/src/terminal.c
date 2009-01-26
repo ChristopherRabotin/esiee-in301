@@ -5,21 +5,6 @@
  * vers lesquels il redirige son entrée et sa sortie standards.
  */
 
-int main(void){
-
-	//on charge les entrées/sorties
-	FILE* accuse = NULL;
-	FILE* ordre = NULL;
-
-	accuse = fopen("./accuse_de_reception", "r");// Ouverture du fichier en écriture(sortie)
-	ordre = fopen("./ordre", "w");// Ouverture du fichier en écriture(sortie)
-
-	terminal(accuse);
-
-	return 0;
-
-}
-
 void terminal(FILE* accuse){
 	//on ouvre les fichiers commercants et actions contenant les listes de commercants
 	//et d'actions dispos

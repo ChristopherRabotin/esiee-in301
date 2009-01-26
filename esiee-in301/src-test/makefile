@@ -15,6 +15,12 @@ TestLogger: logger.o TestLogger.c # TestLogger
 TestServers: communication.o message.o logger.o alea.o TestServers.c # TestServers
 	gcc TestServers.c communication.o message.o alea.o logger.o -o ../Debug/TestServers -D DEBUG
 
+TestExecution: alea.o logger.o message.o PrixAchatVente.o
+	gcc TestExecution.c alea.o logger.o message.o PrixAchatVente.o -o ../Debug/TestExecution -D DEBUG
+
+TestTerminal: alea.o logger.o message.o
+	gcc TestTerminal.c alea.o logger.o message.o -o ../Debug/TestTerminal -D DEBUG
+	
 # ici vont tous les sous-builds (par ordre alphabetique!)
 alea.o: ../libbourse/alea.h ../libbourse/alea.c
 	gcc -Wall -c ../libbourse/alea.c -D DEBUG
