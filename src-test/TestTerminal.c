@@ -6,8 +6,8 @@ int main(void){
 	FILE* accuse = NULL;
 	FILE* ordre = NULL;
 
-	accuse = fopen("./accuse_de_reception", "r");// Ouverture du fichier en écriture(sortie)
-	ordre = fopen("./ordre", "w");// Ouverture du fichier en écriture(sortie)
+	accuse = fopen("../data/accuse_de_reception", "r");// Ouverture du fichier en écriture(sortie)
+	ordre = fopen("../data/ordre", "w");// Ouverture du fichier en écriture(sortie)
 
 	terminal(accuse);
 
