@@ -8,6 +8,6 @@ int main(void){
 	init_one_server(execution, 1200, 2, "execution",exec);
 	init_one_server(acquisition, 1200, 2, "acquisition",ack);
 	sleep(100);
-	printf("fin.\n")
+	printf("fin.\n");
 	return 0;
 }
