@@ -83,7 +83,7 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 			if(atoi(valeur_totale_transaction)!=-1){
 
 				//envoi de l'accusé positif
-				msg * accuse_positif = create_msg(emetteur, type_transaction, id_action, valeur_totale_transaction);
+				msg * accuse_positif = create_msg(emetteur, "AccuseAchat", id_action, valeur_totale_transaction);
 				//printf("msg2: %s", msg_to_str(ordre));
 				//send_msg();
 				log_msg("test d'accusé",accuse_positif);
@@ -114,7 +114,7 @@ void execution(char* emetteur,char* type_transaction,char* id_action_ordre,char*
 		if(stock_restant>=atoi(quantite_ordre) && atoi(valeur_totale_transaction)!=-1){
 
 			//envoi de l'accusé positif
-			msg * accuse_positif = create_msg(emetteur, type_transaction, id_action, valeur_totale_transaction);
+			msg * accuse_positif = create_msg(emetteur, "AccuseVente", id_action, valeur_totale_transaction);
 			//printf("msg2: %s", msg_to_str(ordre));
 			//send_msg();
 			log_msg("test d'accusé",accuse_positif);
