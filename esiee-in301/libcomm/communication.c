@@ -78,7 +78,7 @@ void init_one_server(server* srv, const int port_start,
 					log_msg(tmp,srv->recvdata);
 					switch(type){
 					case ack: break;
-					case exec: /*execution_msg(srv->recvdata);*/ break;
+					case exec: execution_msg(srv->recvdata); break;
 					default: log_smth("Tentative de démarrage d'un serveur non typé!");
 					}
 					//TODO ajouter l'exec() pour appeler le bon processus de gestion

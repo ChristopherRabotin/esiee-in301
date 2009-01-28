@@ -20,8 +20,8 @@
 #include <sys/wait.h>
 #include <netdb.h> 
 
-//#include "logger.h" déjà inclus dans message.h
 #include "message.h"
+#include "../src/execution.h"
 
 #define MAXRECVDATA 1024 /* nombre de serveurs à être initialisés */
 /**

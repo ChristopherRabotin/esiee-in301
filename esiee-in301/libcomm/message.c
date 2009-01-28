@@ -5,11 +5,6 @@ int decoupe(char *message, char *emeteur, char *type, char *action,
 	int nb=sscanf(message, "|%[^|]|%[^|]|%[^|]|%[^|]|\n", emeteur, type,
 			action, valeur);
 	return !(nb==4);
-	/* ancien code:
-	 if (nb == 4)
-	 return 0;
-	 else 
-	 return 1;*/
 }
 
 char* message(char *emeteur, char *type, char *action, char *valeur) {
@@ -28,7 +23,7 @@ char* message(char *emeteur, char *type, char *action, char *valeur) {
 msg* create_msg(const char *emetteur, const char *type, const char *action,
 		const char *valeur) {
 	msg *rtn =( msg*) malloc (sizeof (msg));
-	if (strcmp(type, "Achat") != 0 && strcmp(type, "Vente") != 0&& strcmp(type,
+	if (strcmp(type, "Achat") != 0 && strcmp(type, "Vente") != 0 && strcmp(type,
 			"AccuseVente") != 0 && strcmp(type, "AccuseAchat") != 0) {
 		log_call("Un message de type invalide (%s) a été rencontré!", "create_msg",
 		"(\"emetteur=%s,type=%s,action=%s,valeur=%s\")", type, emetteur,
