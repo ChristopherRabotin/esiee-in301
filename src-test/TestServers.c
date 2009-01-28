@@ -6,7 +6,11 @@
 int main(int argc, char **argv) {
 	init_log("TestServers.log");
 	server servers[3]; client clients[3];
-	init_servers(servers, 3, 1200, 2); init_clients(clients, 3, 1200);
+//	init_servers(servers, 3, 1200, 2);
+	init_one_server(&servers[0], 1200, 2, "execution",exec);
+	init_one_server(&servers[1], 1201, 2, "ack",ack);
+	init_one_server(&servers[2], 1202, 2, "int",interb);
+	init_clients(clients, 3, 1200);
 	// fin init
 	char valeur[5];
 	sprintf(valeur, "%d", alea(1, 50));
