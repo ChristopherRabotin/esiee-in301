@@ -22,7 +22,7 @@ TestTerminal: alea.o logger.o terminal.o message.o
 	gcc TestTerminal.c alea.o logger.o terminal.o message.o -o ../Debug/TestTerminal -D DEBUG
 	
 TestInterboursier: logger.o message.o communication.o
-	gcc TestInterboursier logger.o message.o communication.o -o ../Debug/TestInterboursier -D DEBUG
+	gcc TestInterboursier.c logger.o message.o communication.o -o ../Debug/TestInterboursier -D DEBUG
 	
 # ici vont tous les sous-builds (par ordre alphabetique!)
 alea.o: ../libbourse/alea.h ../libbourse/alea.c
