@@ -10,7 +10,15 @@
 #include "../libcomm/logger.h"
 #include "../libcomm/message.h"
 
+/**
+ * Terminal permet d'envoyer un ordre conçu aléatoirement à partir des annuaires (commerçants,actions)
+ * et de valeurs aléatoires.
+ * Il reçoit et affiche à l'écran un accusé de réception provenant du serveur d'acquisition
+ *
+ * Il prend 2 descripteurs de fichiers en paramètres vers lesquels il redirige son entrée et sa sortie standarts.
+ */
+
 // prototypes
 void terminal();
-void envoie_ordre();
+
 #endif /*TERMINAL_H_*/
