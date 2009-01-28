@@ -11,7 +11,7 @@
 #ifndef COMMUNICATION_H_
 #define COMMUNICATION_H_
 
-#include "../casual_includes.h"
+#include "../src/casual_includes.h"
 #include <unistd.h>
 #include <sys/types.h> 
 #include <netinet/in.h>

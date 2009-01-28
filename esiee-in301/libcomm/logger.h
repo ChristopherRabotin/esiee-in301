@@ -11,7 +11,7 @@
 #ifndef LOGGER_H_
 #define LOGGER_H_
 
-#include "../casual_includes.h"
+#include "../src/casual_includes.h"
 #include <stdarg.h>
 #include <time.h>
 #include "message.h"
