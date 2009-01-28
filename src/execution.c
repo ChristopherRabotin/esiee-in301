@@ -1,8 +1,10 @@
 #include "execution.h"
 
 /**
- * Execution recoit les ordres, traite les transactions
+ * Execution recoit les ordres provenant du serveur d'acquisition, traite les transactions
  * et envoie les accusés de réception.
+ *
+ * Il prend en argument deux desripteurs de fichiers (0 et 1 pour tester dans le terminal)
  */
 //prend en argument deux desripteurs de fichiers (0 et 1 pour tester dans le terminal)
 void execution_msg(msg *mess){
