@@ -1,8 +1,11 @@
 #include "terminal.h"
 
 /**
- * Terminal prend deux descripteurs de fichiers en paramètres
- * vers lesquels il redirige son entrée et sa sortie standards.
+ * Terminal permet d'envoyer un ordre conçu aléatoirement à partir des annuaires (commerçants,actions)
+ * et de valeurs aléatoires.
+ * Il reçoit et affiche à l'écran un accusé de réception provenant du serveur d'acquisition
+ *
+ * Il prend 2 descripteurs de fichiers en paramètres vers lesquels il redirige son entrée et sa sortie standarts.
  */
 
 void terminal(FILE* accuse){
