@@ -10,7 +10,7 @@
 
 #ifndef COMMUNICATION_H_
 #define COMMUNICATION_H_
-
+//TODO: modifier server pour que ça soit un client&serveur à la fois puisque de toutes façons, ils doivent tous envoyer et recevoir des messages. 
 #include "../src/casual_includes.h"
 #include <unistd.h>
 #include <sys/types.h> 
