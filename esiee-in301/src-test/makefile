@@ -45,6 +45,9 @@ PrixAchatVente.o:	../libbourse/PrixAchatVente.c ../libbourse/PrixAchatVente.h
 
 terminal.o: logger.o message.o alea.o ../src/terminal.h ../src/terminal.c
 	gcc -c -Wall ../src/terminal.c -D DEBUG
+	
+interboursier.o: logger.o message.o ../src/interboursier.h ../src/interboursier.c
+	gcc -c -Wall ../src/interboursier.c -D DEBUG
 
 # le clean est ICI
 clean:	
