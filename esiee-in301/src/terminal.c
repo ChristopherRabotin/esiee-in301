@@ -13,8 +13,8 @@ void terminal(FILE* accuse){
 	//et d'actions dispos
 	FILE* commercants = NULL;
 	FILE* actions = NULL;
-	commercants = fopen("./commercants", "r");// Ouverture du fichier en lecture(entrée)
-	actions = fopen("./actions", "r");// Ouverture du fichier en lecture(entrée)
+	commercants = fopen("./data/commercants", "r");// Ouverture du fichier en lecture(entrée)
+	actions = fopen("./data/actions", "r");// Ouverture du fichier en lecture(entrée)
 
 
 	char id_commercant[100];
@@ -28,7 +28,6 @@ void terminal(FILE* accuse){
 		fseek(commercants,0,SEEK_SET);
 		//récupération du nombre de lignes = nombre de commercants dans le fichier
 		while(fgets(id_commercant,25,commercants)!=0) {
-			printf("%s",id_commercant);
 			nombre_commercants++;
 		}
 
@@ -59,7 +58,7 @@ void terminal(FILE* accuse){
 
 		fseek(actions,0,SEEK_SET);
 		//récupération du nombre de lignes = nombre d'actions dans le fichier
-		while(fgets(id_action,12,actions)!=0) {
+		while(fgets(id_action,25,actions)!=0) {
 			nombre_actions++;
 		}
 		//on tire une action aléatoirement dans le fichier des actions
@@ -67,10 +66,14 @@ void terminal(FILE* accuse){
 		aleainit();
 		int action_aleatoire = alea(1,nombre_actions);
 		for(i=0;i<action_aleatoire;i++){
-			fgets(id_action,12,actions);
+			fgets(id_action,25,actions);
 		}
-		//on remplace le \n qui est a la fin de la chaine
-		id_action[10] = ' ';
+		char temp[100];
+		strcpy(temp,id_action);
+		strcpy(id_action,"");
+		for(i=0;i<10;i++){
+			strncat(id_action,temp+i,1);
+		}
 
 		fclose(actions);
 
